@@ -2,6 +2,10 @@ package com.gabrielbmoro.programmingchallenge.models
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * This data class represents the Movie.
+ * @author Gabriel Moro
+ */
 data class Movie(
         @SerializedName("vote_count") val mnVote_count : Int,
         @SerializedName("id") val mnId : Int,
