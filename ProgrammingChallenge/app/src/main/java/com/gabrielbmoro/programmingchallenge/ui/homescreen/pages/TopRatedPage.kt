@@ -7,10 +7,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.api.ApiServiceAccess
 import com.gabrielbmoro.programmingchallenge.models.Movie
+import com.squareup.picasso.Picasso
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -58,12 +60,15 @@ class TopRatedFragment : Fragment(), TopRatedPageContract.View {
     inner class TopRatedMoviesViewHolder(avwView : View) : RecyclerView.ViewHolder(avwView) {
         val mtvTitle : TextView = avwView.findViewById(R.id.tvTitle)
         val mtvVoteAverage : TextView = avwView.findViewById(R.id.tvVoteAverage)
+        val mivPoster : ImageView = avwView.findViewById(R.id.imageView)
     }
     inner class TopRatedMoviesAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapter<TopRatedMoviesViewHolder>() {
 
         var mlstMovies : ArrayList<Movie> = alstMovies
+        var mpicasoObject : Picasso? = null
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedMoviesViewHolder {
+            mpicasoObject = Picasso.Builder(parent.context).build()
             return TopRatedMoviesViewHolder((LayoutInflater.from(parent.context)
                     .inflate(R.layout.cell_topratedmovie, parent, false)))
         }
@@ -75,7 +80,9 @@ class TopRatedFragment : Fragment(), TopRatedPageContract.View {
         override fun onBindViewHolder(holder: TopRatedMoviesViewHolder, position: Int) {
             val movieTarget = mlstMovies[position]
             holder.mtvTitle.text = movieTarget.mstrTitle
-            holder.mtvVoteAverage.text = movieTarget.mnVoteAverage.toString()
+            holder.mtvVoteAverage.text = movieTarget.mstrPosterPath
+
+            mpicasoObject?.load(movieTarget.mstrPosterPath)?.into(holder.mivPoster)
         }
 
     }
@@ -94,6 +101,10 @@ class TopRatedPresenter(aview : TopRatedPageContract.View) : TopRatedPageContrac
                 .subscribe(
                         {
                             if(it.mlstResults != null) mlstMoviesFiltered = ArrayList(it.mlstResults!!)
+
+                            mlstMoviesFiltered?.forEach {
+                                it.mstrPosterPath = "https://image.tmdb.org/t/p/w154"+ it.mstrPosterPath
+                            }
                         },
                         {
                             it.printStackTrace()
