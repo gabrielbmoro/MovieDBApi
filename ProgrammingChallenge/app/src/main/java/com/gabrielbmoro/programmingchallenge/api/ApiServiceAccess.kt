@@ -6,6 +6,11 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import rx.Observable
 
+/**
+ * This class creates the api service.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 class ApiServiceAccess {
 
     val service : ApiServiceInterface

@@ -7,12 +7,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.api.ApiServiceAccess
 import com.gabrielbmoro.programmingchallenge.models.Movie
-import com.squareup.picasso.Picasso
+import com.gabrielbmoro.programmingchallenge.ui.CellSimpleMovieAdapter
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -31,7 +29,7 @@ class TopRatedFragment : Fragment(), TopRatedPageContract.View {
     private var mrvRecyclerView : RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_topratedmovies, container, false)
+        return inflater?.inflate(R.layout.fragment_top_rated_movies, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -49,42 +47,12 @@ class TopRatedFragment : Fragment(), TopRatedPageContract.View {
     override fun setupRecyclerView() {
         val llManager = LinearLayoutManager(context)
         mrvRecyclerView?.layoutManager = llManager
-        mrvRecyclerView?.adapter = TopRatedMoviesAdapter(ArrayList())
+        mrvRecyclerView?.adapter = CellSimpleMovieAdapter(ArrayList())
     }
 
     override fun onNotifyDataChanged(amoviesList : ArrayList<Movie>) {
-        (mrvRecyclerView?.adapter as TopRatedMoviesAdapter).mlstMovies = ArrayList(amoviesList)
+        (mrvRecyclerView?.adapter as CellSimpleMovieAdapter).mlstMovies = ArrayList(amoviesList)
         mrvRecyclerView?.adapter?.notifyDataSetChanged()
-    }
-
-    inner class TopRatedMoviesViewHolder(avwView : View) : RecyclerView.ViewHolder(avwView) {
-        val mtvTitle : TextView = avwView.findViewById(R.id.tvTitle)
-        val mtvOverview : TextView = avwView.findViewById(R.id.tvOverview)
-        val mivPoster : ImageView = avwView.findViewById(R.id.imageView)
-    }
-    inner class TopRatedMoviesAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapter<TopRatedMoviesViewHolder>() {
-
-        var mlstMovies : ArrayList<Movie> = alstMovies
-        var mpicasoObject : Picasso? = null
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedMoviesViewHolder {
-            mpicasoObject = Picasso.Builder(parent.context).build()
-            return TopRatedMoviesViewHolder((LayoutInflater.from(parent.context)
-                    .inflate(R.layout.cell_topratedmovie, parent, false)))
-        }
-
-        override fun getItemCount(): Int {
-            return mlstMovies.size
-        }
-
-        override fun onBindViewHolder(holder: TopRatedMoviesViewHolder, position: Int) {
-            val movieTarget = mlstMovies[position]
-            holder.mtvTitle.text = movieTarget.mstrTitle
-            holder.mtvOverview.text = movieTarget.mstrOverview
-
-            mpicasoObject?.load(movieTarget.mstrPosterPath)?.into(holder.mivPoster)
-        }
-
     }
 }
 
@@ -102,9 +70,9 @@ class TopRatedPresenter(aview : TopRatedPageContract.View) : TopRatedPageContrac
                         {
                             if(it.mlstResults != null) mlstMoviesFiltered = ArrayList(it.mlstResults!!)
 
-                            mlstMoviesFiltered?.forEach {
-                                it.mstrPosterPath = "https://image.tmdb.org/t/p/w154"+ it.mstrPosterPath
-                            }
+//                            mlstMoviesFiltered?.forEach {
+//                                it.mstrPosterPath = "https://image.tmdb.org/t/p/w154"+ it.mstrPosterPath
+//                            }
                         },
                         {
                             it.printStackTrace()
