@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ProgrammingChallenge</string>
     <string name="token_value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTVlMGM2N2FjMmZhODg2ZTc3NWZiOTA1N2YwYTMyZiIsInN1YiI6IjViODVmNDIwYzNhMzY4M2Y4ZDAwMzliYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.COCmVsmRpepifleyO3BxcGAGvLq9SYIuom__K1TuETM</string>
+    <string name="topRatedMoviesTitle">Top Rated</string>
+    <string name="popularMoviesTitle">Popular</string>
+    <string name="favoriteMoviesTitle">Favorite</string>
 </resources>
