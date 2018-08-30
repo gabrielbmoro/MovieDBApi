@@ -59,7 +59,7 @@ class TopRatedFragment : Fragment(), TopRatedPageContract.View {
 
     inner class TopRatedMoviesViewHolder(avwView : View) : RecyclerView.ViewHolder(avwView) {
         val mtvTitle : TextView = avwView.findViewById(R.id.tvTitle)
-        val mtvVoteAverage : TextView = avwView.findViewById(R.id.tvVoteAverage)
+        val mtvOverview : TextView = avwView.findViewById(R.id.tvOverview)
         val mivPoster : ImageView = avwView.findViewById(R.id.imageView)
     }
     inner class TopRatedMoviesAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapter<TopRatedMoviesViewHolder>() {
@@ -80,7 +80,7 @@ class TopRatedFragment : Fragment(), TopRatedPageContract.View {
         override fun onBindViewHolder(holder: TopRatedMoviesViewHolder, position: Int) {
             val movieTarget = mlstMovies[position]
             holder.mtvTitle.text = movieTarget.mstrTitle
-            holder.mtvVoteAverage.text = movieTarget.mstrPosterPath
+            holder.mtvOverview.text = movieTarget.mstrOverview
 
             mpicasoObject?.load(movieTarget.mstrPosterPath)?.into(holder.mivPoster)
         }
