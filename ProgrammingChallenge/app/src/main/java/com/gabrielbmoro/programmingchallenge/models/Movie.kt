@@ -5,12 +5,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * This data class represents the Movie.
  * @author Gabriel Moro
+ * @since 2018-08-30
  */
 data class Movie(
         @SerializedName("vote_count") val mnVote_count : Int,
         @SerializedName("id") val mnId : Int,
         @SerializedName("video") var mbIsItVideo : Boolean,
-        @SerializedName("vote_average") var mnVoteAverage : Int,
+        @SerializedName("vote_average") var msVoteAverage : Float,
         @SerializedName("title") var mstrTitle : String,
         @SerializedName("popularity") var msPopularity : Float,
         @SerializedName("poster_path") var mstrPosterPath : String,

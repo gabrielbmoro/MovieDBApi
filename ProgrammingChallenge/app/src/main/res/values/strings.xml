@@ -4,4 +4,6 @@
     <string name="topRatedMoviesTitle">Top Rated</string>
     <string name="popularMoviesTitle">Popular</string>
     <string name="favoriteMoviesTitle">Favorite</string>
+    <string name="releaseDate">Release Date:</string>
+    <string name="voteAverage">Vote Average:</string>
 </resources>
