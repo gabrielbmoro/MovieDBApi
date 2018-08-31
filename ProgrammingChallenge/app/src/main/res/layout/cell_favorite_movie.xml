@@ -80,10 +80,12 @@
             android:id="@+id/llLine2"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,68 +116,6 @@
                 android:textSize="14sp" />
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btnExpand"
-            android:layout_width="160dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:text="@string/expand"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llLine2" />
-
-        <LinearLayout
-            android:id="@+id/llDetails"
-            android:layout_width="0dp"
-            android:layout_height="240dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnExpand">
-
-            <ImageView
-                android:id="@+id/ivPoster"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                card_view:srcCompat="@drawable/ic_launcher_background" />
-
-            <me.grantland.widget.AutofitTextView
-                android:id="@+id/tvOverview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="2dp"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:gravity="start|center_vertical"
-                android:maxLines="15"
-                android:text="@string/releaseDate"
-                android:textAlignment="gravity"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/ibFavorite"
-            android:layout_width="48dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/cardview_light_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llLine2"
-            card_view:srcCompat="@drawable/baseline_favorite_black_48" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

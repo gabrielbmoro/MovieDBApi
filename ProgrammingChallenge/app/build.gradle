@@ -5,6 +5,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -45,5 +47,9 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     //cardview
     implementation 'com.android.support:cardview-v7:26.1.0'
+    //room
+    def room_version = "1.1.0"
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
 
 }
