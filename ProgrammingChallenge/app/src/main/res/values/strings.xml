@@ -6,4 +6,5 @@
     <string name="favoriteMoviesTitle">Favorite</string>
     <string name="releaseDate">Release Date:</string>
     <string name="voteAverage">Vote Average:</string>
+    <string name="expand">Expand</string>
 </resources>
