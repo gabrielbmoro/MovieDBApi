@@ -21,4 +21,5 @@ data class Movie(
         @SerializedName("backdrop_path") var mstrBackdropPath : String,
         @SerializedName("adult") var misAdult : Boolean,
         @SerializedName("overview") var mstrOverview : String,
-        @SerializedName("release_date") var mstrReleaseDate : String)
+        @SerializedName("release_date") var mstrReleaseDate : String,
+        var mbIsFavorite : Boolean = false)

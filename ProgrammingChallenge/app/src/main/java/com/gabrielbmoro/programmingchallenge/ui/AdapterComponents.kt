@@ -1,5 +1,8 @@
 package com.gabrielbmoro.programmingchallenge.ui
 
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +43,16 @@ class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapte
                 holder.mllDetails.visibility = LinearLayout.GONE
         }
         mpicasoObject?.load(movieTarget.mstrPosterPath)?.into(holder.mivPoster)
+
+        holder.mibFavorite.setOnClickListener {
+            movieTarget.mbIsFavorite = !movieTarget.mbIsFavorite
+
+            if(movieTarget.mbIsFavorite) {
+                holder.mibFavorite.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN)
+            } else {
+                holder.mibFavorite.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN)
+            }
+        }
     }
 
 }
