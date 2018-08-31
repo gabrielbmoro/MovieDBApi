@@ -70,10 +70,9 @@ class PopularMoviesPresenter(aview : PopularMoviesPageContract.View) : PopularMo
                 .subscribe(
                         {
                             if(it.mlstResults != null) mlstMoviesFiltered = ArrayList(it.mlstResults!!)
-
-//                            mlstMoviesFiltered?.forEach {
-//                                it.mstrPosterPath = "https://image.tmdb.org/t/p/w154"+ it.mstrPosterPath
-//                            }
+                            mlstMoviesFiltered?.forEach {
+                                it.mstrPosterPath = "https://image.tmdb.org/t/p/w154"+ it.mstrPosterPath
+                            }
                         },
                         {
                             it.printStackTrace()
