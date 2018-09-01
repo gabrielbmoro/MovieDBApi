@@ -12,6 +12,12 @@ import rx.Observable
  */
 interface ApiServiceInterface {
 
+    /**
+     * This abstract method provides the implementation
+     * model of the target request (Get movies).
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     @GET("discover/movie")
     fun getMovies(@Query("api_key") a_strApiKey : String, @Query("sort_by") a_strSortedBy : String) : Observable<Page>
 }

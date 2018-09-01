@@ -14,7 +14,10 @@ import com.gabrielbmoro.programmingchallenge.models.FavoriteMovie
 abstract class DataBaseFactory : RoomDatabase() {
 
     /**
-     * Provides moviedao
+     * Provides the data access object to
+     * acess the table favoritemovies.
+     * @author Gabriel Moro
+     * @since 2018-08-30
      */
     abstract fun favoriteMovieDao() : FavoriteMovieDAO
 

@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 /**
  * This data class represents a Page that has a lot of movies.
+ * The annotations used was the Retrofit and Gson library.
  * @author Gabriel Moro
  * @since 2018-08-30
  */

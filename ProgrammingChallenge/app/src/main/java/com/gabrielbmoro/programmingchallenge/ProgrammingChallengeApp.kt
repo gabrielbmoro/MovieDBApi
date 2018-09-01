@@ -11,17 +11,16 @@ import com.gabrielbmoro.programmingchallenge.dao.DataBaseFactory
  */
 class ProgrammingChallengeApp : Application() {
 
-    /*        StaticCollections.mappDataBuilder = Room.databaseBuilder(this,
-                DataBaseFactory::class.java,
-                "diin-database")
-                .allowMainThreadQueries()
-                .build()
-*/
-
     companion object {
         var mappDataBuilder : DataBaseFactory? = null
     }
 
+    /**
+     * This is the first method called when
+     * the app starts.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onCreate() {
         super.onCreate()
 
