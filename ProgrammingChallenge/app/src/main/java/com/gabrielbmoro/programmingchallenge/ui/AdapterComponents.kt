@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.gabrielbmoro.programmingchallenge.ProgrammingChallengeApp
 import com.gabrielbmoro.programmingchallenge.R
+import com.gabrielbmoro.programmingchallenge.dao.FavoriteMovieDAOAssistant
 import com.gabrielbmoro.programmingchallenge.models.FavoriteMovie
 import com.gabrielbmoro.programmingchallenge.models.Movie
 import com.squareup.picasso.Picasso
@@ -22,8 +23,8 @@ import com.squareup.picasso.Picasso
  */
 class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapter<CellSimpleMovieViewHolder>() {
 
-    var mlstMovies    : ArrayList<Movie> = alstMovies
-    var mpicasoObject : Picasso?         = null
+    var mlstMovies: ArrayList<Movie> = alstMovies
+    var mpicasoObject: Picasso? = null
 
     /**
      * This state is necessary to create the viewholder. This
@@ -60,13 +61,13 @@ class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapte
         holder.mtvVoteAverageValue.text = movieTarget.msVoteAverage.toString()
         holder.mtvOverView.text = movieTarget.mstrOverview
         holder.mllDetails.visibility = LinearLayout.GONE
-        if(movieTarget.mbIsFavorite)
+        if (movieTarget.mbIsFavorite)
             holder.mibFavorite.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN)
         else
             holder.mibFavorite.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN)
 
         holder.mbtnExpand.setOnClickListener {
-            if(holder.mllDetails.visibility == LinearLayout.GONE)
+            if (holder.mllDetails.visibility == LinearLayout.GONE)
                 holder.mllDetails.visibility = LinearLayout.VISIBLE
             else
                 holder.mllDetails.visibility = LinearLayout.GONE
@@ -74,32 +75,20 @@ class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapte
         mpicasoObject?.load(movieTarget.mstrPosterPath)?.into(holder.mivPoster)
         holder.mibFavorite.setOnClickListener { it ->
             val bNewValue = !movieTarget.mbIsFavorite
-            val databaseLst = ProgrammingChallengeApp.mappDataBuilder?.favoriteMovieDao()?.all()
-            if(bNewValue) {
-                val nCountOccurs = databaseLst
-                                    ?.filter { target -> target.mnId == mlstMovies[position].mnId }
-                                    ?.count()
-                if(nCountOccurs != null && nCountOccurs == 0) {
-                    ProgrammingChallengeApp.mappDataBuilder?.favoriteMovieDao()?.add(FavoriteMovie(null,
-                            mlstMovies[position].mnId,
-                            mlstMovies[position].mstrTitle,
-                            mlstMovies[position].mstrReleaseDate,
-                            mlstMovies[position].msVoteAverage))
-                    mlstMovies[position].mbIsFavorite = true
+            val databaseInstance = ProgrammingChallengeApp.mappDataBuilder
+            if (databaseInstance != null) {
+                if (bNewValue) {
+                    FavoriteMovieDAOAssistant(databaseInstance)
+                            .addMovieAsFavorite(mlstMovies[position])
                     notifyItemChanged(position)
-                }
-            } else {
-                val movieToRemove = databaseLst
-                                        ?.first { target -> target.mnId == mlstMovies[position].mnId }
-                if(movieToRemove!=null) {
-                    ProgrammingChallengeApp.mappDataBuilder?.favoriteMovieDao()?.delete(movieToRemove)
-                    mlstMovies[position].mbIsFavorite = false
+                } else {
+                    FavoriteMovieDAOAssistant(databaseInstance)
+                            .deleteFavoriteMovie(mlstMovies[position])
                     notifyItemChanged(position)
                 }
             }
         }
     }
-
 }
 
 /**
