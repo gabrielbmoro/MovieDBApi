@@ -8,4 +8,5 @@
     <string name="voteAverage">Vote Average:</string>
     <string name="expand">Expand</string>
     <string name="FavoriteMoviesTitle">Favorite Movies</string>
+    <string name="offlinenow">You are offline now.</string>
 </resources>
