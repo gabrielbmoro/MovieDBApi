@@ -14,25 +14,59 @@ import com.gabrielbmoro.programmingchallenge.ui.CellSimpleMovieAdapter
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
+/**
+ * This contract provides two interfaces:
+ * - Presenter is used to manipulate the app's business
+ * objects;
+ * - View is used to control the widgets components.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 interface PopularMoviesPageContract {
+    /**
+     * Presenter defines the load movies action.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     interface Presenter {
         fun loadMovies()
     }
+    /**
+     * View defines the setup and update screen operations.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     interface View{
         fun setupRecyclerView()
         fun onNotifyDataChanged(moviesList : ArrayList<Movie>)
     }
 }
 
+/**
+ * This is a view that represents the popular movies.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 class PopularMoviesFragment : Fragment(), PopularMoviesPageContract.View {
 
     private var mrvRecyclerView : RecyclerView? = null
-    private var presenter : PopularMoviesPageContract.Presenter? = null
+    private var presenter       : PopularMoviesPageContract.Presenter? = null
 
+    /**
+     * In this state the fragment view is created.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_popularmovies, container, false)
     }
 
+    /**
+     * This state occurs after onCreateView.
+     * In this state it is possible to create the widget instances.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mrvRecyclerView = view?.findViewById(R.id.rvPopularMoviesList)
@@ -40,28 +74,55 @@ class PopularMoviesFragment : Fragment(), PopularMoviesPageContract.View {
         presenter = PopularMoviesPresenter(this)
     }
 
+    /**
+     * The last state before show the page to the user.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onResume() {
         super.onResume()
         presenter?.loadMovies()
     }
 
+    /**
+     * This method start the first recyclerview setup
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun setupRecyclerView() {
         val llManager = LinearLayoutManager(context)
         mrvRecyclerView?.layoutManager = llManager
         mrvRecyclerView?.adapter = CellSimpleMovieAdapter(ArrayList())
     }
 
+    /**
+     * This method allows to update all elements of the adapter list.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onNotifyDataChanged(amoviesList: ArrayList<Movie>) {
         (mrvRecyclerView?.adapter as CellSimpleMovieAdapter).mlstMovies = ArrayList(amoviesList)
         mrvRecyclerView?.adapter?.notifyDataSetChanged()
     }
 }
 
+/**
+ * This is presenter provides all behavior to the its view.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 class PopularMoviesPresenter(aview : PopularMoviesPageContract.View) : PopularMoviesPageContract.Presenter {
 
-    private val view : PopularMoviesPageContract.View = aview
-    var mlstMoviesFiltered : ArrayList<Movie>? = null
+    private val view              : PopularMoviesPageContract.View = aview
+            var mlstMoviesFiltered : ArrayList<Movie>? = null
 
+    /**
+     * This method allows the load movies using the request.
+     * In this case, I use the RxJava to get the information
+     * in IO thread, after that to update the screen in UI Thread.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun loadMovies() {
         val api = ApiServiceAccess()
         api.getMovies("popularity.desc")

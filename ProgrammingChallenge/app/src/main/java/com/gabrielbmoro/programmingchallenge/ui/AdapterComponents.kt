@@ -2,7 +2,6 @@ package com.gabrielbmoro.programmingchallenge.ui
 
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -14,21 +13,46 @@ import com.gabrielbmoro.programmingchallenge.models.FavoriteMovie
 import com.gabrielbmoro.programmingchallenge.models.Movie
 import com.squareup.picasso.Picasso
 
+/**
+ * This adapter is the manager of R.layout.cell_simple_movie.
+ * It allows the content configuration according the list of
+ * model objects.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapter<CellSimpleMovieViewHolder>() {
 
-    var mlstMovies : ArrayList<Movie> = alstMovies
-    var mpicasoObject : Picasso? = null
+    var mlstMovies    : ArrayList<Movie> = alstMovies
+    var mpicasoObject : Picasso?         = null
 
+    /**
+     * This state is necessary to create the viewholder. This
+     * object will be used to send new content
+     * using adapter notifications.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CellSimpleMovieViewHolder {
         mpicasoObject = Picasso.Builder(parent.context).build()
         return CellSimpleMovieViewHolder((LayoutInflater.from(parent.context)
                 .inflate(R.layout.cell_simple_movie, parent, false)))
     }
 
+    /**
+     * Return the size number of list objects. This
+     * control is used by onBindViewHolder.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun getItemCount(): Int {
         return mlstMovies.size
     }
 
+    /**
+     * This method allows to relation the object and viewholder.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onBindViewHolder(holder: CellSimpleMovieViewHolder, position: Int) {
         val movieTarget = mlstMovies[position]
         holder.mtvTitle.text = movieTarget.mstrTitle
@@ -48,21 +72,27 @@ class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapte
                 holder.mllDetails.visibility = LinearLayout.GONE
         }
         mpicasoObject?.load(movieTarget.mstrPosterPath)?.into(holder.mivPoster)
-        holder.mibFavorite.setOnClickListener {
+        holder.mibFavorite.setOnClickListener { it ->
             val bNewValue = !movieTarget.mbIsFavorite
+            val databaseLst = ProgrammingChallengeApp.mappDataBuilder?.favoriteMovieDao()?.all()
             if(bNewValue) {
-                ProgrammingChallengeApp.mappDataBuilder?.favoriteMovieDao()?.add(FavoriteMovie(null,
-                        mlstMovies[position].mnId,
-                        mlstMovies[position].mstrTitle,
-                        mlstMovies[position].mstrReleaseDate,
-                        mlstMovies[position].msVoteAverage))
-                mlstMovies[position].mbIsFavorite = true
-                notifyItemChanged(position)
+                val nCountOccurs = databaseLst
+                                    ?.filter { target -> target.mnId == mlstMovies[position].mnId }
+                                    ?.count()
+                if(nCountOccurs != null && nCountOccurs == 0) {
+                    ProgrammingChallengeApp.mappDataBuilder?.favoriteMovieDao()?.add(FavoriteMovie(null,
+                            mlstMovies[position].mnId,
+                            mlstMovies[position].mstrTitle,
+                            mlstMovies[position].mstrReleaseDate,
+                            mlstMovies[position].msVoteAverage))
+                    mlstMovies[position].mbIsFavorite = true
+                    notifyItemChanged(position)
+                }
             } else {
-                val databaseLst = ProgrammingChallengeApp.mappDataBuilder?.favoriteMovieDao()?.all()
-                val fvriteMovie = databaseLst?.filter { fvite -> fvite.mnId == mlstMovies[position].mnId }?.first()
-                if(fvriteMovie!=null) {
-                    ProgrammingChallengeApp.mappDataBuilder?.favoriteMovieDao()?.delete(fvriteMovie)
+                val movieToRemove = databaseLst
+                                        ?.first { target -> target.mnId == mlstMovies[position].mnId }
+                if(movieToRemove!=null) {
+                    ProgrammingChallengeApp.mappDataBuilder?.favoriteMovieDao()?.delete(movieToRemove)
                     mlstMovies[position].mbIsFavorite = false
                     notifyItemChanged(position)
                 }
@@ -72,15 +102,20 @@ class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapte
 
 }
 
+/**
+ * This class defines the widget creation.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 class CellSimpleMovieViewHolder(avwView : View) : RecyclerView.ViewHolder(avwView) {
-    val mtvTitle : TextView = avwView.findViewById(R.id.tvTitle)
-    val mtvReleaseDateValue : TextView = avwView.findViewById(R.id.tvReleaseDateValue)
-    val mtvVoteAverageValue : TextView = avwView.findViewById(R.id.tvVoteAverageValue)
-    val mllDetails : LinearLayout = avwView.findViewById(R.id.llDetails)
-    val mivPoster : ImageView = avwView.findViewById(R.id.ivPoster)
-    val mtvOverView : TextView = avwView.findViewById(R.id.tvOverview)
-    val mibFavorite : ImageButton = avwView.findViewById(R.id.ibFavorite)
-    val mbtnExpand : Button = avwView.findViewById(R.id.btnExpand)
+    val mtvTitle            : TextView     = avwView.findViewById(R.id.tvTitle)
+    val mtvReleaseDateValue : TextView     = avwView.findViewById(R.id.tvReleaseDateValue)
+    val mtvVoteAverageValue : TextView     = avwView.findViewById(R.id.tvVoteAverageValue)
+    val mllDetails          : LinearLayout = avwView.findViewById(R.id.llDetails)
+    val mivPoster           : ImageView    = avwView.findViewById(R.id.ivPoster)
+    val mtvOverView         : TextView     = avwView.findViewById(R.id.tvOverview)
+    val mibFavorite         : ImageButton  = avwView.findViewById(R.id.ibFavorite)
+    val mbtnExpand          : Button       = avwView.findViewById(R.id.btnExpand)
 
     init {
         mllDetails.visibility = LinearLayout.GONE
@@ -88,18 +123,41 @@ class CellSimpleMovieViewHolder(avwView : View) : RecyclerView.ViewHolder(avwVie
     }
 }
 
+/**
+ * This is a simple adapter used to control the R.layou.cell_favorite_movie.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 class CellFavoriteMovieAdapter(alstMovies : ArrayList<FavoriteMovie>): RecyclerView.Adapter<CellFavoriteMovieViewHolder>() {
     var mlstMovies : ArrayList<FavoriteMovie> = alstMovies
 
+    /**
+     * This state is necessary to create the viewholder. This
+     * object will be used to send new content
+     * using adapter notifications.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CellFavoriteMovieViewHolder {
         return CellFavoriteMovieViewHolder((LayoutInflater.from(parent.context)
                 .inflate(R.layout.cell_favorite_movie, parent, false)))
     }
 
+    /**
+     * Return the size number of list objects. This
+     * control is used by onBindViewHolder.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun getItemCount(): Int {
         return mlstMovies.size
     }
 
+    /**
+     * This method allows to relation the object and viewholder.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onBindViewHolder(holder: CellFavoriteMovieViewHolder, position: Int) {
         val movieTarget = mlstMovies[position]
         holder.mtvTitle.text = movieTarget.mstrTitle
@@ -108,8 +166,13 @@ class CellFavoriteMovieAdapter(alstMovies : ArrayList<FavoriteMovie>): RecyclerV
     }
 }
 
+/**
+ * This class defines the widget creation.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 class CellFavoriteMovieViewHolder(avwView : View) : RecyclerView.ViewHolder(avwView) {
-    val mtvTitle : TextView = avwView.findViewById(R.id.tvTitle)
+    val mtvTitle            : TextView = avwView.findViewById(R.id.tvTitle)
     val mtvReleaseDateValue : TextView = avwView.findViewById(R.id.tvReleaseDateValue)
     val mtvVoteAverageValue : TextView = avwView.findViewById(R.id.tvVoteAverageValue)
 }

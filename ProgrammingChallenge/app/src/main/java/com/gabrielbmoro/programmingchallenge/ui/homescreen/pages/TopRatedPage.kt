@@ -14,24 +14,58 @@ import com.gabrielbmoro.programmingchallenge.ui.CellSimpleMovieAdapter
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
+/**
+ * This contract provides two interfaces:
+ * - Presenter is used to manipulate the app's business
+ * objects;
+ * - View is used to control the widgets components.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 interface TopRatedPageContract {
+    /**
+     * Presenter defines the load movies action.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     interface Presenter {
         fun loadMovies()
     }
+    /**
+     * View defines the setup and update screen operations.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     interface View{
         fun setupRecyclerView()
         fun onNotifyDataChanged(moviesList : ArrayList<Movie>)
     }
 }
 
+/**
+ * This is a view that represents the top rated movies.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 class TopRatedFragment : Fragment(), TopRatedPageContract.View {
-    private var presenter : TopRatedPageContract.Presenter? = null
+    private var presenter       : TopRatedPageContract.Presenter? = null
     private var mrvRecyclerView : RecyclerView? = null
 
+    /**
+     * In this state the fragment view is created.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_top_rated_movies, container, false)
     }
 
+    /**
+     * This state occurs after onCreateView.
+     * In this state it is possible to create the widget instances.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mrvRecyclerView = view?.findViewById(R.id.rvTopRatedMoviesList)
@@ -39,28 +73,55 @@ class TopRatedFragment : Fragment(), TopRatedPageContract.View {
         presenter = TopRatedPresenter(this)
     }
 
+    /**
+     * The last state before show the page to the user.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onResume() {
         super.onResume()
         presenter?.loadMovies()
     }
 
+    /**
+     * This method start the first recyclerview setup
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun setupRecyclerView() {
         val llManager = LinearLayoutManager(context)
         mrvRecyclerView?.layoutManager = llManager
         mrvRecyclerView?.adapter = CellSimpleMovieAdapter(ArrayList())
     }
 
+    /**
+     * This method allows to update all elements of the adapter list.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onNotifyDataChanged(amoviesList : ArrayList<Movie>) {
         (mrvRecyclerView?.adapter as CellSimpleMovieAdapter).mlstMovies = ArrayList(amoviesList)
         mrvRecyclerView?.adapter?.notifyDataSetChanged()
     }
 }
 
+/**
+ * This is presenter provides all behavior to the its view.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 class TopRatedPresenter(aview : TopRatedPageContract.View) : TopRatedPageContract.Presenter {
 
-    private val view : TopRatedPageContract.View = aview
-    var mlstMoviesFiltered : ArrayList<Movie>? = null
+    private val view               : TopRatedPageContract.View = aview
+            var mlstMoviesFiltered : ArrayList<Movie>? = null
 
+    /**
+     * This method allows the load movies using the request.
+     * In this case, I use the RxJava to get the information
+     * in IO thread, after that to update the screen in UI Thread.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun loadMovies() {
         val api = ApiServiceAccess()
         api.getMovies("vote_average.desc")

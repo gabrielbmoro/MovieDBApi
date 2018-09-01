@@ -11,22 +11,49 @@ import com.gabrielbmoro.programmingchallenge.ui.homescreen.pages.PopularMoviesFr
 import com.gabrielbmoro.programmingchallenge.ui.homescreen.pages.TopRatedFragment
 import me.relex.circleindicator.CircleIndicator
 
+/**
+ * This contract provides two interfaces:
+ * - Presenter is used to manipulate the app's business
+ * objects;
+ * - View is used to control the widgets components.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 interface HomeScreenContract {
-    interface Presenter {
-
-    }
+    /**
+     * Presenter defines the load movies action.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
+    interface Presenter { }
+    /**
+     * View defines the setup and update screen operations.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     interface View{
         fun loadPages()
     }
 }
 
+/**
+ * This is a view that represents the three pages: top rated movies,
+ * popular movies, and favorite movies.
+ * @author Gabriel Moro
+ * @since 2018-08-30
+ */
 class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View {
 
+    private var presenter    : HomeScreenContract.Presenter? = null
+    private var mvwViewPager : ViewPager?                    = null
+    private var mciIndicator : CircleIndicator?              = null
 
-    private var presenter : HomeScreenContract.Presenter? = null
-    private var mvwViewPager : ViewPager? = null
-    private var mciIndicator : CircleIndicator? = null
-
+    /**
+     * This method is called before screen creation.
+     * I use it to get the widgets components.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homescreen)
@@ -37,6 +64,12 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View {
         loadPages()
     }
 
+    /**
+     * This method starts the viewpager component, this
+     * component shows the three pages like a book.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
     override fun loadPages() {
         val lstPages = ArrayList<Fragment>()
         lstPages.add(TopRatedFragment())
@@ -55,51 +88,6 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View {
         mvwViewPager?.adapter?.registerDataSetObserver(mciIndicator?.dataSetObserver)
     }
 }
-
-/*
-
-  class ViewPagerAdapter(a_fmFragmentManager : FragmentManager, a_lstPages : ArrayList<Fragment>) : FragmentPagerAdapter(a_fmFragmentManager) {
-
-    private val mlstPages : ArrayList<Fragment> = a_lstPages
-
-    override fun getItem(position: Int): Fragment {
-        return mlstPages[position]
-    }
-
-    override fun getCount(): Int {
-        return mlstPages.size
-    }
-
-}
-
-
-  private fun loadViewPageAdapter() {
-        val lstPages = ArrayList<Fragment>()
-        lstPages.add(FragmentExpensesList())
-        lstPages.add(FragmentFinancialReport())
-        lstPages.add(FragmentSalaryList())
-
-        mvwViewPager?.adapter = ViewPagerAdapter(supportFragmentManager, lstPages)
-        mvwViewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {}
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-
-            override fun onPageSelected(position: Int) {
-                mPrevMenuItem?.isChecked = false
-
-                val mTargetMenu: MenuItem? = when {
-                    position == 0 -> mnvNavigation?.menu?.findItem(R.id.navigation_expenses)
-                    position == 1 -> mnvNavigation?.menu?.findItem(R.id.navigation_piechart)
-                    position == 2 -> mnvNavigation?.menu?.findItem(R.id.navigation_salary)
-                    else -> null
-                }
-                mTargetMenu?.isChecked = true
-                mPrevMenuItem = mTargetMenu
-            }
-        })
-    }
-*/
 
 class HomeScreenPresenter(aview : HomeScreenContract.View) : HomeScreenContract.Presenter {
     private val view : HomeScreenContract.View = aview
