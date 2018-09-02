@@ -112,7 +112,7 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View, Connect
         /**
          * Limit pages in memory.
          */
-        mvwViewPager?.offscreenPageLimit = 3
+        mvwViewPager?.offscreenPageLimit = 0
     }
 
     /**
