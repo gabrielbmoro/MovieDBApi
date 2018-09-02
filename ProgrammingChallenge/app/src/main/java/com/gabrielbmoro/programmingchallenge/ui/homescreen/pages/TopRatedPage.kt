@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import com.gabrielbmoro.programmingchallenge.ProgrammingChallengeApp
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.api.ApiServiceAccess
+import com.gabrielbmoro.programmingchallenge.dao.FavoriteMovieDAOAssistant
 import com.gabrielbmoro.programmingchallenge.models.Movie
 import com.gabrielbmoro.programmingchallenge.ui.CellSimpleMovieAdapter
 import rx.android.schedulers.AndroidSchedulers
@@ -147,8 +149,12 @@ class TopRatedPresenter(aview : TopRatedPageContract.View) : TopRatedPageContrac
                         {
                             if(it.mlstResults != null) mlstMoviesFiltered = ArrayList(it.mlstResults!!)
 
+                            val daoAssistant = FavoriteMovieDAOAssistant(ProgrammingChallengeApp.mappDataBuilder!!)
                             mlstMoviesFiltered?.forEach {
                                 it.mstrPosterPath = "https://image.tmdb.org/t/p/w154"+ it.mstrPosterPath
+                                if(ProgrammingChallengeApp.mappDataBuilder != null) {
+                                    it.mbIsFavorite = daoAssistant.isThereSomeMovieInFavorite(it)
+                                }
                             }
                         },
                         {

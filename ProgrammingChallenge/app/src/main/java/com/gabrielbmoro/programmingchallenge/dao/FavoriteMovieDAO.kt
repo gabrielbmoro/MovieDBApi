@@ -18,6 +18,17 @@ class FavoriteMovieDAOAssistant(adtBase : DataBaseFactory) {
     private val mdtBase : DataBaseFactory = adtBase
 
     /**
+     * If there is some movie saved like favorite, this method
+     * provides true.
+     * @author Gabriel Moro
+     * @since 2018-08-30
+     */
+    fun isThereSomeMovieInFavorite(amvMovie: Movie) : Boolean {
+        return mdtBase.favoriteMovieDao()
+                .all()
+                .filter { it.mnId == amvMovie.mnId }.count() > 0
+    }
+    /**
      * This method adds some movie as favorite movie.
      * @author Gabriel Moro
      * @since 2018-08-30
