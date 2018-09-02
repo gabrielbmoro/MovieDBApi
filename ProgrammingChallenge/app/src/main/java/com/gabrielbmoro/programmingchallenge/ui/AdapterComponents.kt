@@ -61,6 +61,7 @@ class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapte
         holder.mtvVoteAverageValue.text = movieTarget.msVoteAverage.toString()
         holder.mtvOverView.text = movieTarget.mstrOverview
         holder.mllDetails.visibility = LinearLayout.GONE
+        holder.mbtnExpand.setText(R.string.expand)
         if (movieTarget.mbIsFavorite)
             holder.mibFavorite.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN)
         else
