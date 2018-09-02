@@ -72,7 +72,11 @@ class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapte
             else
                 holder.mllDetails.visibility = LinearLayout.GONE
         }
+
+
         mpicasoObject?.load(movieTarget.mstrPosterPath)?.into(holder.mivPoster)
+
+
         holder.mibFavorite.setOnClickListener { it ->
             val bNewValue = !movieTarget.mbIsFavorite
             val databaseInstance = ProgrammingChallengeApp.mappDataBuilder
