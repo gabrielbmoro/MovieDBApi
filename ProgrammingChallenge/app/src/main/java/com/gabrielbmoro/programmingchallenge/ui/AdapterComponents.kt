@@ -67,10 +67,13 @@ class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapte
             holder.mibFavorite.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN)
 
         holder.mbtnExpand.setOnClickListener {
-            if (holder.mllDetails.visibility == LinearLayout.GONE)
+            if (holder.mllDetails.visibility == LinearLayout.GONE) {
                 holder.mllDetails.visibility = LinearLayout.VISIBLE
-            else
+                holder.mbtnExpand.setText(R.string.hide)
+            } else {
                 holder.mllDetails.visibility = LinearLayout.GONE
+                holder.mbtnExpand.setText(R.string.expand)
+            }
         }
 
 

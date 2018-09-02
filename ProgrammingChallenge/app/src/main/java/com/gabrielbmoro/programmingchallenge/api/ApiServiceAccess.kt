@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import rx.Observable
+import java.util.concurrent.TimeUnit
 
 /**
  * This class creates the api service.
@@ -33,7 +34,10 @@ class ApiServiceAccess {
                 .baseUrl(BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(OkHttpClient.Builder().build())
+                .client(OkHttpClient.Builder()
+                        .connectTimeout(15, TimeUnit.SECONDS)
+                        .readTimeout(15, TimeUnit.SECONDS)
+                        .build())
                 .build()
         service = retrofit.create(ApiServiceInterface::class.java)
     }
