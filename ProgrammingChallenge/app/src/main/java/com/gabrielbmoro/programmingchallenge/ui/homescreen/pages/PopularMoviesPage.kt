@@ -8,15 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
 import com.gabrielbmoro.programmingchallenge.ProgrammingChallengeApp
 import com.gabrielbmoro.programmingchallenge.R
-import com.gabrielbmoro.programmingchallenge.RxBus
 import com.gabrielbmoro.programmingchallenge.api.ApiServiceAccess
 import com.gabrielbmoro.programmingchallenge.dao.FavoriteMovieDAOAssistant
 import com.gabrielbmoro.programmingchallenge.models.Movie
 import com.gabrielbmoro.programmingchallenge.ui.CellSimpleMovieAdapter
-import rx.Observer
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -47,6 +44,7 @@ interface PopularMoviesPageContract {
         fun onNotifyDataChanged(moviesList : ArrayList<Movie>)
         fun showProgress()
         fun hideProgress()
+        fun areThereSomeElementsAtRecyclerView() : Boolean
     }
 }
 
@@ -83,24 +81,6 @@ class PopularMoviesFragment : Fragment(), PopularMoviesPageContract.View {
         mpdProgressBar?.isIndeterminate = true
         setupRecyclerView()
         presenter = PopularMoviesPresenter(this)
-
-        RxBus.getConnectionEvent()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    object : Observer<Boolean> {
-                        override fun onCompleted() {
-
-                        }
-                        override fun onError(e: Throwable?) {
-
-                        }
-                        override fun onNext(t: Boolean?) {
-                            if(it) {
-                                Toast.makeText(context, "conectou", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                }
     }
 
     /**
@@ -141,6 +121,15 @@ class PopularMoviesFragment : Fragment(), PopularMoviesPageContract.View {
     override fun showProgress() {
         mpdProgressBar?.visibility = ProgressBar.VISIBLE
     }
+
+    override fun areThereSomeElementsAtRecyclerView(): Boolean {
+        return if(mrvRecyclerView?.adapter == null) false
+        else {
+            val cellSimpleAdapter = (mrvRecyclerView?.adapter as CellSimpleMovieAdapter)
+            cellSimpleAdapter.mlstMovies.isNotEmpty()
+        }
+    }
+
 }
 
 /**
@@ -161,6 +150,8 @@ class PopularMoviesPresenter(aview : PopularMoviesPageContract.View) : PopularMo
      * @since 2018-08-30
      */
     override fun loadMovies() {
+        if(!ProgrammingChallengeApp.mbHasNetworkConnection) return
+        if(view.areThereSomeElementsAtRecyclerView()) return
         view.showProgress()
         val api = ApiServiceAccess()
         api.getMovies("popularity.desc")

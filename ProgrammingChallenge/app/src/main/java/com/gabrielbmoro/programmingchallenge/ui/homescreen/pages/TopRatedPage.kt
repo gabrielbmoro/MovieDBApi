@@ -44,6 +44,7 @@ interface TopRatedPageContract {
         fun onNotifyDataChanged(moviesList : ArrayList<Movie>)
         fun showProgress()
         fun hideProgress()
+        fun areThereSomeElementsAtRecyclerView() : Boolean
     }
 }
 
@@ -120,6 +121,14 @@ class TopRatedFragment : Fragment(), TopRatedPageContract.View {
     override fun showProgress() {
         mpdProgressBar?.visibility = ProgressBar.VISIBLE
     }
+
+    override fun areThereSomeElementsAtRecyclerView(): Boolean {
+        return if(mrvRecyclerView?.adapter == null) false
+        else {
+            val cellSimpleAdapter = (mrvRecyclerView?.adapter as CellSimpleMovieAdapter)
+            cellSimpleAdapter.mlstMovies.isNotEmpty()
+        }
+    }
 }
 
 /**
@@ -140,6 +149,8 @@ class TopRatedPresenter(aview : TopRatedPageContract.View) : TopRatedPageContrac
      * @since 2018-08-30
      */
     override fun loadMovies() {
+        if(!ProgrammingChallengeApp.mbHasNetworkConnection) return
+        if(view.areThereSomeElementsAtRecyclerView()) return
         view.showProgress()
         val api = ApiServiceAccess()
         api.getMovies("vote_average.desc")

@@ -14,7 +14,7 @@ import com.gabrielbmoro.programmingchallenge.ui.homescreen.pages.PopularMoviesFr
 import com.gabrielbmoro.programmingchallenge.ui.homescreen.pages.TopRatedFragment
 import me.relex.circleindicator.CircleIndicator
 import android.support.design.widget.Snackbar
-import com.gabrielbmoro.programmingchallenge.RxBus
+import com.gabrielbmoro.programmingchallenge.ProgrammingChallengeApp
 
 /**
  * This contract provides two interfaces:
@@ -78,12 +78,14 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View, Connect
     /**
      * Callback will be called when there is change
      */
-    override fun onNetworkConnectionChanged(abisConnected: Boolean) {
-        if(!abisConnected)
+    override fun onNetworkConnectionChanged(isConnected : Boolean) {
+        ProgrammingChallengeApp.mbHasNetworkConnection = isConnected
+        if(!isConnected)
             showSnackBar(resources.getString(R.string.offlinenow))
         else {
-            RxBus.setConnectionBoolean(abisConnected)
             hideSnackBar()
+            val nCurrentPage = mvwViewPager?.currentItem ?: 0
+            (mvwViewPager?.adapter as FragmentPagerAdapter).getItem(nCurrentPage)?.onResume()
         }
     }
 
