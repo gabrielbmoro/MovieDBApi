@@ -4,7 +4,10 @@
 
 - The [Wiki](https://github.com/tido4410/moviedatabaseapi/wiki) has more information about the project like its architecture and the libraries used;
 
-- The apks are in this [link](https://github.com/tido4410/moviedatabaseapi/tree/master/apk).
+## Installation
+
+- The apks are in this [link](https://github.com/tido4410/moviedatabaseapi/tree/master/apk);
+- Platform requirement: >= Android Lolipop.
 
 ## Screenshots
 
