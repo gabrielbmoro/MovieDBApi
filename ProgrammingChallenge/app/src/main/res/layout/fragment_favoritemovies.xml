@@ -16,7 +16,7 @@
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/FavoriteMoviesTitle"
         android:textColor="@android:color/black"
-        android:textSize="24sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/rvFavoriteMoviesList"
         app:layout_constraintEnd_toEndOf="parent"
