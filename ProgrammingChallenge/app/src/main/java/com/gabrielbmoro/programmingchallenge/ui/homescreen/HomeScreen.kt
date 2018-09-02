@@ -107,6 +107,15 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View, Connect
                 return lstPages[position]
             }
         }
+        mvwViewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) { }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) { }
+
+            override fun onPageSelected(position: Int) {
+                (mvwViewPager?.adapter as FragmentPagerAdapter).getItem(position)?.onResume()
+            }
+        })
         mciIndicator?.setViewPager(mvwViewPager)
         mvwViewPager?.adapter?.registerDataSetObserver(mciIndicator?.dataSetObserver)
         /**
