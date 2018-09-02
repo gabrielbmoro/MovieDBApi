@@ -14,6 +14,7 @@ import com.gabrielbmoro.programmingchallenge.ui.homescreen.pages.PopularMoviesFr
 import com.gabrielbmoro.programmingchallenge.ui.homescreen.pages.TopRatedFragment
 import me.relex.circleindicator.CircleIndicator
 import android.support.design.widget.Snackbar
+import com.gabrielbmoro.programmingchallenge.RxBus
 
 /**
  * This contract provides two interfaces:
@@ -47,6 +48,7 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View, Connect
     private var mvwViewPager : ViewPager?                    = null
     private var mciIndicator : CircleIndicator?              = null
     private var msbSnackBar  : Snackbar?                     = null
+    private var mcrReceiver  : ConnectivityReceiver?         = null
 
     /**
      * This method is called before screen creation.
@@ -62,12 +64,15 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View, Connect
         mciIndicator = findViewById(R.id.indicator)
 
         loadPages()
+
+        if(mcrReceiver==null) mcrReceiver = ConnectivityReceiver()
+        registerReceiver(mcrReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+        ConnectivityReceiver.connectivityReceiverListener = this
     }
 
-    override fun onResume() {
-        super.onResume()
-        registerReceiver(ConnectivityReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
-        ConnectivityReceiver.connectivityReceiverListener = this
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(mcrReceiver)
     }
 
     /**
@@ -76,8 +81,10 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View, Connect
     override fun onNetworkConnectionChanged(abisConnected: Boolean) {
         if(!abisConnected)
             showSnackBar(resources.getString(R.string.offlinenow))
-        else
+        else {
+            RxBus.setConnectionBoolean(abisConnected)
             hideSnackBar()
+        }
     }
 
     /**
@@ -102,6 +109,10 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View, Connect
         }
         mciIndicator?.setViewPager(mvwViewPager)
         mvwViewPager?.adapter?.registerDataSetObserver(mciIndicator?.dataSetObserver)
+        /**
+         * Limit pages in memory.
+         */
+        mvwViewPager?.offscreenPageLimit = 3
     }
 
     /**

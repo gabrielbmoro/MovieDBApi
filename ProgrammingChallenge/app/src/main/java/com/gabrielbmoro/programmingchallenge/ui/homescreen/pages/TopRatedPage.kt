@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.api.ApiServiceAccess
 import com.gabrielbmoro.programmingchallenge.models.Movie
@@ -39,6 +40,8 @@ interface TopRatedPageContract {
     interface View{
         fun setupRecyclerView()
         fun onNotifyDataChanged(moviesList : ArrayList<Movie>)
+        fun showProgress()
+        fun hideProgress()
     }
 }
 
@@ -48,8 +51,10 @@ interface TopRatedPageContract {
  * @since 2018-08-30
  */
 class TopRatedFragment : Fragment(), TopRatedPageContract.View {
+
     private var presenter       : TopRatedPageContract.Presenter? = null
     private var mrvRecyclerView : RecyclerView? = null
+    private var mpdProgressBar  : ProgressBar?  = null
 
     /**
      * In this state the fragment view is created.
@@ -69,6 +74,8 @@ class TopRatedFragment : Fragment(), TopRatedPageContract.View {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mrvRecyclerView = view?.findViewById(R.id.rvTopRatedMoviesList)
+        mpdProgressBar = view?.findViewById(R.id.pbProgress)
+        mpdProgressBar?.isIndeterminate = true
         setupRecyclerView()
         presenter = TopRatedPresenter(this)
     }
@@ -103,6 +110,14 @@ class TopRatedFragment : Fragment(), TopRatedPageContract.View {
         (mrvRecyclerView?.adapter as CellSimpleMovieAdapter).mlstMovies = ArrayList(amoviesList)
         mrvRecyclerView?.adapter?.notifyDataSetChanged()
     }
+
+    override fun hideProgress() {
+        mpdProgressBar?.visibility = ProgressBar.GONE
+    }
+
+    override fun showProgress() {
+        mpdProgressBar?.visibility = ProgressBar.VISIBLE
+    }
 }
 
 /**
@@ -123,6 +138,7 @@ class TopRatedPresenter(aview : TopRatedPageContract.View) : TopRatedPageContrac
      * @since 2018-08-30
      */
     override fun loadMovies() {
+        view.showProgress()
         val api = ApiServiceAccess()
         api.getMovies("vote_average.desc")
                 .subscribeOn(Schedulers.io())
@@ -139,9 +155,10 @@ class TopRatedPresenter(aview : TopRatedPageContract.View) : TopRatedPageContrac
                             it.printStackTrace()
                         },{
                     //ui
-                    if(mlstMoviesFiltered!=null)
-                    view.onNotifyDataChanged(mlstMoviesFiltered!!)
-                }
-                )
+                    if(mlstMoviesFiltered!=null) {
+                        view.onNotifyDataChanged(mlstMoviesFiltered!!)
+                        view.hideProgress()
+                    }
+                })
     }
 }
