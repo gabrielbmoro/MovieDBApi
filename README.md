@@ -2,11 +2,12 @@
 
 - This repository provides an Android project that uses the library  [Movie DB API](https://www.themoviedb.org);
 
-- The [Wiki](https://github.com/tido4410/moviedatabaseapi/wiki) has more information about the project like its architecture and the libraries used;
+- The [Wiki](https://github.com/tido4410/moviedatabaseapi/wiki) has more information about the project like its architecture and the libraries used.
 
 ## Installation
 
 - The apks are in this [link](https://github.com/tido4410/moviedatabaseapi/tree/master/apk);
+
 - Platform requirement: >= Android Lolipop.
 
 ## Screenshots
