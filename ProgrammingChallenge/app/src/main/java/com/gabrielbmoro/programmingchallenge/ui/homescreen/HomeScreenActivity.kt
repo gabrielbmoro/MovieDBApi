@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.databinding.ActivityHomescreenBinding
 import com.gabrielbmoro.programmingchallenge.ui.homescreen.page.MovieListFragment
-import com.google.android.material.snackbar.Snackbar
 
 /**
  * This is a view that represents the three pages: top rated movies,
@@ -18,32 +16,18 @@ import com.google.android.material.snackbar.Snackbar
  * @author Gabriel Moro
  * @since 2018-08-30
  */
-class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View {
+class HomeScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomescreenBinding
-    private var snackBar: Snackbar? = null
 
-    /**
-     * This method is called before screen creation.
-     * I use it to get the widgets components.
-     * @author Gabriel Moro
-     * @since 2018-08-30
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_homescreen)
 
         loadPages()
-
     }
 
-    /**
-     * This method starts the viewpager component, this
-     * component shows the three pages like a book.
-     * @author Gabriel Moro
-     * @since 2018-08-30
-     */
-    override fun loadPages() {
+    private fun loadPages() {
         val lstPages = ArrayList<Fragment>()
         lstPages.add(MovieListFragment.newInstance(MovieListFragment.TOP_RATED_MOVIES_TYPE))
         lstPages.add(MovieListFragment.newInstance(MovieListFragment.POPULAR_MOVIES_TYPE))
@@ -90,25 +74,5 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View {
          * Limit pages in memory.
          */
         binding.vwPagerComponent.offscreenPageLimit = 0
-    }
-
-    /**
-     * This method shows the snackbar with message
-     * @author Gabriel Moro
-     * @since 2018-08-30
-     */
-    override fun showSnackBar(astrMessage: String) {
-        snackBar = Snackbar.make(findViewById(R.id.clParentView), astrMessage, Snackbar.LENGTH_LONG) //Assume "rootLayout" as the root layout of every activity.
-        snackBar?.show()
-    }
-
-
-    /**
-     * Hide the snackbar component.
-     * @author Gabriel Moro
-     * @since 2018-08-30
-     */
-    override fun hideSnackBar() {
-        snackBar?.dismiss()
     }
 }
