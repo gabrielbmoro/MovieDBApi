@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="poster_card_width">180dp</dimen>
+    <dimen name="card_view_height">280dp</dimen>
+    <dimen name="card_title_max_height">150dp</dimen>
+</resources>

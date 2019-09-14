@@ -10,3 +10,8 @@ fun setImagePath(imageView : ImageView, path : String) {
         load(path).into(imageView)
     }
 }
+
+@BindingAdapter("srcCompat")
+fun setImage(imageView: ImageView, drawable : Int) {
+    imageView.setImageResource(drawable)
+}

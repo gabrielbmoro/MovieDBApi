@@ -10,4 +10,7 @@
     <string name="hide">Hide</string>
     <string name="favorite_movies_screen_title">Favorite Movies</string>
     <string name="offline_now">You are offline now.</string>
+    <string name="grande_dragao_branco">O Grande Dragão Branco</string>
+    <string name="release_date_example">10/02/2019</string>
+    <string name="star">star</string>
 </resources>

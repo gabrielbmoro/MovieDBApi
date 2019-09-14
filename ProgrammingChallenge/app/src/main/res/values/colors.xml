@@ -6,4 +6,5 @@
     <color name="backgroundScreen">#7d7a9b</color>
     <color name="colorSep">#b0bad1</color>
     <color name="purple">#553258</color>
+    <color name="star_color">#FFA000</color>
 </resources>

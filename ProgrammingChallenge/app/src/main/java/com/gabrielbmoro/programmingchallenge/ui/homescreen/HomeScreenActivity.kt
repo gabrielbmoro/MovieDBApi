@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.databinding.ActivityHomescreenBinding
 import com.gabrielbmoro.programmingchallenge.ui.homescreen.page.MovieListFragment
@@ -57,8 +59,20 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View {
             }
         }
 
+        binding.vwPagerComponent.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {}
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageSelected(position: Int) {
+                when (position) {
+                    0 -> binding.bnvBottomMenu.selectedItemId = R.id.menuTopRatedMovies
+                    1 -> binding.bnvBottomMenu.selectedItemId = R.id.menuPopularMovies
+                    2 -> binding.bnvBottomMenu.selectedItemId = R.id.menuFavoriteMovies
+                }
+            }
+        })
+
         binding.bnvBottomMenu.setOnNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.menuTopRatedMovies -> binding.vwPagerComponent.setCurrentItem(0, false)
                 R.id.menuPopularMovies -> binding.vwPagerComponent.setCurrentItem(1, false)
                 R.id.menuFavoriteMovies -> binding.vwPagerComponent.setCurrentItem(2, false)

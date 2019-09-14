@@ -22,14 +22,7 @@ class MovieListViewModel(application: Application) : BaseViewModel(application) 
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 {
-                                    adapter.setup(
-                                            it.results?.map { movie ->
-                                                MovieData(
-                                                        posterPath = "https://image.tmdb.org/t/p/w780${movie.posterPath}",
-                                                        movieTitle = movie.title
-                                                )
-                                            }
-                                    )
+                                    adapter.setup(it.results)
                                 },
                                 {
 
