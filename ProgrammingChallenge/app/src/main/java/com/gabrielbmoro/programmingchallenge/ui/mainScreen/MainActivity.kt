@@ -1,4 +1,4 @@
-package com.gabrielbmoro.programmingchallenge.ui.homescreen
+package com.gabrielbmoro.programmingchallenge.ui.mainScreen
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.gabrielbmoro.programmingchallenge.R
-import com.gabrielbmoro.programmingchallenge.databinding.ActivityHomescreenBinding
-import com.gabrielbmoro.programmingchallenge.ui.homescreen.page.MovieListFragment
+import com.gabrielbmoro.programmingchallenge.databinding.ActivityMainBinding
+import com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.MovieListFragment
 
 /**
  * This is a view that represents the three pages: top rated movies,
@@ -16,13 +16,13 @@ import com.gabrielbmoro.programmingchallenge.ui.homescreen.page.MovieListFragmen
  * @author Gabriel Moro
  * @since 2018-08-30
  */
-class HomeScreenActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHomescreenBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_homescreen)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         loadPages()
     }

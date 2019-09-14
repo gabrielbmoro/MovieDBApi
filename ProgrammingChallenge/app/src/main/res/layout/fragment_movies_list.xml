@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.gabrielbmoro.programmingchallenge.ui.homescreen.page.MovieListViewModel" />
+            type="com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.MovieListViewModel" />
 
     </data>
 

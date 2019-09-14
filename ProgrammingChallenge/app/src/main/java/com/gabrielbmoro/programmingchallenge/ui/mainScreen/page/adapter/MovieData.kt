@@ -1,4 +1,4 @@
-package com.gabrielbmoro.programmingchallenge.ui.homescreen.page.adapter
+package com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter
 
 import androidx.annotation.DrawableRes
 

@@ -1,4 +1,4 @@
-package com.gabrielbmoro.programmingchallenge.ui.homescreen.page
+package com.gabrielbmoro.programmingchallenge.ui.mainScreen.page
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.databinding.FragmentMoviesListBinding

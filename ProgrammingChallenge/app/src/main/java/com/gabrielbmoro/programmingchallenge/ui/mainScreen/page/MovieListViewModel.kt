@@ -1,10 +1,10 @@
-package com.gabrielbmoro.programmingchallenge.ui.homescreen.page
+package com.gabrielbmoro.programmingchallenge.ui.mainScreen.page
 
 import android.app.Application
 import com.gabrielbmoro.programmingchallenge.api.ApiServiceAccess
 import com.gabrielbmoro.programmingchallenge.models.MoviesListType
 import com.gabrielbmoro.programmingchallenge.ui.base.BaseViewModel
-import com.gabrielbmoro.programmingchallenge.ui.homescreen.page.adapter.MoviesListAdapter
+import com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter.MoviesListAdapter
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 

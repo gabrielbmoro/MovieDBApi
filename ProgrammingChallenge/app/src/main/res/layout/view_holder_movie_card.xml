@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.gabrielbmoro.programmingchallenge.ui.homescreen.page.adapter.MovieData" />
+            type="com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter.MovieData" />
     </data>
 
     <androidx.cardview.widget.CardView

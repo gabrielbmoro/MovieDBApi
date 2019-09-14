@@ -17,7 +17,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".ui.homescreen.HomeScreenActivity"
+            android:name=".ui.mainScreen.MainActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Base.ProgrammingChallange.FullScreen">
             <intent-filter>
