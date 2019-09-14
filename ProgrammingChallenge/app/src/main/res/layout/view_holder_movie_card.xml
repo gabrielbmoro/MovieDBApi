@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gabrielbmoro.programmingchallenge.ui.homescreen.page.adapter.MovieData" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="500dp"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"
+        android:elevation="2dp"
+        android:background="@android:color/darker_gray"
+        android:orientation="vertical"
+        app:cardCornerRadius="10dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@{viewModel.movieTitle}"
+            android:scaleType="fitCenter"
+            app:imagePath="@{viewModel.posterPath}"
+            tools:src="@drawable/jean_claude_van_damme" />
+
+    </androidx.cardview.widget.CardView>
+</layout>

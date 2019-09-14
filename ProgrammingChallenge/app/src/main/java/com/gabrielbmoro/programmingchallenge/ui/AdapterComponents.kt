@@ -2,7 +2,7 @@ package com.gabrielbmoro.programmingchallenge.ui
 
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +21,10 @@ import com.squareup.picasso.Picasso
  * @author Gabriel Moro
  * @since 2018-08-30
  */
-class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapter<CellSimpleMovieViewHolder>() {
+class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>):RecyclerView.Adapter<CellSimpleMovieViewHolder>() {
 
     var mlstMovies: ArrayList<Movie> = alstMovies
-    var mpicasoObject: Picasso? = null
+    private var mpicasoObject: Picasso? = null
 
     /**
      * This state is necessary to create the viewholder. This
@@ -56,13 +56,13 @@ class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapte
      */
     override fun onBindViewHolder(holder: CellSimpleMovieViewHolder, position: Int) {
         val movieTarget = mlstMovies[position]
-        holder.mtvTitle.text = movieTarget.mstrTitle
-        holder.mtvReleaseDateValue.text = movieTarget.mstrReleaseDate
-        holder.mtvVoteAverageValue.text = movieTarget.msVoteAverage.toString()
-        holder.mtvOverView.text = movieTarget.mstrOverview
+        holder.mtvTitle.text = movieTarget.title
+        holder.mtvReleaseDateValue.text = movieTarget.releaseDate
+        holder.mtvVoteAverageValue.text = movieTarget.votesAverage.toString()
+        holder.mtvOverView.text = movieTarget.overview
         holder.mllDetails.visibility = LinearLayout.GONE
         holder.mbtnExpand.setText(R.string.expand)
-        if (movieTarget.mbIsFavorite)
+        if (movieTarget.isFavorite)
             holder.mibFavorite.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN)
         else
             holder.mibFavorite.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN)
@@ -78,11 +78,11 @@ class CellSimpleMovieAdapter(alstMovies : ArrayList<Movie>): RecyclerView.Adapte
         }
 
 
-        mpicasoObject?.load(movieTarget.mstrPosterPath)?.into(holder.mivPoster)
+        mpicasoObject?.load(movieTarget.posterPath)?.into(holder.mivPoster)
 
 
-        holder.mibFavorite.setOnClickListener { it ->
-            val bNewValue = !movieTarget.mbIsFavorite
+        holder.mibFavorite.setOnClickListener {
+            val bNewValue = !movieTarget.isFavorite
             val databaseInstance = ProgrammingChallengeApp.mappDataBuilder
             if (databaseInstance != null) {
                 if (bNewValue) {
@@ -125,7 +125,7 @@ class CellSimpleMovieViewHolder(avwView : View) : RecyclerView.ViewHolder(avwVie
  * @author Gabriel Moro
  * @since 2018-08-30
  */
-class CellFavoriteMovieAdapter(alstMovies : ArrayList<FavoriteMovie>): RecyclerView.Adapter<CellFavoriteMovieViewHolder>() {
+class CellFavoriteMovieAdapter(alstMovies : ArrayList<FavoriteMovie>): androidx.recyclerview.widget.RecyclerView.Adapter<CellFavoriteMovieViewHolder>() {
     var mlstMovies : ArrayList<FavoriteMovie> = alstMovies
 
     /**
@@ -157,9 +157,9 @@ class CellFavoriteMovieAdapter(alstMovies : ArrayList<FavoriteMovie>): RecyclerV
      */
     override fun onBindViewHolder(holder: CellFavoriteMovieViewHolder, position: Int) {
         val movieTarget = mlstMovies[position]
-        holder.mtvTitle.text = movieTarget.mstrTitle
-        holder.mtvReleaseDateValue.text = movieTarget.mstrReleaseDate
-        holder.mtvVoteAverageValue.text = movieTarget.msVoteAverage.toString()
+        holder.mtvTitle.text = movieTarget.title
+        holder.mtvReleaseDateValue.text = movieTarget.releaseDate
+        holder.mtvVoteAverageValue.text = movieTarget.votesAverage.toString()
     }
 }
 

@@ -1,7 +1,7 @@
 package com.gabrielbmoro.programmingchallenge
 
 import android.app.Application
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import com.gabrielbmoro.programmingchallenge.dao.DataBaseFactory
 import com.gabrielbmoro.programmingchallenge.network_monitor.CheckInternet
 
@@ -13,8 +13,8 @@ import com.gabrielbmoro.programmingchallenge.network_monitor.CheckInternet
 class ProgrammingChallengeApp : Application() {
 
     companion object {
-        var mappDataBuilder : DataBaseFactory? = null
-        var mbHasNetworkConnection : Boolean = false
+        var mappDataBuilder: DataBaseFactory? = null
+        var mbHasNetworkConnection: Boolean = false
     }
 
     /**

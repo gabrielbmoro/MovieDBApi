@@ -9,18 +9,19 @@ import com.google.gson.annotations.SerializedName
  * @since 2018-08-30
  */
 data class Movie(
-        @SerializedName("vote_count") val mnVote_count : Int,
-        @SerializedName("id") val mnId : Int,
-        @SerializedName("video") var mbIsItVideo : Boolean,
-        @SerializedName("vote_average") var msVoteAverage : Float,
-        @SerializedName("title") var mstrTitle : String,
-        @SerializedName("popularity") var msPopularity : Float,
-        @SerializedName("poster_path") var mstrPosterPath : String,
-        @SerializedName("original_language") var mstrOriginalLanguage : String,
-        @SerializedName("original_title") var mstrOriginalTitle : String,
-        @SerializedName("genre_ids") var mlstGenreIds : List<Int>? = null,
-        @SerializedName("backdrop_path") var mstrBackdropPath : String,
-        @SerializedName("adult") var misAdult : Boolean,
-        @SerializedName("overview") var mstrOverview : String,
-        @SerializedName("release_date") var mstrReleaseDate : String,
-        var mbIsFavorite : Boolean = false)
+        @SerializedName("vote_count") val votes: Int,
+        @SerializedName("id") val id: Int,
+        @SerializedName("video") var isVideo: Boolean,
+        @SerializedName("vote_average") var votesAverage: Float,
+        @SerializedName("title") var title: String,
+        @SerializedName("popularity") var popularity: Float,
+        @SerializedName("poster_path") var posterPath: String,
+        @SerializedName("original_language") var originalLanguage: String,
+        @SerializedName("original_title") var originalTitle: String,
+        @SerializedName("genre_ids") var genreIds: List<Int>? = null,
+        @SerializedName("backdrop_path") var backdropPath: String,
+        @SerializedName("adult") var isAdult: Boolean,
+        @SerializedName("overview") var overview: String,
+        @SerializedName("release_date") var releaseDate: String,
+        var isFavorite: Boolean = false
+)

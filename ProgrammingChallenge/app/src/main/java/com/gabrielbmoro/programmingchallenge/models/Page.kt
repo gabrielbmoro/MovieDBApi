@@ -9,7 +9,8 @@ import com.google.gson.annotations.SerializedName
  * @since 2018-08-30
  */
 data class Page(
-        @SerializedName("page") val mnPageId : Int,
-        @SerializedName("total_results") var mnTotalResults : Int,
-        @SerializedName("total_pages") var mnTotalPages : Int,
-        @SerializedName("results") var mlstResults : List<Movie>? = null)
+        @SerializedName("page") val page: Int,
+        @SerializedName("total_results") var totalResults: Int,
+        @SerializedName("total_pages") var totalPages: Int,
+        @SerializedName("results") var results: List<Movie>? = null
+)

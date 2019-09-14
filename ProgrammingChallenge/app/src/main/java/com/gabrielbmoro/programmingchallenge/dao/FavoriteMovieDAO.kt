@@ -1,9 +1,9 @@
 package com.gabrielbmoro.programmingchallenge.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
 import com.gabrielbmoro.programmingchallenge.models.FavoriteMovie
 import com.gabrielbmoro.programmingchallenge.models.Movie
 
@@ -13,9 +13,9 @@ import com.gabrielbmoro.programmingchallenge.models.Movie
  * @author Gabriel Moro
  * @since 2018-08-30
  */
-class FavoriteMovieDAOAssistant(adtBase : DataBaseFactory) {
+class FavoriteMovieDAOAssistant(adtBase: DataBaseFactory) {
 
-    private val mdtBase : DataBaseFactory = adtBase
+    private val mdtBase: DataBaseFactory = adtBase
 
     /**
      * If there is some movie saved like favorite, this method
@@ -23,30 +23,31 @@ class FavoriteMovieDAOAssistant(adtBase : DataBaseFactory) {
      * @author Gabriel Moro
      * @since 2018-08-30
      */
-    fun isThereSomeMovieInFavorite(amvMovie: Movie) : Boolean {
+    fun isThereSomeMovieInFavorite(amvMovie: Movie): Boolean {
         return mdtBase.favoriteMovieDao()
                 .all()
-                .filter { it.mnId == amvMovie.mnId }.count() > 0
+                .filter { it.id == amvMovie.id }.count() > 0
     }
+
     /**
      * This method adds some movie as favorite movie.
      * @author Gabriel Moro
      * @since 2018-08-30
      */
-    fun addMovieAsFavorite(amvMovie : Movie){
+    fun addMovieAsFavorite(amvMovie: Movie) {
         val bIsThereThisMovie = mdtBase.favoriteMovieDao()
                 .all()
-                .filter { it.mnId == amvMovie.mnId }
+                .filter { it.id == amvMovie.id }
                 .count() > 0
-        if(!bIsThereThisMovie) {
+        if (!bIsThereThisMovie) {
             mdtBase.favoriteMovieDao().add(
                     FavoriteMovie(null,
-                            amvMovie.mnId,
-                            amvMovie.mstrTitle,
-                            amvMovie.mstrReleaseDate,
-                            amvMovie.msVoteAverage)
+                            amvMovie.id,
+                            amvMovie.title,
+                            amvMovie.releaseDate,
+                            amvMovie.votesAverage)
             )
-            amvMovie.mbIsFavorite = true
+            amvMovie.isFavorite = true
         }
     }
 
@@ -55,12 +56,12 @@ class FavoriteMovieDAOAssistant(adtBase : DataBaseFactory) {
      * @author Gabriel Moro
      * @since 2018-08-30
      */
-    fun deleteFavoriteMovie(amvMovie : Movie) {
-        val movieToRemove : FavoriteMovie? = mdtBase.favoriteMovieDao().all()
-                .first{ it.mnId == amvMovie.mnId }
-        if(movieToRemove != null) {
+    fun deleteFavoriteMovie(amvMovie: Movie) {
+        val movieToRemove: FavoriteMovie? = mdtBase.favoriteMovieDao().all()
+                .first { it.id == amvMovie.id }
+        if (movieToRemove != null) {
             mdtBase.favoriteMovieDao().delete(movieToRemove)
-            amvMovie.mbIsFavorite = false
+            amvMovie.isFavorite = false
         }
     }
 }
@@ -79,7 +80,7 @@ interface FavoriteMovieDAO {
      * @since 2018-08-30
      */
     @Query("SELECT * FROM favoritemovie")
-    fun all() : List<FavoriteMovie>
+    fun all(): List<FavoriteMovie>
 
     /**
      * Add some Movie element.

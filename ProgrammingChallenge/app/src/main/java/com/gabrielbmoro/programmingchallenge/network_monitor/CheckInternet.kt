@@ -15,8 +15,8 @@ object CheckInternet {
      * @author Gabriel Moro
      * @since 2018-08-30
      */
-    fun checkInternet(actxContext : Context) : Boolean {
-        val cm = actxContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    fun checkInternet(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = cm.activeNetworkInfo
 
         return if (activeNetwork != null) {

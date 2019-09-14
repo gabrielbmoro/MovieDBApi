@@ -19,5 +19,5 @@ interface ApiServiceInterface {
      * @since 2018-08-30
      */
     @GET("discover/movie")
-    fun getMovies(@Query("api_key") a_strApiKey : String, @Query("sort_by") a_strSortedBy : String) : Observable<Page>
+    fun getMovies(@Query("api_key") a_strApiKey: String, @Query("sort_by") a_strSortedBy: String): Observable<Page>
 }

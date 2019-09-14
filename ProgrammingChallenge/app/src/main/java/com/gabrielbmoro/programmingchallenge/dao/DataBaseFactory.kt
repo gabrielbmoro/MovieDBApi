@@ -1,7 +1,7 @@
 package com.gabrielbmoro.programmingchallenge.dao
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.gabrielbmoro.programmingchallenge.models.FavoriteMovie
 
 /**
@@ -19,6 +19,6 @@ abstract class DataBaseFactory : RoomDatabase() {
      * @author Gabriel Moro
      * @since 2018-08-30
      */
-    abstract fun favoriteMovieDao() : FavoriteMovieDAO
+    abstract fun favoriteMovieDao(): FavoriteMovieDAO
 
 }

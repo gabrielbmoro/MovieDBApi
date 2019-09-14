@@ -1,8 +1,8 @@
 package com.gabrielbmoro.programmingchallenge.models
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 /**
  * This class represents the movie choosed by
@@ -11,10 +11,11 @@ import android.arch.persistence.room.PrimaryKey
  * @author Gabriel Moro
  * @since 2018-08-30
  */
-@Entity(tableName = "favoritemovie")
+@Entity(tableName = "favoriteMovie")
 data class FavoriteMovie(
-        @PrimaryKey(autoGenerate = true) val mnDataBaseId : Long?,
-        @ColumnInfo(name = "id") val mnId: Int,
-        @ColumnInfo(name = "title") var mstrTitle : String,
-        @ColumnInfo(name = "releasedate") var mstrReleaseDate : String,
-        @ColumnInfo(name = "voteaverage") var msVoteAverage: Float)
+        @PrimaryKey(autoGenerate = true) val dataBaseId: Long?,
+        @ColumnInfo(name = "id") val id: Int,
+        @ColumnInfo(name = "title") var title: String,
+        @ColumnInfo(name = "releasedate") var releaseDate: String,
+        @ColumnInfo(name = "voteaverage") var votesAverage: Float
+)

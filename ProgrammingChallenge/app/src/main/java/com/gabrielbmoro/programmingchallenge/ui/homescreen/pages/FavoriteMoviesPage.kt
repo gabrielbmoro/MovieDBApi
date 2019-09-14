@@ -1,14 +1,14 @@
 package com.gabrielbmoro.programmingchallenge.ui.homescreen.pages
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.gabrielbmoro.programmingchallenge.ProgrammingChallengeApp
 import com.gabrielbmoro.programmingchallenge.R
+import com.gabrielbmoro.programmingchallenge.databinding.FragmentFavoritemoviesBinding
 import com.gabrielbmoro.programmingchallenge.models.FavoriteMovie
 import com.gabrielbmoro.programmingchallenge.ui.CellFavoriteMovieAdapter
 
@@ -35,9 +35,9 @@ interface FavoriteMoviesPageContract {
      * @author Gabriel Moro
      * @since 2018-08-30
      */
-    interface View{
+    interface View {
         fun setupRecyclerView()
-        fun onNotifyDataChanged(amoviesList : ArrayList<FavoriteMovie>)
+        fun onNotifyDataChanged(amoviesList: ArrayList<FavoriteMovie>)
     }
 }
 
@@ -46,18 +46,19 @@ interface FavoriteMoviesPageContract {
  * @author Gabriel Moro
  * @since 2018-08-30
  */
-class FavoriteMoviesFragment : Fragment(), FavoriteMoviesPageContract.View {
+class FavoriteMoviesFragment : androidx.fragment.app.Fragment(), FavoriteMoviesPageContract.View {
 
-    private var mrvRecyclerView : RecyclerView?           = null
-    private var presenter       : FavoriteMoviesPageContract.Presenter? = null
+    private lateinit var binding : FragmentFavoritemoviesBinding
+    private var presenter: FavoriteMoviesPageContract.Presenter? = null
 
     /**
      * In this state the fragment view is created.
      * @author Gabriel Moro
      * @since 2018-08-30
      */
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_favoritemovies, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favoritemovies, container, false)
+        return binding.root
     }
 
     /**
@@ -66,9 +67,8 @@ class FavoriteMoviesFragment : Fragment(), FavoriteMoviesPageContract.View {
      * @author Gabriel Moro
      * @since 2018-08-30
      */
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mrvRecyclerView = view?.findViewById(R.id.rvFavoriteMoviesList)
         setupRecyclerView()
         presenter = FavoriteMoviesPresenter(this)
     }
@@ -90,8 +90,8 @@ class FavoriteMoviesFragment : Fragment(), FavoriteMoviesPageContract.View {
      */
     override fun setupRecyclerView() {
         val llManager = LinearLayoutManager(context)
-        mrvRecyclerView?.layoutManager = llManager
-        mrvRecyclerView?.adapter = CellFavoriteMovieAdapter(ArrayList())
+        binding.rvFavoriteMoviesList.layoutManager = llManager
+        binding.rvFavoriteMoviesList.adapter = CellFavoriteMovieAdapter(ArrayList())
     }
 
     /**
@@ -100,8 +100,8 @@ class FavoriteMoviesFragment : Fragment(), FavoriteMoviesPageContract.View {
      * @since 2018-08-30
      */
     override fun onNotifyDataChanged(amoviesList: ArrayList<FavoriteMovie>) {
-        (mrvRecyclerView?.adapter as CellFavoriteMovieAdapter).mlstMovies = ArrayList(amoviesList)
-        mrvRecyclerView?.adapter?.notifyDataSetChanged()
+        (binding.rvFavoriteMoviesList.adapter as CellFavoriteMovieAdapter).mlstMovies = ArrayList(amoviesList)
+        binding.rvFavoriteMoviesList.adapter?.notifyDataSetChanged()
     }
 }
 
@@ -110,8 +110,8 @@ class FavoriteMoviesFragment : Fragment(), FavoriteMoviesPageContract.View {
  * @author Gabriel Moro
  * @since 2018-08-30
  */
-class FavoriteMoviesPresenter(aview : FavoriteMoviesPageContract.View) : FavoriteMoviesPageContract.Presenter {
-    private val view : FavoriteMoviesPageContract.View = aview
+class FavoriteMoviesPresenter(aview: FavoriteMoviesPageContract.View) : FavoriteMoviesPageContract.Presenter {
+    private val view: FavoriteMoviesPageContract.View = aview
 
     /**
      * This method allows the load movies from data base.
@@ -120,6 +120,6 @@ class FavoriteMoviesPresenter(aview : FavoriteMoviesPageContract.View) : Favorit
      */
     override fun loadMovies() {
         val lstFavoriteMovies = ProgrammingChallengeApp.mappDataBuilder?.favoriteMovieDao()?.all()
-        if(lstFavoriteMovies!=null) view.onNotifyDataChanged(ArrayList(lstFavoriteMovies))
+        if (lstFavoriteMovies != null) view.onNotifyDataChanged(ArrayList(lstFavoriteMovies))
     }
 }

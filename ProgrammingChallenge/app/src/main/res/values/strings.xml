@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">ProgrammingChallenge</string>
-    <string name="token_value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTVlMGM2N2FjMmZhODg2ZTc3NWZiOTA1N2YwYTMyZiIsInN1YiI6IjViODVmNDIwYzNhMzY4M2Y4ZDAwMzliYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.COCmVsmRpepifleyO3BxcGAGvLq9SYIuom__K1TuETM</string>
-    <string name="topRatedMoviesTitle">Top Rated</string>
-    <string name="popularMoviesTitle">Popular</string>
-    <string name="favoriteMoviesTitle">Favorite</string>
-    <string name="releaseDate">Release Date:</string>
-    <string name="voteAverage">Vote Average:</string>
+    <string name="token_value">755e0c67ac2fa886e775fb9057f0a32f</string>
+    <string name="top_rated_movies_title">Top Rated</string>
+    <string name="popular_movies_title">Popular</string>
+    <string name="favorite_movies_title">Favorite</string>
+    <string name="release_date">Release Date:</string>
+    <string name="vote_average">Vote Average:</string>
     <string name="expand">Expand</string>
     <string name="hide">Hide</string>
-    <string name="FavoriteMoviesTitle">Favorite Movies</string>
-    <string name="offlinenow">You are offline now.</string>
+    <string name="favorite_movies_screen_title">Favorite Movies</string>
+    <string name="offline_now">You are offline now.</string>
 </resources>

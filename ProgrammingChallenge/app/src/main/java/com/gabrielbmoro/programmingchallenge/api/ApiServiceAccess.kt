@@ -14,14 +14,14 @@ import java.util.concurrent.TimeUnit
  */
 class ApiServiceAccess {
 
-    val service : ApiServiceInterface
+    private val service: ApiServiceInterface
 
     /**
      * The companion object will be used like a kind of singleton
      */
     companion object {
-        val BASE_URL : String = "https://api.themoviedb.org/3/"
-        val API_KEY  : String = "API KEY"
+        const val BASE_URL: String = "https://api.themoviedb.org/3/"
+        const val API_KEY: String = "755e0c67ac2fa886e775fb9057f0a32f"
     }
 
     /**
@@ -47,7 +47,7 @@ class ApiServiceAccess {
      * @author Gabriel Moro
      * @since 2018-08-30
      */
-    fun getMovies(a_strSortedBy : String) : Observable<Page> {
+    fun getMovies(a_strSortedBy: String): Observable<Page> {
         return service.getMovies(API_KEY, a_strSortedBy)
     }
 }
