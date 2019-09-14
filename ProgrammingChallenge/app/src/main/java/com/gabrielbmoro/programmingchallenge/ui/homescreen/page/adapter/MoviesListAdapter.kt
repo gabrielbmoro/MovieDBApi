@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.models.Movie
 import com.gabrielbmoro.programmingchallenge.ui.base.GeneralBaseAdapter
+import kotlin.math.roundToInt
 
 class MoviesListAdapter : GeneralBaseAdapter<MovieData>() {
 
@@ -22,7 +23,7 @@ class MoviesListAdapter : GeneralBaseAdapter<MovieData>() {
         elements?.addAll(
                 movieDataList.map { movie ->
 
-                    val numberOfStars = movie.votesAverage * STARS_AVAILABLE / AVERAGE_TOTAL
+                    val numberOfStars = (movie.votesAverage / 10f) * STARS_AVAILABLE
 
                     MovieData(
                             posterPath = "https://image.tmdb.org/t/p/w780${movie.posterPath}",
@@ -40,17 +41,22 @@ class MoviesListAdapter : GeneralBaseAdapter<MovieData>() {
     }
 
     @DrawableRes
-    private fun gettingAccordingPosition(numberOfStars: Float, positionOrdinal: Int): Int {
+    private fun gettingAccordingPosition(votes: Float, positionOrdinal: Int): Int {
         return when {
-            numberOfStars > positionOrdinal -> R.drawable.ic_star
-            numberOfStars < positionOrdinal + 0.5f -> R.drawable.ic_star_border
-            else -> R.drawable.ic_star_half
+            votes > positionOrdinal -> R.drawable.ic_star
+            votes < positionOrdinal -> {
+                if(votes.roundToInt() == positionOrdinal)
+                    R.drawable.ic_star_half
+                else
+                    R.drawable.ic_star_border
+            }
+            else -> R.drawable.ic_star_border
         }
     }
 
     companion object {
-        const val AVERAGE_TOTAL = 10
-        const val STARS_AVAILABLE = 5
+        const val AVERAGE_TOTAL = 10f
+        const val STARS_AVAILABLE = 5f
     }
 
 }
