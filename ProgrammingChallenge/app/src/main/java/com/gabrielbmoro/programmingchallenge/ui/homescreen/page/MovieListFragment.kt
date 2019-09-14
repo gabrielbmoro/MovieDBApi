@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.databinding.FragmentMoviesListBinding
 import com.gabrielbmoro.programmingchallenge.models.MoviesListType
@@ -28,6 +29,11 @@ class MovieListFragment : Fragment() {
 
         arguments?.getInt(FRAGMENT_TYPE_KEY)?.let {
             mapAccordingToId(it)?.let { moviesListType ->
+                when(moviesListType) {
+                    MoviesListType.TOP_RATED_MOVIES, MoviesListType.POPULAR_RATED_MOVIES ->
+                        binding.rvList.recycledViewPool.setMaxRecycledViews(0, 0)
+                    else -> { }
+                }
                 viewModel.setup(moviesListType)
             }
         }
