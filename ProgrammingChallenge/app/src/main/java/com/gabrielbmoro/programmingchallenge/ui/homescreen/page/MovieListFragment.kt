@@ -8,11 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.databinding.FragmentMoviesListBinding
 import com.gabrielbmoro.programmingchallenge.models.MoviesListType
 
-class MovieListFragment : Fragment() {
+class MovieListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var binding: FragmentMoviesListBinding
     private lateinit var viewModel: MovieListViewModel
@@ -21,6 +22,9 @@ class MovieListFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MovieListViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movies_list, container, false)
         binding.viewModel = viewModel
+
+        binding.swRefreshLayout.setOnRefreshListener(this)
+
         return binding.root
     }
 
@@ -29,10 +33,11 @@ class MovieListFragment : Fragment() {
 
         arguments?.getInt(FRAGMENT_TYPE_KEY)?.let {
             mapAccordingToId(it)?.let { moviesListType ->
-                when(moviesListType) {
+                when (moviesListType) {
                     MoviesListType.TOP_RATED_MOVIES, MoviesListType.POPULAR_RATED_MOVIES ->
                         binding.rvList.recycledViewPool.setMaxRecycledViews(0, 0)
-                    else -> { }
+                    else -> {
+                    }
                 }
                 viewModel.setup(moviesListType)
             }
@@ -48,8 +53,13 @@ class MovieListFragment : Fragment() {
         }
     }
 
-    fun scrollToTop(){
+    fun scrollToTop() {
         binding.rvList.smoothScrollToPosition(0)
+    }
+
+    override fun onRefresh() {
+        binding.swRefreshLayout.isRefreshing = false
+        viewModel.reload()
     }
 
     companion object {
@@ -58,7 +68,7 @@ class MovieListFragment : Fragment() {
         const val POPULAR_MOVIES_TYPE = 0
         const val FAVORITE_MOVIES_TYPE = 1
 
-        fun newInstance(fragmentType: Int) : MovieListFragment {
+        fun newInstance(fragmentType: Int): MovieListFragment {
             return MovieListFragment().apply {
                 if (arrayOf(TOP_RATED_MOVIES_TYPE, POPULAR_MOVIES_TYPE, FAVORITE_MOVIES_TYPE).contains(fragmentType)) {
                     arguments = Bundle().apply {

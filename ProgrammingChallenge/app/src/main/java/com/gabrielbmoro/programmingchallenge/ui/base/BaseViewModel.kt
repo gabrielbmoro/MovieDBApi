@@ -5,11 +5,19 @@ import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.AndroidViewModel
+import com.gabrielbmoro.programmingchallenge.BR
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application), Observable {
 
     @Transient
     private var mCallbacks: PropertyChangeRegistry? = null
+
+    @get:Bindable
+    var isLoading: Boolean = false
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.loading)
+        }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback) {
         synchronized(this) {
