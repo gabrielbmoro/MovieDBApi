@@ -48,6 +48,10 @@ class MovieListFragment : Fragment() {
         }
     }
 
+    fun scrollToTop(){
+        binding.rvList.smoothScrollToPosition(0)
+    }
+
     companion object {
         private const val FRAGMENT_TYPE_KEY = "fragmentType"
         const val TOP_RATED_MOVIES_TYPE = -1

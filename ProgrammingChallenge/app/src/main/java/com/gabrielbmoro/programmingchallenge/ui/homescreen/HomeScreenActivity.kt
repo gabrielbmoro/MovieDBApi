@@ -72,6 +72,12 @@ class HomeScreenActivity : AppCompatActivity(), HomeScreenContract.View {
         })
 
         binding.bnvBottomMenu.setOnNavigationItemSelectedListener {
+
+
+            if (binding.bnvBottomMenu.selectedItemId == it.itemId) {
+                (lstPages[binding.vwPagerComponent.currentItem] as? MovieListFragment)?.scrollToTop()
+            }
+
             when (it.itemId) {
                 R.id.menuTopRatedMovies -> binding.vwPagerComponent.setCurrentItem(0, false)
                 R.id.menuPopularMovies -> binding.vwPagerComponent.setCurrentItem(1, false)
