@@ -23,7 +23,7 @@ class MoviesListAdapter : GeneralBaseAdapter<MovieData>() {
         elements?.addAll(
                 movieDataList.map { movie ->
 
-                    val numberOfStars = (movie.votesAverage / 10f) * STARS_AVAILABLE
+                    val numberOfStars = (movie.votesAverage / AVERAGE_TOTAL) * STARS_AVAILABLE
 
                     MovieData(
                             posterPath = "https://image.tmdb.org/t/p/w780${movie.posterPath}",
