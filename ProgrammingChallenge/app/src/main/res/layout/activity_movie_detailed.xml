@@ -29,6 +29,11 @@
 
                 <include
                     layout="@layout/layout_section_paragraph"
+                    app:sectionContent="@{viewModel.originalTitle}"
+                    app:sectionTitle="@{@string/original_title}" />
+
+                <include
+                    layout="@layout/layout_section_paragraph"
                     app:sectionContent="@{viewModel.description}"
                     app:sectionTitle="@{@string/overview}" />
 
@@ -36,6 +41,16 @@
                     layout="@layout/layout_section_paragraph"
                     app:sectionContent="@{viewModel.language}"
                     app:sectionTitle="@{@string/language}" />
+
+                <include
+                    layout="@layout/layout_section_paragraph"
+                    app:sectionContent="@{viewModel.popularityAverage}"
+                    app:sectionTitle="@{@string/popularity}" />
+
+                <include
+                    layout="@layout/layout_section_paragraph"
+                    app:sectionContent="@{viewModel.voteAverage}"
+                    app:sectionTitle="@{@string/vote_average}" />
 
             </LinearLayout>
 

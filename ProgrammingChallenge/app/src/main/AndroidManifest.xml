@@ -27,8 +27,11 @@
         </activity>
 
         <activity
-            android:name="com.gabrielbmoro.programmingchallenge.ui.mainScreen.detailedScreen.MovieDetailedActivity"
-            android:theme="@style/Base.ProgrammingChallange.FullScreen" />
+            android:name="com.gabrielbmoro.programmingchallenge.ui.mainScreen.detailedScreen.MovieDetailedActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.mainScreen.MainActivity" />
+        </activity>
 
     </application>
 

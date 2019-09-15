@@ -37,11 +37,35 @@ class MovieDetailedViewModel(application: Application) : BaseViewModel(applicati
             notifyPropertyChanged(BR.language)
         }
 
+    @get:Bindable
+    var originalTitle: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.originalTitle)
+        }
+
+    @get:Bindable
+    var voteAverage: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.voteAverage)
+        }
+
+    @get:Bindable
+    var popularityAverage: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.popularityAverage)
+        }
+
     fun setup(movie: Movie) {
         posterPath = "${BuildConfig.baseImageAddress}${movie.posterPath}"
         description = movie.overview
         title = movie.title
         language = movie.originalLanguage
+        originalTitle = movie.originalTitle
+        voteAverage = movie.votesAverage.toString()
+        popularityAverage = movie.popularity.toString()
     }
 
 }

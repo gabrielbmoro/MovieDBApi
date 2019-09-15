@@ -23,6 +23,7 @@ class MovieDetailedActivity : AppCompatActivity() {
 
         intent.getParcelableExtra<Movie>(MOVIE_INTENT_KEY)?.let{
             viewModel.setup(it)
+            supportActionBar?.title = viewModel.title
         }
     }
 

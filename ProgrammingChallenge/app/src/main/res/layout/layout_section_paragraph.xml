@@ -38,11 +38,7 @@
             android:lineSpacingExtra="4dp"
             android:text="@{sectionContent}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            tools:text="@string/descriptionExample" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/space_height" />
+            tools:text="@string/description_example" />
 
     </LinearLayout>
 </layout>
