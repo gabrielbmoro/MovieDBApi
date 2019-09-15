@@ -1,6 +1,7 @@
 package com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter
 
 import androidx.annotation.DrawableRes
+import com.gabrielbmoro.programmingchallenge.BuildConfig
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.models.Movie
 import com.gabrielbmoro.programmingchallenge.ui.base.GeneralBaseAdapter
@@ -26,14 +27,15 @@ class MoviesListAdapter : GeneralBaseAdapter<MovieData>() {
                     val numberOfStars = (movie.votesAverage / AVERAGE_TOTAL) * STARS_AVAILABLE
 
                     MovieData(
-                            posterPath = "https://image.tmdb.org/t/p/w780${movie.posterPath}",
+                            posterPath = "${BuildConfig.baseImageAddress}${movie.posterPath}",
                             movieTitle = movie.title,
                             releaseDate = movie.releaseDate,
                             firstStar = gettingAccordingPosition(numberOfStars, 1),
                             secondStar = gettingAccordingPosition(numberOfStars, 2),
                             thirdStar = gettingAccordingPosition(numberOfStars, 3),
                             fourthStar = gettingAccordingPosition(numberOfStars, 4),
-                            fifthStar = gettingAccordingPosition(numberOfStars, 5)
+                            fifthStar = gettingAccordingPosition(numberOfStars, 5),
+                            movieReference = movie
                     )
                 }
         )
@@ -45,7 +47,7 @@ class MoviesListAdapter : GeneralBaseAdapter<MovieData>() {
         return when {
             votes > positionOrdinal -> R.drawable.ic_star
             votes < positionOrdinal -> {
-                if(votes.roundToInt() == positionOrdinal)
+                if (votes.roundToInt() == positionOrdinal)
                     R.drawable.ic_star_half
                 else
                     R.drawable.ic_star_border

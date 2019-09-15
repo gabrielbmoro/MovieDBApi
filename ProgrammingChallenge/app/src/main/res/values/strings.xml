@@ -13,4 +13,7 @@
     <string name="grande_dragao_branco">O Grande Dragão Branco</string>
     <string name="release_date_example">10/02/2019</string>
     <string name="star">star</string>
+    <string name="descriptionExample">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas, purus sit amet placerat congue, arcu augue aliquet enim, a aliquam quam velit eu odio. Curabitur lectus risus, interdum quis diam a, pulvinar finibus dolor. Nulla nec nibh et nulla lobortis dignissim vel in risus. Vivamus ligula elit, efficitur at sollicitudin in, gravida quis dolor. Etiam finibus mollis lacinia. Quisque suscipit ornare enim bibendum fringilla. Nullam rhoncus ut sem non consequat. Vivamus non dui dolor. Aliquam et viverra justo. Sed dictum nisi vitae justo blandit varius. Ut placerat euismod pharetra. Integer interdum, arcu gravida pulvinar fringilla, lectus lectus viverra libero, et tristique magna orci sed augue. Cras et erat condimentum, suscipit orci ac, semper augue. Ut ac ornare nunc. Nam pharetra elementum est, eu malesuada mauris dignissim in. Nullam pretium tellus mi, congue tincidunt dolor varius et.</string>
+    <string name="overview">Overview</string>
+    <string name="language">Language</string>
 </resources>
