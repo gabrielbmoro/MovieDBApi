@@ -12,17 +12,20 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/clRootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsvBaseScroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
+                android:id="@+id/llInternalLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -52,12 +55,23 @@
                     app:sectionContent="@{viewModel.voteAverage}"
                     app:sectionTitle="@{@string/vote_average}" />
 
+                <Button
+                    android:id="@+id/btnFavorite"
+                    style="@style/ButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:background="@color/favorite_button_onn"
+                    android:drawableStart="@drawable/ic_heart_border"
+                    android:text="@string/favorite"
+                    android:textColor="@color/heart_color" />
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/apbBarLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/app_bar_layout_height">
 

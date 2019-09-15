@@ -21,7 +21,7 @@ class MovieDetailedActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detailed)
         binding.viewModel = viewModel
 
-        intent.getParcelableExtra<Movie>(MOVIE_INTENT_KEY)?.let{
+        intent.getParcelableExtra<Movie>(MOVIE_INTENT_KEY)?.let {
             viewModel.setup(it)
             supportActionBar?.title = viewModel.title
         }

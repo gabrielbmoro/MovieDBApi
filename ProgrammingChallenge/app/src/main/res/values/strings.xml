@@ -18,4 +18,6 @@
     <string name="original_title">Original Title</string>
     <string name="popularity">Popularity</string>
     <string name="vote_average">Vote Average</string>
+    <string name="favorite_option">Favorite option</string>
+    <string name="favorite">Favorite</string>
 </resources>

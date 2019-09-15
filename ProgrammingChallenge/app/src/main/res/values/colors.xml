@@ -7,4 +7,8 @@
     <color name="colorSep">#b0bad1</color>
     <color name="purple">#553258</color>
     <color name="star_color">#FFA000</color>
+    <color name="heart_color">#D32F2F</color>
+    <color name="shadow_color">#33303F9F</color>
+    <color name="favorite_button_onn">#FAAFC7</color>
+    <color name="favorite_button_off">#F1B0FD</color>
 </resources>
