@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.databinding.Bindable
 import com.gabrielbmoro.programmingchallenge.BR
 import com.gabrielbmoro.programmingchallenge.BuildConfig
-import com.gabrielbmoro.programmingchallenge.models.Movie
+import com.gabrielbmoro.programmingchallenge.model.Movie
 import com.gabrielbmoro.programmingchallenge.ui.base.BaseViewModel
 
 class MovieDetailedViewModel(application: Application) : BaseViewModel(application) {
@@ -66,6 +66,10 @@ class MovieDetailedViewModel(application: Application) : BaseViewModel(applicati
         originalTitle = movie.originalTitle
         voteAverage = movie.votesAverage.toString()
         popularityAverage = movie.popularity.toString()
+    }
+
+    fun onFavoriteEvent() {
+
     }
 
 }

@@ -3,12 +3,14 @@ package com.gabrielbmoro.programmingchallenge.ui.mainScreen.detailedScreen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.databinding.ActivityMovieDetailedBinding
-import com.gabrielbmoro.programmingchallenge.models.Movie
+import com.gabrielbmoro.programmingchallenge.model.Movie
 
 class MovieDetailedActivity : AppCompatActivity() {
 
@@ -25,6 +27,18 @@ class MovieDetailedActivity : AppCompatActivity() {
             viewModel.setup(it)
             supportActionBar?.title = viewModel.title
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.favorite_menu_option, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==R.menu.favorite_menu_option) {
+            viewModel.onFavoriteEvent()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

@@ -2,7 +2,7 @@ package com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter
 
 import android.view.View
 import androidx.annotation.DrawableRes
-import com.gabrielbmoro.programmingchallenge.models.Movie
+import com.gabrielbmoro.programmingchallenge.model.Movie
 import com.gabrielbmoro.programmingchallenge.ui.mainScreen.detailedScreen.MovieDetailedActivity
 
 data class MovieData(

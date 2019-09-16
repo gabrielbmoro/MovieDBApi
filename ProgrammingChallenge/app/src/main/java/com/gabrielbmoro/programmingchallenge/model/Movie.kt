@@ -1,4 +1,4 @@
-package com.gabrielbmoro.programmingchallenge.models
+package com.gabrielbmoro.programmingchallenge.model
 
 import android.os.Parcel
 import android.os.Parcelable

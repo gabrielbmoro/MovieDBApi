@@ -62,6 +62,7 @@
                     android:layout_height="@dimen/button_height"
                     android:background="@color/favorite_button_onn"
                     android:drawableStart="@drawable/ic_heart_border"
+                    android:onClick="@{_ -> viewModel.onFavoriteEvent()}"
                     android:text="@string/favorite"
                     android:textColor="@color/heart_color" />
 

@@ -1,6 +1,6 @@
-package com.gabrielbmoro.programmingchallenge.api
+package com.gabrielbmoro.programmingchallenge.dependenciesInjector
 
-import com.gabrielbmoro.programmingchallenge.models.Page
+import com.gabrielbmoro.programmingchallenge.model.Page
 import retrofit2.http.GET
 import retrofit2.http.Query
 import rx.Observable
@@ -10,7 +10,7 @@ import rx.Observable
  * @author Gabriel Moro
  * @since 2018-08-30
  */
-interface ApiServiceInterface {
+interface ApiRepository {
 
     /**
      * This abstract method provides the implementation

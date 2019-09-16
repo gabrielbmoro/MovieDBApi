@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.databinding.FragmentMoviesListBinding
-import com.gabrielbmoro.programmingchallenge.models.MoviesListType
+import com.gabrielbmoro.programmingchallenge.model.MoviesListType
 
 class MovieListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 

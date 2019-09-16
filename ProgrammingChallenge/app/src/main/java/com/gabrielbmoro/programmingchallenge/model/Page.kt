@@ -1,4 +1,4 @@
-package com.gabrielbmoro.programmingchallenge.models
+package com.gabrielbmoro.programmingchallenge.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,6 +1,9 @@
 package com.gabrielbmoro.programmingchallenge
 
 import android.app.Application
+import com.gabrielbmoro.programmingchallenge.dependenciesInjector.repositoryModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 /**
  * The base context.
@@ -11,7 +14,16 @@ class ProgrammingChallengeApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        startKoin()
+    }
 
+    private fun startKoin() {
+        startKoin {
+            // Android context
+            androidContext(this@ProgrammingChallengeApp)
+            // modules
+            modules(repositoryModule)
+        }
     }
 
 }

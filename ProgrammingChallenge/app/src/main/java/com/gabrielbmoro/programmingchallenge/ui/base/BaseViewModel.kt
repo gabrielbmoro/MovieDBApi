@@ -6,8 +6,9 @@ import androidx.databinding.Observable
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.AndroidViewModel
 import com.gabrielbmoro.programmingchallenge.BR
+import org.koin.core.KoinComponent
 
-open class BaseViewModel(application: Application) : AndroidViewModel(application), Observable {
+open class BaseViewModel(application: Application) : AndroidViewModel(application), Observable, KoinComponent {
 
     @Transient
     private var mCallbacks: PropertyChangeRegistry? = null

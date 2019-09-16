@@ -3,7 +3,7 @@ package com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter
 import androidx.annotation.DrawableRes
 import com.gabrielbmoro.programmingchallenge.BuildConfig
 import com.gabrielbmoro.programmingchallenge.R
-import com.gabrielbmoro.programmingchallenge.models.Movie
+import com.gabrielbmoro.programmingchallenge.model.Movie
 import com.gabrielbmoro.programmingchallenge.ui.base.GeneralBaseAdapter
 import kotlin.math.roundToInt
 
