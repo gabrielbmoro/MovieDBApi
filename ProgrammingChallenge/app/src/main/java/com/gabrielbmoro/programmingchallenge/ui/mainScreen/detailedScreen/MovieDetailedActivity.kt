@@ -39,8 +39,9 @@ class MovieDetailedActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.menu.favorite_menu_option) {
-            viewModel.onFavoriteEvent()
+        when (item.itemId) {
+            R.menu.favorite_menu_option -> viewModel.onFavoriteEvent()
+            android.R.id.home -> supportFinishAfterTransition()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -49,6 +50,10 @@ class MovieDetailedActivity : AppCompatActivity() {
 
         private const val MOVIE_INTENT_KEY = "movie key"
 
+        /**
+         * About animation
+         * Reference: https://guides.codepath.com/android/shared-element-activity-transition
+         */
         fun startActivity(context: Activity, movie: Movie, ivImageShared: View) {
             context.startActivity(
                     Intent(context, MovieDetailedActivity::class.java).apply {
