@@ -29,6 +29,7 @@
             android:layout_height="280dp"
             android:layout_gravity="top|start"
             android:contentDescription="@{viewModel.movieTitle}"
+            android:transitionName="@string/transition_name"
             android:scaleType="fitStart"
             app:imagePath="@{viewModel.posterPath}"
             tools:src="@drawable/jean_claude_van_damme" />

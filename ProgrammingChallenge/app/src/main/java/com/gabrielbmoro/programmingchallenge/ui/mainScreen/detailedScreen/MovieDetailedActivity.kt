@@ -1,11 +1,15 @@
 package com.gabrielbmoro.programmingchallenge.ui.mainScreen.detailedScreen
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.gabrielbmoro.programmingchallenge.R
@@ -35,19 +39,26 @@ class MovieDetailedActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.menu.favorite_menu_option) {
+        if (item.itemId == R.menu.favorite_menu_option) {
             viewModel.onFavoriteEvent()
         }
         return super.onOptionsItemSelected(item)
     }
 
     companion object {
+
         private const val MOVIE_INTENT_KEY = "movie key"
-        fun startActivity(context: Context, movie: Movie) {
+
+        fun startActivity(context: Activity, movie: Movie, ivImageShared: View) {
             context.startActivity(
                     Intent(context, MovieDetailedActivity::class.java).apply {
                         putExtra(MOVIE_INTENT_KEY, movie)
-                    }
+                    },
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            context,
+                            ivImageShared,
+                            context.resources.getString(R.string.transition_name)
+                    ).toBundle()
             )
         }
     }

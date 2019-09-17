@@ -1,9 +1,13 @@
 package com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter
 
+import android.app.Activity
 import android.view.View
+import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.model.Movie
 import com.gabrielbmoro.programmingchallenge.ui.mainScreen.detailedScreen.MovieDetailedActivity
+import kotlinx.android.synthetic.main.view_holder_movie_card.view.*
 
 data class MovieData(
         val posterPath: String,
@@ -22,6 +26,10 @@ data class MovieData(
         var movieReference: Movie
 ) {
     fun onClick(v: View) {
-        MovieDetailedActivity.startActivity(v.context, movieReference)
+        val activity = v.context as? Activity
+        val imageView = v.findViewById<ImageView>(R.id.ivPoster)
+        if (activity != null && imageView != null) {
+            MovieDetailedActivity.startActivity(activity, movieReference, imageView)
+        }
     }
 }

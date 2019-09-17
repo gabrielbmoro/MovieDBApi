@@ -20,4 +20,5 @@
     <string name="vote_average">Vote Average</string>
     <string name="favorite_option">Favorite option</string>
     <string name="favorite">Favorite</string>
+    <string name="transition_name">movie card</string>
 </resources>
