@@ -45,7 +45,7 @@ class MoviesListAdapter : GeneralBaseAdapter<MovieData>() {
     @DrawableRes
     private fun gettingAccordingPosition(votes: Float, positionOrdinal: Int): Int {
         return when {
-            votes > positionOrdinal -> R.drawable.ic_star
+            votes >= positionOrdinal -> R.drawable.ic_star
             votes < positionOrdinal -> {
                 if (votes.roundToInt() == positionOrdinal)
                     R.drawable.ic_star_half
