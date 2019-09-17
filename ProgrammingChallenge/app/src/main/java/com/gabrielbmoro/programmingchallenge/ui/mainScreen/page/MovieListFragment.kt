@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.databinding.FragmentMoviesListBinding
 import com.gabrielbmoro.programmingchallenge.model.MoviesListType
+import com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter.MoviesListAdapter
 
 class MovieListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
@@ -34,7 +35,7 @@ class MovieListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             mapAccordingToId(it)?.let { moviesListType ->
                 when (moviesListType) {
                     MoviesListType.TOP_RATED_MOVIES, MoviesListType.POPULAR_RATED_MOVIES ->
-                        binding.rvList.recycledViewPool.setMaxRecycledViews(0, 0)
+                        binding.rvList.recycledViewPool.setMaxRecycledViews(MoviesListAdapter.VIEW_TYPE, 0)
                     else -> {
                     }
                 }
@@ -53,7 +54,9 @@ class MovieListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     fun scrollToTop() {
-        binding.rvList.smoothScrollToPosition(0)
+        if (::binding.isInitialized) {
+            binding.rvList.smoothScrollToPosition(0)
+        }
     }
 
     override fun onRefresh() {

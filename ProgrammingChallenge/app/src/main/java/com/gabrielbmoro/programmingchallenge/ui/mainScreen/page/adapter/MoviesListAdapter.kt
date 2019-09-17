@@ -13,6 +13,10 @@ class MoviesListAdapter : GeneralBaseAdapter<MovieData>() {
         return R.layout.view_holder_movie_card
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return VIEW_TYPE
+    }
+
     fun setup(movieDataList: List<Movie>?) {
         movieDataList ?: return
 
@@ -59,6 +63,7 @@ class MoviesListAdapter : GeneralBaseAdapter<MovieData>() {
     companion object {
         const val AVERAGE_TOTAL = 10f
         const val STARS_AVAILABLE = 5f
+        const val VIEW_TYPE = -123
     }
 
 }

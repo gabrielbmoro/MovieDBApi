@@ -2,11 +2,11 @@ package com.gabrielbmoro.programmingchallenge.ui.base
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 
 @BindingAdapter("imagePath")
 fun setImagePath(imageView : ImageView, path : String) {
-    Picasso.Builder(imageView.context).build().apply {
+    Glide.with(imageView.context).apply {
         load(path).into(imageView)
     }
 }
