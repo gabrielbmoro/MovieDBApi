@@ -73,6 +73,6 @@ class MainActivity : AppCompatActivity() {
         /**
          * Limit pages in memory.
          */
-        binding.vwPagerComponent.offscreenPageLimit = 0
+        binding.vwPagerComponent.offscreenPageLimit = 3
     }
 }
