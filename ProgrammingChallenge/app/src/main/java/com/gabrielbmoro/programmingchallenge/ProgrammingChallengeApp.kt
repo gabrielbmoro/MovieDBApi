@@ -1,7 +1,7 @@
 package com.gabrielbmoro.programmingchallenge
 
 import android.app.Application
-import com.gabrielbmoro.programmingchallenge.dependenciesInjector.repositoryModule
+import com.gabrielbmoro.programmingchallenge.koin.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -22,7 +22,7 @@ class ProgrammingChallengeApp : Application() {
             // Android context
             androidContext(this@ProgrammingChallengeApp)
             // modules
-            modules(repositoryModule)
+            modules(networkModule)
         }
     }
 
