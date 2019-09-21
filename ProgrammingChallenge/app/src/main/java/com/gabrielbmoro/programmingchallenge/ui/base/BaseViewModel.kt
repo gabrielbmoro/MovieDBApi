@@ -20,18 +20,6 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
             notifyPropertyChanged(BR.loading)
         }
 
-    private val lstSubscriptions = ArrayList<rx.Subscription>()
-
-    fun registerDisposable(d : rx.Subscription) {
-        lstSubscriptions.add(d)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-
-        lstSubscriptions.forEach { if(!it.isUnsubscribed) it.unsubscribe() }
-    }
-
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback) {
         synchronized(this) {
             if (mCallbacks == null) {

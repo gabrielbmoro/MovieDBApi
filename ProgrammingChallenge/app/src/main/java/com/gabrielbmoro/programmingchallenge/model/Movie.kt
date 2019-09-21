@@ -2,6 +2,9 @@ package com.gabrielbmoro.programmingchallenge.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -10,7 +13,9 @@ import com.google.gson.annotations.SerializedName
  * @author Gabriel Moro
  * @since 2018-08-30
  */
+@Entity(tableName = "favorite_movie")
 data class Movie(
+        @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "dataBaseId") var dataBaseId: Long? = null,
         @SerializedName("vote_count") val votes: Int,
         @SerializedName("id") val id: Int,
         @SerializedName("video") var isVideo: Boolean,
@@ -27,6 +32,7 @@ data class Movie(
         var isFavorite: Boolean = false
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+            parcel.readLong(),
             parcel.readInt(),
             parcel.readInt(),
             parcel.readByte() != 0.toByte(),
@@ -44,6 +50,7 @@ data class Movie(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeLong(dataBaseId ?: 0L)
         parcel.writeInt(votes)
         parcel.writeInt(id)
         parcel.writeByte(if (isVideo) 1 else 0)

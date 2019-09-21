@@ -3,7 +3,6 @@ package com.gabrielbmoro.programmingchallenge.koin.api
 import com.gabrielbmoro.programmingchallenge.model.Page
 import retrofit2.http.GET
 import retrofit2.http.Query
-import rx.Observable
 
 /**
  * The inferface that defines the requests to API.
@@ -19,5 +18,5 @@ interface ApiRepository {
      * @since 2018-08-30
      */
     @GET("discover/movie")
-    fun getMovies(@Query("api_key") a_strApiKey: String, @Query("sort_by") a_strSortedBy: String): Observable<Page>
+    suspend fun getMovies(@Query("api_key") a_strApiKey: String, @Query("sort_by") a_strSortedBy: String): Page
 }

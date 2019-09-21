@@ -1,15 +1,13 @@
 package com.gabrielbmoro.programmingchallenge.ui.mainScreen.page
 
 import android.app.Application
+import androidx.lifecycle.viewModelScope
 import com.gabrielbmoro.programmingchallenge.koin.api.ApiRepositoryImpl
+import com.gabrielbmoro.programmingchallenge.model.Movie
 import com.gabrielbmoro.programmingchallenge.model.MoviesListType
-import com.gabrielbmoro.programmingchallenge.model.Page
 import com.gabrielbmoro.programmingchallenge.ui.base.BaseViewModel
 import com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter.MoviesListAdapter
 import org.koin.core.inject
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 
 class MovieListViewModel(application: Application) : BaseViewModel(application) {
 
@@ -25,35 +23,21 @@ class MovieListViewModel(application: Application) : BaseViewModel(application) 
     private fun requestForMovies() {
         type?.let { t ->
 
-            val observable: Observable<Page>? = when (t) {
-                MoviesListType.TOP_RATED_MOVIES -> {
-                    api.getTopRatedMovies()
-                }
-                MoviesListType.POPULAR_RATED_MOVIES -> {
-                    api.getPopularMovies()
-                }
+            isLoading = true
 
-                MoviesListType.FAVORITE_MOVIES -> {
-                    null
-                }
+            val actionAfterRequest = { movies: List<Movie> ->
+                adapter.setup(movies)
+                isLoading = false
             }
 
-            observable?.let { response ->
-                isLoading = true
-                registerDisposable(
-                        response.doAfterTerminate {
-                            isLoading = false
-                        }.subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(
-                                        {
-                                            adapter.setup(it.results)
-                                        },
-                                        {
-
-                                        }
-                                )
-                )
+            when (t) {
+                MoviesListType.TOP_RATED_MOVIES ->
+                    api.getTopRatedMovies(viewModelScope, actionAfterRequest)
+                MoviesListType.POPULAR_RATED_MOVIES ->
+                    api.getPopularMovies(viewModelScope, actionAfterRequest)
+                MoviesListType.FAVORITE_MOVIES -> {
+                    isLoading = false
+                }
             }
         }
     }
