@@ -1,14 +1,14 @@
 package com.gabrielbmoro.programmingchallenge.ui.mainScreen.detailedScreen
 
 import android.app.Application
+import android.widget.Toast
 import androidx.databinding.Bindable
 import androidx.lifecycle.viewModelScope
 import com.gabrielbmoro.programmingchallenge.BR
 import com.gabrielbmoro.programmingchallenge.BuildConfig
-import com.gabrielbmoro.programmingchallenge.koin.dataBase.FavoriteMoviesDAO
 import com.gabrielbmoro.programmingchallenge.model.Movie
+import com.gabrielbmoro.programmingchallenge.model.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.ui.base.BaseViewModel
-import kotlinx.coroutines.launch
 import org.koin.core.inject
 
 class MovieDetailedViewModel(application: Application) : BaseViewModel(application) {
@@ -62,9 +62,9 @@ class MovieDetailedViewModel(application: Application) : BaseViewModel(applicati
             notifyPropertyChanged(BR.popularityAverage)
         }
 
-    private var baseMovie : Movie? = null
+    private var baseMovie: Movie? = null
 
-    private val favoriteDAO :  FavoriteMoviesDAO by inject()
+    private val repository: MoviesRepository by inject()
 
     fun setup(movie: Movie) {
         baseMovie = movie
@@ -80,11 +80,22 @@ class MovieDetailedViewModel(application: Application) : BaseViewModel(applicati
     }
 
     fun onFavoriteEvent() {
-        baseMovie?.let{
-            viewModelScope.launch{
-                favoriteDAO.saveFavorite(it)
+        baseMovie?.let {
+            if(!it.isFavorite) {
+                repository.saveMovieAsFavorite(
+                        viewModelScope,
+                        it
+                ) {
+                    Toast.makeText(getApplication(), "favorite", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                repository.unFavorite(
+                        viewModelScope,
+                        it
+                ) {
+                    Toast.makeText(getApplication(), "unfavorite", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
-
 }

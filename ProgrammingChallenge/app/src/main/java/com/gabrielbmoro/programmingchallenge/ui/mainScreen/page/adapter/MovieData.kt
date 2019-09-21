@@ -7,7 +7,6 @@ import androidx.annotation.DrawableRes
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.model.Movie
 import com.gabrielbmoro.programmingchallenge.ui.mainScreen.detailedScreen.MovieDetailedActivity
-import kotlinx.android.synthetic.main.view_holder_movie_card.view.*
 
 data class MovieData(
         val posterPath: String,

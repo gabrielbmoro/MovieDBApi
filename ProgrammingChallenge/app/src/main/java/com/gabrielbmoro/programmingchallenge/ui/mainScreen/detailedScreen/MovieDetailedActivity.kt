@@ -1,8 +1,6 @@
 package com.gabrielbmoro.programmingchallenge.ui.mainScreen.detailedScreen
 
 import android.app.Activity
-import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu

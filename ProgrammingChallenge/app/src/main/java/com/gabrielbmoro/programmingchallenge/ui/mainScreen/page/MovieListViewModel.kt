@@ -2,20 +2,17 @@ package com.gabrielbmoro.programmingchallenge.ui.mainScreen.page
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
-import com.gabrielbmoro.programmingchallenge.koin.api.ApiRepositoryImpl
-import com.gabrielbmoro.programmingchallenge.koin.dataBase.FavoriteMoviesDAO
 import com.gabrielbmoro.programmingchallenge.model.Movie
 import com.gabrielbmoro.programmingchallenge.model.MoviesListType
+import com.gabrielbmoro.programmingchallenge.model.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.ui.base.BaseViewModel
 import com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter.MoviesListAdapter
-import kotlinx.coroutines.launch
 import org.koin.core.inject
 
 class MovieListViewModel(application: Application) : BaseViewModel(application) {
 
     val adapter = MoviesListAdapter()
-    private val api: ApiRepositoryImpl by inject()
-    private val dataBase : FavoriteMoviesDAO by inject()
+    private val repository :  MoviesRepository by inject()
     private var type: MoviesListType? = null
 
     fun setup(listType: MoviesListType) {
@@ -35,15 +32,11 @@ class MovieListViewModel(application: Application) : BaseViewModel(application) 
 
             when (t) {
                 MoviesListType.TOP_RATED_MOVIES ->
-                    api.getTopRatedMovies(viewModelScope, actionAfterRequest)
+                    repository.getTopRatedMovies(viewModelScope, actionAfterRequest)
                 MoviesListType.POPULAR_RATED_MOVIES ->
-                    api.getPopularMovies(viewModelScope, actionAfterRequest)
+                    repository.getPopularMovies(viewModelScope, actionAfterRequest)
                 MoviesListType.FAVORITE_MOVIES -> {
-                    viewModelScope.launch {
-                        val movies = dataBase.allFavoriteMovies()
-                        adapter.setup(movies)
-                        isLoading = false
-                    }
+                    repository.getAllFavoriteMovies(viewModelScope, actionAfterRequest)
                 }
             }
         }
