@@ -1,8 +1,8 @@
 package com.gabrielbmoro.programmingchallenge.ui.mainScreen.detailedScreen
 
 import android.app.Application
-import android.widget.Toast
 import androidx.databinding.Bindable
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gabrielbmoro.programmingchallenge.BR
 import com.gabrielbmoro.programmingchallenge.BuildConfig
@@ -62,6 +62,8 @@ class MovieDetailedViewModel(application: Application) : BaseViewModel(applicati
             notifyPropertyChanged(BR.popularityAverage)
         }
 
+    val favoriteLiveData = MutableLiveData<Boolean>()
+
     private var baseMovie: Movie? = null
 
     private val repository: MoviesRepository by inject()
@@ -76,6 +78,7 @@ class MovieDetailedViewModel(application: Application) : BaseViewModel(applicati
             originalTitle = it.originalTitle
             voteAverage = it.votesAverage.toString()
             popularityAverage = it.popularity.toString()
+            favoriteLiveData.value = it.isFavorite
         }
     }
 
@@ -86,14 +89,14 @@ class MovieDetailedViewModel(application: Application) : BaseViewModel(applicati
                         viewModelScope,
                         it
                 ) {
-                    Toast.makeText(getApplication(), "favorite", Toast.LENGTH_SHORT).show()
+                    favoriteLiveData.postValue(true)
                 }
             } else {
                 repository.unFavorite(
                         viewModelScope,
                         it
                 ) {
-                    Toast.makeText(getApplication(), "unfavorite", Toast.LENGTH_SHORT).show()
+                    favoriteLiveData.postValue(false)
                 }
             }
         }
