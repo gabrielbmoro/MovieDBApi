@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter.MovieData" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_view_height"
+        android:layout_margin="12dp"
+        android:background="@android:color/darker_gray"
+        android:elevation="2dp"
+        android:focusable="true"
+        android:clickable="true"
+        android:onClick="@{v -> viewModel.onClick(v)}"
+        android:orientation="vertical"
+        app:cardCornerRadius="10dp">
+
+        <ImageView
+            android:id="@+id/ivPoster"
+            android:layout_width="@dimen/poster_card_width"
+            android:layout_height="280dp"
+            android:layout_gravity="top|start"
+            android:contentDescription="@{viewModel.movieTitle}"
+            android:transitionName="@string/transition_name"
+            android:scaleType="fitStart"
+            app:imagePath="@{viewModel.posterPath}"
+            tools:src="@drawable/jean_claude_van_damme" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="@dimen/poster_card_width"
+            android:maxHeight="@dimen/card_title_max_height"
+            android:padding="4dp"
+            android:text="@{viewModel.movieTitle}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            tools:text="@string/grande_dragao_branco" />
+
+        <TextView
+            android:id="@+id/tvReleaseDate"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="@dimen/poster_card_width"
+            android:layout_marginTop="@dimen/card_title_max_height"
+            android:padding="4dp"
+            android:text="@{viewModel.releaseDate}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            tools:text="@string/release_date_example" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="@dimen/poster_card_width"
+            android:layout_marginTop="180dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivFirstStar"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/star"
+                app:srcCompat="@{viewModel.firstStar}"
+                tools:src="@drawable/ic_star" />
+
+            <ImageView
+                android:id="@+id/ivSecondStar"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/star"
+                app:srcCompat="@{viewModel.secondStar}"
+                tools:src="@drawable/ic_star" />
+
+            <ImageView
+                android:id="@+id/ivThirdStar"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/star"
+                app:srcCompat="@{viewModel.thirdStar}"
+                tools:src="@drawable/ic_star" />
+
+            <ImageView
+                android:id="@+id/ivFourthStar"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/star"
+                app:srcCompat="@{viewModel.fourthStar}"
+                tools:src="@drawable/ic_star_half" />
+
+            <ImageView
+                android:id="@+id/ivFifthStar"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/star"
+                app:srcCompat="@{viewModel.fifthStar}"
+                tools:src="@drawable/ic_star_border" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
