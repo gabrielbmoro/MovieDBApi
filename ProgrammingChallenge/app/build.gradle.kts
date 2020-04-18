@@ -33,7 +33,7 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.71")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.71")
     //noinspection GradleCompatible
     implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
