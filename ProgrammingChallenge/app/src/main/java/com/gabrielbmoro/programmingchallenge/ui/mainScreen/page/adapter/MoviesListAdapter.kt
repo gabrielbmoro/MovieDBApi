@@ -1,8 +1,8 @@
 package com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter
 
 import androidx.annotation.DrawableRes
-import com.gabrielbmoro.programmingchallenge.BuildConfig
 import com.gabrielbmoro.programmingchallenge.R
+import com.gabrielbmoro.programmingchallenge.koin.ConfigVariables.BASE_IMAGE_ADDRESS
 import com.gabrielbmoro.programmingchallenge.model.Movie
 import com.gabrielbmoro.programmingchallenge.ui.base.GeneralBaseAdapter
 import kotlin.math.roundToInt
@@ -31,7 +31,7 @@ class MoviesListAdapter : GeneralBaseAdapter<MovieData>() {
                     val numberOfStars = (movie.votesAverage / AVERAGE_TOTAL) * STARS_AVAILABLE
 
                     MovieData(
-                            posterPath = "${BuildConfig.baseImageAddress}${movie.posterPath}",
+                            posterPath = "${BASE_IMAGE_ADDRESS}${movie.posterPath}",
                             movieTitle = movie.title,
                             releaseDate = movie.releaseDate,
                             firstStar = gettingAccordingPosition(numberOfStars, 1),

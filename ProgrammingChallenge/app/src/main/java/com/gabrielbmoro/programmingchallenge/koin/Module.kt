@@ -1,7 +1,8 @@
 package com.gabrielbmoro.programmingchallenge.koin
 
 import androidx.room.Room
-import com.gabrielbmoro.programmingchallenge.BuildConfig
+import com.gabrielbmoro.programmingchallenge.koin.ConfigVariables.BASE_URL
+import com.gabrielbmoro.programmingchallenge.koin.ConfigVariables.DATABASE_NAME
 import com.gabrielbmoro.programmingchallenge.koin.api.ApiRepository
 import com.gabrielbmoro.programmingchallenge.koin.dataBase.DataBaseFactory
 import com.gabrielbmoro.programmingchallenge.model.MoviesRepository
@@ -15,7 +16,7 @@ val repositoryModule = module {
     single {
         MoviesRepository(
                 service = Retrofit.Builder()
-                        .baseUrl(BuildConfig.baseUrl)
+                        .baseUrl(BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .client(
                                 OkHttpClient.Builder()
@@ -28,7 +29,7 @@ val repositoryModule = module {
                 favoriteDAO = Room.databaseBuilder(
                         get(),
                         DataBaseFactory::class.java,
-                        BuildConfig.dataBaseName
+                        DATABASE_NAME
                 ).build().favoriteMoviesDAO()
         )
     }

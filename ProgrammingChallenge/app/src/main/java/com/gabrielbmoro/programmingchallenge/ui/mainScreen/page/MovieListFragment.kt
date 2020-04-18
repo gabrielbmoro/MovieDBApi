@@ -6,25 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.lifecycle.ViewModelProvider
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.databinding.FragmentMoviesListBinding
 import com.gabrielbmoro.programmingchallenge.model.MoviesListType
 import com.gabrielbmoro.programmingchallenge.ui.mainScreen.page.adapter.MoviesListAdapter
 
-class MovieListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class MovieListFragment : Fragment() {
 
     private lateinit var binding: FragmentMoviesListBinding
     private lateinit var viewModel: MovieListViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewModel = ViewModelProviders.of(this).get(MovieListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movies_list, container, false)
         binding.viewModel = viewModel
 
-        binding.swRefreshLayout.setOnRefreshListener(this)
-
+        binding.swRefreshLayout.setOnRefreshListener {
+            binding.swRefreshLayout.isRefreshing = false
+            viewModel.reload()
+        }
         return binding.root
     }
 
@@ -57,11 +58,6 @@ class MovieListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         if (::binding.isInitialized) {
             binding.rvList.smoothScrollToPosition(0)
         }
-    }
-
-    override fun onRefresh() {
-        binding.swRefreshLayout.isRefreshing = false
-        viewModel.reload()
     }
 
     companion object {

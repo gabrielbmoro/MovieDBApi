@@ -1,6 +1,7 @@
 package com.gabrielbmoro.programmingchallenge.model
 
 import com.gabrielbmoro.programmingchallenge.BuildConfig
+import com.gabrielbmoro.programmingchallenge.koin.ConfigVariables.TOKEN
 import com.gabrielbmoro.programmingchallenge.koin.api.ApiRepository
 import com.gabrielbmoro.programmingchallenge.koin.dataBase.FavoriteMoviesDAO
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +21,7 @@ class MoviesRepository(val service: ApiRepository, val favoriteDAO: FavoriteMovi
             contract.invoke(
                     fillFavoriteMovies(
                             fromServer = service.getMovies(
-                                    BuildConfig.token,
+                                    TOKEN,
                                     MoviesListType.TOP_RATED_MOVIES.requestParameter
                             ).results ?: emptyList(),
                             favoriteMovies = favoriteMovies
@@ -42,7 +43,7 @@ class MoviesRepository(val service: ApiRepository, val favoriteDAO: FavoriteMovi
             contract.invoke(
                     fillFavoriteMovies(
                             fromServer = service.getMovies(
-                                    BuildConfig.token,
+                                    TOKEN,
                                     MoviesListType.POPULAR_RATED_MOVIES.requestParameter
                             ).results ?: emptyList(),
                             favoriteMovies = favoriteMovies

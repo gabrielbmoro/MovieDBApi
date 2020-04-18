@@ -5,7 +5,8 @@ import androidx.databinding.Bindable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gabrielbmoro.programmingchallenge.BR
-import com.gabrielbmoro.programmingchallenge.BuildConfig
+import com.gabrielbmoro.programmingchallenge.koin.ConfigVariables
+import com.gabrielbmoro.programmingchallenge.koin.ConfigVariables.BASE_IMAGE_ADDRESS
 import com.gabrielbmoro.programmingchallenge.model.Movie
 import com.gabrielbmoro.programmingchallenge.model.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.ui.base.BaseViewModel
@@ -71,7 +72,7 @@ class MovieDetailedViewModel(application: Application) : BaseViewModel(applicati
     fun setup(movie: Movie) {
         baseMovie = movie
         baseMovie?.let {
-            posterPath = "${BuildConfig.baseImageAddress}${it.posterPath}"
+            posterPath = "${BASE_IMAGE_ADDRESS}${it.posterPath}"
             description = it.overview
             title = it.title
             language = it.originalLanguage

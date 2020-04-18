@@ -10,7 +10,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.databinding.ActivityMovieDetailedBinding
 import com.gabrielbmoro.programmingchallenge.model.Movie
@@ -24,7 +24,7 @@ class MovieDetailedActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MovieDetailedViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MovieDetailedViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detailed)
         binding.viewModel = viewModel
 
