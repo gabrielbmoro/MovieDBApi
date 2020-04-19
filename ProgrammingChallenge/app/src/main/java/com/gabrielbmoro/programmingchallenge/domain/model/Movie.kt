@@ -18,16 +18,17 @@ open class Movie(
         @PrimaryKey(autoGenerate = false)
         @SerializedName("id")
         var id: Int,
-        open val votes: Int,
-        open val isVideo: Boolean,
-        open val votesAverage: Float,
-        open val title: String,
-        open val popularity: Float,
-        open val posterPath: String,
-        open val originalLanguage: String,
-        open val originalTitle: String,
-        open val backdropPath: String,
-        open val isAdult: Boolean,
-        open val overview: String,
-        open val releaseDate: String
+        val votes: Int,
+        val isVideo: Boolean,
+        val votesAverage: Float,
+        val title: String,
+        val popularity: Float,
+        val posterPath: String,
+        val originalLanguage: String,
+        val originalTitle: String,
+        val backdropPath: String,
+        val isAdult: Boolean,
+        val overview: String,
+        val releaseDate: String,
+        var isFavorite : Boolean = false
 ) : Parcelable
