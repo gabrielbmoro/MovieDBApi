@@ -3,6 +3,7 @@ package com.gabrielbmoro.programmingchallenge.presentation
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
@@ -22,11 +23,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             MovieListFragment.newInstance(MovieListType.Popular),
             MovieListFragment.newInstance(MovieListType.Favorite)
     )
+    private lateinit var viewModel : MainViewModel
 
     override fun onStart() {
         super.onStart()
-        vwPagerComponent.adapter = object : FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+        vwPagerComponent.adapter = object : FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             override fun getCount(): Int {
                 return fragmentsList.size
             }
@@ -36,15 +39,17 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
         }
 
+        vwPagerComponent.currentItem = viewModel.getPage()
         vwPagerComponent.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(position: Int) {
                 when (position) {
-                    0 -> bnvBottomMenu.selectedItemId = R.id.menuTopRatedMovies
-                    1 -> bnvBottomMenu.selectedItemId = R.id.menuPopularMovies
-                    2 -> bnvBottomMenu.selectedItemId = R.id.menuFavoriteMovies
+                    MainViewModel.TOP_RATED_PAGE -> bnvBottomMenu.selectedItemId = R.id.menuTopRatedMovies
+                    MainViewModel.POPULAR_PAGE -> bnvBottomMenu.selectedItemId = R.id.menuPopularMovies
+                    MainViewModel.FAVORITE_PAGE -> bnvBottomMenu.selectedItemId = R.id.menuFavoriteMovies
                 }
+                viewModel.setPage(pageIndex = position)
             }
         })
 
