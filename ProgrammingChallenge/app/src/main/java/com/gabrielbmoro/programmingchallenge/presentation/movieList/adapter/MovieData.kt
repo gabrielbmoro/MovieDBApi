@@ -3,7 +3,6 @@ package com.gabrielbmoro.programmingchallenge.presentation.movieList.adapter
 import android.app.Activity
 import android.view.View
 import android.widget.ImageView
-import androidx.annotation.DrawableRes
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedActivity
@@ -12,16 +11,7 @@ data class MovieData(
         val posterPath: String,
         val movieTitle: String,
         val releaseDate: String,
-        @DrawableRes
-        val firstStar: Int,
-        @DrawableRes
-        val secondStar: Int,
-        @DrawableRes
-        val thirdStar: Int,
-        @DrawableRes
-        val fourthStar: Int,
-        @DrawableRes
-        val fifthStar: Int,
+        val votes : Float,
         var movieReference: Movie
 ) {
     fun onClick(v: View) {

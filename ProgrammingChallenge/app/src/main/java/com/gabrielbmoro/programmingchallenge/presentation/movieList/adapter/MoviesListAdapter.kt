@@ -3,12 +3,14 @@ package com.gabrielbmoro.programmingchallenge.presentation.movieList.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.core.ConfigVariables.BASE_IMAGE_ADDRESS
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
-import kotlin.math.roundToInt
+import com.gabrielbmoro.programmingchallenge.presentation.FiveStarsComponent
+import com.gabrielbmoro.programmingchallenge.presentation.util.setImagePath
 
 class MoviesListAdapter : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder>() {
 
@@ -38,18 +40,11 @@ class MoviesListAdapter : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder
         elements.clear()
         elements.addAll(
                 movieDataList.map { movie ->
-
-                    val numberOfStars = (movie.votesAverage / AVERAGE_TOTAL) * STARS_AVAILABLE
-
                     MovieData(
                             posterPath = "${BASE_IMAGE_ADDRESS}${movie.posterPath}",
                             movieTitle = movie.title,
-                            releaseDate = movie.releaseDate.toString(),
-                            firstStar = gettingAccordingPosition(numberOfStars, 1),
-                            secondStar = gettingAccordingPosition(numberOfStars, 2),
-                            thirdStar = gettingAccordingPosition(numberOfStars, 3),
-                            fourthStar = gettingAccordingPosition(numberOfStars, 4),
-                            fifthStar = gettingAccordingPosition(numberOfStars, 5),
+                            releaseDate = movie.releaseDate,
+                            votes = movie.votesAverage,
                             movieReference = movie
                     )
                 }
@@ -57,30 +52,22 @@ class MoviesListAdapter : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder
         notifyDataSetChanged()
     }
 
-    @DrawableRes
-    private fun gettingAccordingPosition(votes: Float, positionOrdinal: Int): Int {
-        return when {
-            votes >= positionOrdinal -> R.drawable.ic_star
-            votes < positionOrdinal -> {
-                if (votes.roundToInt() == positionOrdinal)
-                    R.drawable.ic_star_half
-                else
-                    R.drawable.ic_star_border
-            }
-            else -> R.drawable.ic_star_border
-        }
-    }
-
     inner class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(data: MovieData) {
+        private val ivPoster : ImageView? = view.findViewById(R.id.ivPoster)
+        private val tvTitle : TextView? = view.findViewById(R.id.tvTitle)
+        private val tvReleaseDate : TextView? = view.findViewById(R.id.tvReleaseDate)
+        private val fiveStarsComponent : FiveStarsComponent? = view.findViewById(R.id.fiveStarsComponent)
 
+        fun bind(data: MovieData) {
+            ivPoster?.setImagePath(data.posterPath)
+            tvTitle?.text = data.movieTitle
+            tvReleaseDate?.text = data.releaseDate
+            fiveStarsComponent?.setVotesAvg(data.votes)
         }
     }
 
     companion object {
-        const val AVERAGE_TOTAL = 10f
-        const val STARS_AVAILABLE = 5f
         const val VIEW_TYPE = -123
     }
 }

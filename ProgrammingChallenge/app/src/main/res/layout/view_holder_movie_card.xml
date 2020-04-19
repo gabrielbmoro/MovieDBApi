@@ -17,6 +17,7 @@
         android:layout_width="@dimen/poster_card_width"
         android:layout_height="280dp"
         android:layout_gravity="top|start"
+        android:contentDescription="@string/poster"
         android:scaleType="fitStart"
         android:transitionName="@string/transition_name"
         tools:src="@drawable/jean_claude_van_damme" />
@@ -44,49 +45,13 @@
         tools:text="@string/release_date_example" />
 
 
-    <LinearLayout
+    <com.gabrielbmoro.programmingchallenge.presentation.FiveStarsComponent
+        android:id="@+id/fiveStarsComponent"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="top|start"
         android:layout_marginStart="@dimen/poster_card_width"
         android:layout_marginTop="180dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/ivFirstStar"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/star"
-            tools:src="@drawable/ic_star" />
-
-        <ImageView
-            android:id="@+id/ivSecondStar"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/star"
-            tools:src="@drawable/ic_star" />
-
-        <ImageView
-            android:id="@+id/ivThirdStar"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/star"
-            tools:src="@drawable/ic_star" />
-
-        <ImageView
-            android:id="@+id/ivFourthStar"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/star"
-            tools:src="@drawable/ic_star_half" />
-
-        <ImageView
-            android:id="@+id/ivFifthStar"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/star"
-            tools:src="@drawable/ic_star_border" />
-
-    </LinearLayout>
+        android:orientation="horizontal" />
 
 </androidx.cardview.widget.CardView>
