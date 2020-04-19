@@ -14,86 +14,143 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:id="@+id/llInternalLayout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin_space"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/default_margin_space"
+            android:layout_marginStart="@dimen/default_margin_space"
+            android:layout_marginEnd="@dimen/default_margin_space">
 
             <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_height" />
+                android:id="@+id/space1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space_height"
+                app:layout_constraintBottom_toTopOf="@+id/tvOriginalTitleLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tvOriginalTitleLabel"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/original_title"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintBottom_toTopOf="@+id/tvOriginalTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/space1" />
 
             <TextView
                 android:id="@+id/tvOriginalTitle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                app:layout_constraintBottom_toTopOf="@+id/space2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvOriginalTitleLabel"
                 tools:text="O grande dragão branco" />
 
             <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_height" />
+                android:id="@+id/space2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space_height"
+                app:layout_constraintBottom_toTopOf="@+id/tvOverviewLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvOriginalTitle" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tvOverviewLabel"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/overview"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintBottom_toTopOf="@+id/tvOverview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/space2" />
 
             <TextView
                 android:id="@+id/tvOverview"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                app:layout_constraintBottom_toTopOf="@+id/space3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvOverviewLabel"
                 tools:text="@string/description_example" />
 
             <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_height" />
+                android:id="@+id/space3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space_height"
+                app:layout_constraintBottom_toTopOf="@+id/tvLanguageTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvOverview" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tvLanguageTitle"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/language"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintBottom_toTopOf="@+id/tvLanguage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/space3" />
 
             <TextView
                 android:id="@+id/tvLanguage"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                app:layout_constraintBottom_toTopOf="@+id/space4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLanguageTitle"
                 tools:text="en-US" />
 
             <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_height" />
+                android:id="@+id/space4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/space_height"
+                app:layout_constraintBottom_toTopOf="@+id/tvPopularityTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLanguage" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/tvPopularityTitle"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/popularity"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintBottom_toTopOf="@+id/tvPopularity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/space4" />
 
             <TextView
                 android:id="@+id/tvPopularity"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPopularityTitle"
                 tools:text="1230" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
 
@@ -129,12 +186,11 @@
                 android:id="@+id/background"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/app_bar_layout_height"
+                android:background="@drawable/card_gradient_background"
                 android:contentDescription="@string/background"
                 android:fitsSystemWindows="true"
                 android:scaleType="fitXY"
-                app:layout_collapseMode="parallax"
-                android:background="@drawable/card_gradient_background"
-                />
+                app:layout_collapseMode="parallax" />
 
             <ImageButton
                 android:id="@+id/btnFavorite"
@@ -149,8 +205,8 @@
                 android:id="@+id/fiveStarsComponent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:layout_gravity="end|bottom"/>
+                android:layout_gravity="end|bottom"
+                android:layout_margin="12dp" />
 
             <Toolbar
                 android:id="@+id/toolbar"

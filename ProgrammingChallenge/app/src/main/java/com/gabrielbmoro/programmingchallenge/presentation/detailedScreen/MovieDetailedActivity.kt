@@ -48,12 +48,8 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
     private fun changeFavoriteViewsState(it: Boolean) {
         if (it) {
             favoriteMenu?.icon = ContextCompat.getDrawable(this, R.drawable.ic_heart_border)
-            btnFavorite.setBackgroundColor(ContextCompat.getColor(this, R.color.favorite_button_off))
-//            btnFavorite.setText(R.string.unfavorite)
         } else {
             favoriteMenu?.icon = ContextCompat.getDrawable(this, R.drawable.ic_heart_filled)
-            btnFavorite.setBackgroundColor(ContextCompat.getColor(this, R.color.favorite_button_onn))
-//            btnFavorite.setText(R.string.favorite)
         }
     }
 
