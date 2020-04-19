@@ -16,18 +16,27 @@ class MovieDetailedViewModel(application: Application) : AndroidViewModel(applic
 
     private var movie: Movie? = null
 
-    fun setup(movie: Movie) {
+    fun setup(movie: Movie) : LiveData<ViewModelResult>{
         this.movie = movie
+        return liveData {
+            try {
+                movie.isFavorite = favoriteMovieUseCase.isFavorite(movie)
+                emit(ViewModelResult.Success)
+            } catch(exception : Exception){
+                emit(ViewModelResult.Error(exception))
+            }
+        }
     }
 
     fun favoriteEvent(isToFavorite: Boolean): LiveData<ViewModelResult>? {
-        return movie?.let { movie ->
+        return movie?.let { m ->
             liveData {
                 try {
                     if (isToFavorite)
-                        favoriteMovieUseCase.favoriteMovie(movie)
+                        favoriteMovieUseCase.favoriteMovie(m)
                     else
-                        favoriteMovieUseCase.unFavoriteMovie(movie)
+                        favoriteMovieUseCase.unFavoriteMovie(m)
+                    movie?.isFavorite = isToFavorite
                     emit(ViewModelResult.Success)
                 } catch (exception: Exception) {
                     emit(ViewModelResult.Error(exception))

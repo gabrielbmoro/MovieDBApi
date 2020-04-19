@@ -15,9 +15,9 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "favorite_movies")
 @Parcelize
 open class Movie(
-        @PrimaryKey(autoGenerate = false)
+        @PrimaryKey(autoGenerate = true)
         @SerializedName("id")
-        var id: Int,
+        var id: Int? = null,
         val votes: Int,
         val isVideo: Boolean,
         val votesAverage: Float,
@@ -30,5 +30,5 @@ open class Movie(
         val isAdult: Boolean,
         val overview: String,
         val releaseDate: String,
-        var isFavorite : Boolean = false
+        var isFavorite: Boolean = false
 ) : Parcelable

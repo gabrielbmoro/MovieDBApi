@@ -7,7 +7,6 @@ object MoviesMapper {
     fun map(response: PageResponse?): List<Movie> {
         return response?.results?.map {
             Movie(
-                    id = 0,
                     votes = it.votes ?: 0,
                     votesAverage = it.votesAverage ?: 0f,
                     isVideo = it.isVideo ?: false,

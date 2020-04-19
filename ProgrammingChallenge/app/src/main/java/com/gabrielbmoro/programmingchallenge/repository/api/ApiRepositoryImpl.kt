@@ -27,4 +27,6 @@ class ApiRepositoryImpl(private val apiRepository : ApiRepository) : MoviesRepos
 
     override suspend fun unFavorite(movie: Movie)= false
 
+    override suspend fun checkIsAFavoriteMovie(movie: Movie) = false
+
 }

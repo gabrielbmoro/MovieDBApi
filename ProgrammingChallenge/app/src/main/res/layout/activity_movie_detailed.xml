@@ -17,8 +17,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin_space"
             android:layout_marginStart="@dimen/default_margin_space"
+            android:layout_marginTop="@dimen/default_margin_space"
             android:layout_marginEnd="@dimen/default_margin_space">
 
             <Space
@@ -163,6 +163,7 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
@@ -200,7 +201,9 @@
                 android:layout_margin="@dimen/top_card_margin"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/favorite"
-                android:src="@drawable/ic_heart_border" />
+                android:src="@drawable/ic_heart_border"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <com.gabrielbmoro.programmingchallenge.presentation.FiveStarsComponent
                 android:id="@+id/fiveStarsComponent"
