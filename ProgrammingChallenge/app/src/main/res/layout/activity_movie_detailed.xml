@@ -93,24 +93,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 tools:text="1230" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/space_height" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/vote_average"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
-            <TextView
-                android:id="@+id/tvVoteAverage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lineSpacingExtra="4dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                tools:text="12.0" />
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -136,13 +118,23 @@
                 android:id="@+id/backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/app_bar_layout_height"
+                android:contentDescription="@string/poster"
                 android:fitsSystemWindows="true"
                 android:scaleType="fitXY"
                 android:transitionName="@string/transition_name"
                 app:layout_collapseMode="parallax"
-                tools:src="@drawable/jean_claude_van_damme"
-                android:contentDescription="@string/poster" />
+                tools:src="@drawable/jean_claude_van_damme" />
 
+            <ImageView
+                android:id="@+id/background"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_bar_layout_height"
+                android:contentDescription="@string/background"
+                android:fitsSystemWindows="true"
+                android:scaleType="fitXY"
+                app:layout_collapseMode="parallax"
+                android:background="@drawable/card_gradient_background"
+                />
 
             <ImageButton
                 android:id="@+id/btnFavorite"
@@ -152,6 +144,13 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/favorite"
                 android:src="@drawable/ic_heart_border" />
+
+            <com.gabrielbmoro.programmingchallenge.presentation.FiveStarsComponent
+                android:id="@+id/fiveStarsComponent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_gravity="end|bottom"/>
 
             <Toolbar
                 android:id="@+id/toolbar"

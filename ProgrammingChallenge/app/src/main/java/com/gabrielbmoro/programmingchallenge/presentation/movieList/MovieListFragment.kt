@@ -60,7 +60,7 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
     }
 
     fun scrollToTop() {
-
+        rvList.scrollToPosition(0)
     }
 
     companion object {

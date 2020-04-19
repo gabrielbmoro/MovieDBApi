@@ -49,8 +49,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         })
 
         bnvBottomMenu.setOnNavigationItemSelectedListener {
-
-
             if (bnvBottomMenu.selectedItemId == it.itemId) {
                 (fragmentsList[vwPagerComponent.currentItem] as? MovieListFragment)?.scrollToTop()
             }

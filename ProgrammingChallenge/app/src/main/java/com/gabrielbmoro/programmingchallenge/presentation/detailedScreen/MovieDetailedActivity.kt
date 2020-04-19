@@ -22,7 +22,8 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
     override fun onStart() {
         super.onStart()
         viewModel = ViewModelProvider(this).get(MovieDetailedViewModel::class.java)
-        (viewModel.getMovie() ?: intent.getParcelableExtra(MOVIE_INTENT_KEY) as? Movie)?.let { movie ->
+        (viewModel.getMovie()
+                ?: intent.getParcelableExtra(MOVIE_INTENT_KEY) as? Movie)?.let { movie ->
             viewModel.setup(movie)
             setView(movie)
             viewModel.favoriteLiveData.observe(
@@ -37,6 +38,11 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
     private fun setView(movie: Movie) {
         supportActionBar?.title = movie.title
         backdrop.setImagePath(movie.posterPath)
+        tvOriginalTitle?.text = movie.originalTitle
+        tvOverview?.text = movie.overview
+        tvLanguage?.text = movie.originalLanguage
+        tvPopularity?.text = movie.popularity.toString()
+        fiveStarsComponent?.setVotesAvg(movie.votesAverage)
     }
 
     private fun changeFavoriteViewsState(it: Boolean) {
