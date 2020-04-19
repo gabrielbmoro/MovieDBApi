@@ -1,15 +1,16 @@
 package com.gabrielbmoro.programmingchallenge.presentation.detailedScreen
 
 import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
-import com.gabrielbmoro.programmingchallenge.presentation.BaseViewModel
+import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class MovieDetailedViewModel(application: Application) : BaseViewModel(application) {
+class MovieDetailedViewModel(application: Application) : AndroidViewModel(application), KoinComponent {
 
     private val favoriteMovieUseCase: FavoriteMovieUseCase by inject()
     val favoriteLiveData = MutableLiveData<Boolean>()

@@ -1,52 +1,54 @@
 package com.gabrielbmoro.programmingchallenge.core
 
 import androidx.room.Room
-import com.gabrielbmoro.programmingchallenge.core.ConfigVariables.BASE_URL
-import com.gabrielbmoro.programmingchallenge.core.ConfigVariables.DATABASE_NAME
+import com.gabrielbmoro.programmingchallenge.domain.usecase.*
+import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.repository.api.ApiRepository
-import com.gabrielbmoro.programmingchallenge.repository.dataBase.DataBaseFactory
 import com.gabrielbmoro.programmingchallenge.repository.api.ApiRepositoryImpl
+import com.gabrielbmoro.programmingchallenge.repository.api.LoggedInterceptor
+import com.gabrielbmoro.programmingchallenge.repository.dataBase.DataBaseFactory
 import com.gabrielbmoro.programmingchallenge.repository.dataBase.DataBaseRepositoryImpl
-import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
-import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMoviesUseCase
-import com.gabrielbmoro.programmingchallenge.domain.usecase.PopularMoviesUseCase
-import com.gabrielbmoro.programmingchallenge.domain.usecase.TopRatedMoviesUseCase
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.bind
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-val dataReceiverModule = module {
+
+val repositoryModule = module {
     single {
         ApiRepositoryImpl(
                 Retrofit.Builder()
-                        .baseUrl(BASE_URL)
+                        .baseUrl(ConfigVariables.BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .client(
                                 OkHttpClient.Builder()
                                         .connectTimeout(15, TimeUnit.SECONDS)
                                         .readTimeout(15, TimeUnit.SECONDS)
+                                        .addInterceptor(LoggedInterceptor())
                                         .build()
                         )
                         .build()
                         .create(ApiRepository::class.java)
         )
+    } bind MoviesRepository::class
+
+    single {
         DataBaseRepositoryImpl(
                 Room.databaseBuilder(
-                        get(),
+                        androidContext(),
                         DataBaseFactory::class.java,
-                        DATABASE_NAME
+                        ConfigVariables.DATABASE_NAME
                 ).build().favoriteMoviesDAO()
         )
-    }
+    } bind MoviesRepository::class
 }
 
-val useCaseModule = module {
-    factory {
-        FavoriteMovieUseCase(get<DataBaseRepositoryImpl>())
-        FavoriteMoviesUseCase(get<ApiRepositoryImpl>())
-        TopRatedMoviesUseCase(get<ApiRepositoryImpl>())
-        PopularMoviesUseCase(get<ApiRepositoryImpl>())
-    }
+val usecaseModule = module {
+    factory { FavoriteMoviesUseCase(get<ApiRepositoryImpl>()) }
+    factory { TopRatedMoviesUseCase(get<ApiRepositoryImpl>()) }
+    factory { PopularMoviesUseCase(get<ApiRepositoryImpl>()) }
+    factory { FavoriteMovieUseCase(get<DataBaseRepositoryImpl>()) }
 }

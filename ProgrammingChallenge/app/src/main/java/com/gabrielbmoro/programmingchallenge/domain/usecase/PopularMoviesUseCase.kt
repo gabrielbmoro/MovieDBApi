@@ -4,7 +4,7 @@ import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.usecase.mapper.MoviesMapper
 import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 
-class PopularMoviesUseCase(repository: MoviesRepository) : BaseUseCase(repository) {
+class PopularMoviesUseCase(val repository: MoviesRepository) {
 
     suspend fun execute(): List<Movie> {
         return MoviesMapper.map(repository.getPopularMovies())
