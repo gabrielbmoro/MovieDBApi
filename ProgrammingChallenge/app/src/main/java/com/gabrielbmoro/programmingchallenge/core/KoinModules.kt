@@ -47,8 +47,8 @@ val repositoryModule = module {
 }
 
 val usecaseModule = module {
-    factory { FavoriteMoviesUseCase(get<ApiRepositoryImpl>()) }
-    factory { TopRatedMoviesUseCase(get<ApiRepositoryImpl>()) }
-    factory { PopularMoviesUseCase(get<ApiRepositoryImpl>()) }
-    factory { FavoriteMovieUseCase(get<DataBaseRepositoryImpl>()) }
+    single { FavoriteMoviesUseCase(get<ApiRepositoryImpl>()) }
+    single { TopRatedMoviesUseCase(get<ApiRepositoryImpl>()) }
+    single { PopularMoviesUseCase(get<ApiRepositoryImpl>()) }
+    single { FavoriteMovieUseCase(get<DataBaseRepositoryImpl>()) }
 }
