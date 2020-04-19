@@ -42,6 +42,9 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
         tvPopularity.text = movie.popularity.toString()
         fiveStarsComponent.setVotesAvg(movie.votesAverage)
         changeFavoriteViewsState(movie.isFavorite)
+        ivFavoriteOption?.setOnClickListener {
+            viewModel.favoriteEvent(!movie.isFavorite)
+        }
     }
 
     private fun changeFavoriteViewsState(isFavorite: Boolean) {
