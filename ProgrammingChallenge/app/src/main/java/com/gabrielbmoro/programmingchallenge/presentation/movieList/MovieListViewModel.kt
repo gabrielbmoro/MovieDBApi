@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult.Loading
@@ -19,6 +20,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     private val favoriteMoviesUseCase: FavoriteMoviesUseCase by inject()
     private val topRatedMoviesUseCase: TopRatedMoviesUseCase by inject()
     private val popularMoviesUseCase: PopularMoviesUseCase by inject()
+    private val moviesList = ArrayList<Movie>()
     private lateinit var type: MovieListType
 
     fun setup(type: MovieListType): LiveData<ViewModelResult> {
@@ -31,7 +33,9 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
                     MovieListType.Favorite -> favoriteMoviesUseCase.execute()
                 }
                 this@MovieListViewModel.type = type
-                emit(ViewModelResult.Success(movies))
+                moviesList.clear()
+                moviesList.addAll(movies)
+                emit(ViewModelResult.Success)
             } catch (exception: Exception) {
                 Log.e("ERROR", exception.message ?: "--")
                 emit(ViewModelResult.Error(exception))
@@ -44,4 +48,6 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
             setup(type)
         } else null
     }
+
+    fun movies() = moviesList.toList()
 }

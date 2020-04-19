@@ -20,6 +20,7 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
     private val adapter = MoviesListAdapter()
 
     private val observer = Observer<ViewModelResult> { result ->
+        swRefreshLayout.isRefreshing = false
         when (result) {
             is ViewModelResult.Error -> {
                 tvError.show(true)
@@ -31,7 +32,8 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
                 tvError.show(false)
                 swRefreshLayout.show(false)
             }
-            is ViewModelResult.Success<*> -> {
+            is ViewModelResult.Success -> {
+                adapter.setup(viewModel.movies())
                 swRefreshLayout.show(true)
                 progressBar.show(false)
                 tvError.show(false)

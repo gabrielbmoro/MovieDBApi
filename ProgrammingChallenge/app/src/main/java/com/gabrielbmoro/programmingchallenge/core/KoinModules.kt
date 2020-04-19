@@ -47,8 +47,8 @@ val repositoryModule = module {
 }
 
 val usecaseModule = module {
-    single { FavoriteMoviesUseCase(get<ApiRepositoryImpl>()) }
     single { TopRatedMoviesUseCase(get<ApiRepositoryImpl>()) }
     single { PopularMoviesUseCase(get<ApiRepositoryImpl>()) }
     single { FavoriteMovieUseCase(get<DataBaseRepositoryImpl>()) }
+    single { FavoriteMoviesUseCase(get<DataBaseRepositoryImpl>()) }
 }
