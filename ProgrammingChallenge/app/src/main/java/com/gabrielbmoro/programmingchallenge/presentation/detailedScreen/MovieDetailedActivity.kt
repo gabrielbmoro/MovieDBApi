@@ -24,12 +24,6 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
                 ?: intent.getParcelableExtra(MOVIE_INTENT_KEY) as? Movie)?.let { movie ->
             viewModel.setup(movie)
             setView(movie)
-            viewModel.favoriteLiveData.observe(
-                    this@MovieDetailedActivity,
-                    Observer {
-                        changeFavoriteViewsState(it)
-                    }
-            )
         } ?: finish()
     }
 
@@ -43,7 +37,13 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
         fiveStarsComponent.setVotesAvg(movie.votesAverage)
         changeFavoriteViewsState(movie.isFavorite)
         ivFavoriteOption?.setOnClickListener {
-            viewModel.favoriteEvent(!movie.isFavorite)
+            val newFavoriteValue = !movie.isFavorite
+            viewModel.favoriteEvent(newFavoriteValue)?.observe(
+                    this@MovieDetailedActivity,
+                    Observer {
+                        changeFavoriteViewsState(newFavoriteValue)
+                    }
+            )
         }
     }
 

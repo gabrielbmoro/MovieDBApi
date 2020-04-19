@@ -3,15 +3,11 @@ package com.gabrielbmoro.programmingchallenge.repository.dataBase
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.repository.api.response.PageResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class DataBaseRepositoryImpl(private val favoriteDao: FavoriteMoviesDAO) : MoviesRepository {
 
     override suspend fun getFavoriteMovies(): List<Movie> {
-        return withContext(Dispatchers.IO) {
-            favoriteDao.allFavoriteMovies()
-        }
+        return favoriteDao.allFavoriteMovies()
     }
 
     override suspend fun getPopularMovies(): PageResponse? = null
@@ -20,7 +16,7 @@ class DataBaseRepositoryImpl(private val favoriteDao: FavoriteMoviesDAO) : Movie
 
     override suspend fun doAsFavorite(movie: Movie): Boolean {
         return try {
-            favoriteDao.saveFavorite(movie)
+            favoriteDao.saveFavorite(movie.also { it.isFavorite = true })
             true
         } catch (exception: Exception) {
             false
