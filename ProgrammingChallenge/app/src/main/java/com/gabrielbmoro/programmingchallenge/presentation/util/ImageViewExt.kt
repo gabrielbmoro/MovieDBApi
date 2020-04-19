@@ -1,15 +1,11 @@
 package com.gabrielbmoro.programmingchallenge.presentation.util
 
 import android.widget.ImageView
-import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
+import com.gabrielbmoro.programmingchallenge.core.ConfigVariables.BASE_IMAGE_ADDRESS
 
 fun ImageView.setImagePath(path: String) {
     Glide.with(context).apply {
-        load(path).into(this@setImagePath)
+        load("${BASE_IMAGE_ADDRESS}$path").into(this@setImagePath)
     }
-}
-
-fun ImageView.setImage(@DrawableRes drawable: Int) {
-    setImageResource(drawable)
 }

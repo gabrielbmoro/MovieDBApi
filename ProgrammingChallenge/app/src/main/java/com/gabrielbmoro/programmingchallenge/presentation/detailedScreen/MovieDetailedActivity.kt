@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
+import com.gabrielbmoro.programmingchallenge.presentation.util.setImagePath
 import kotlinx.android.synthetic.main.activity_movie_detailed.*
 
 class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed) {
@@ -35,6 +36,7 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
 
     private fun setView(movie: Movie) {
         supportActionBar?.title = movie.title
+        backdrop.setImagePath(movie.posterPath)
     }
 
     private fun changeFavoriteViewsState(it: Boolean) {

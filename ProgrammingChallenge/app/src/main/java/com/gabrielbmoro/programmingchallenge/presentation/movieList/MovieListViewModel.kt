@@ -50,4 +50,5 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun movies() = moviesList.toList()
+
 }
