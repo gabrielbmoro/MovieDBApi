@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
@@ -11,11 +12,10 @@ import com.gabrielbmoro.programmingchallenge.domain.model.convertToMovieListType
 import com.gabrielbmoro.programmingchallenge.presentation.movieList.adapter.MoviesListAdapter
 import com.gabrielbmoro.programmingchallenge.presentation.util.show
 import kotlinx.android.synthetic.main.fragment_movies_list.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
 
-    private val viewModel: MovieListViewModel by viewModel()
+    private lateinit var viewModel : MovieListViewModel
 
     private val adapter = MoviesListAdapter()
 
@@ -41,6 +41,7 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
         rvList.adapter = adapter
         arguments?.getInt(MOVIE_TYPE_VALUE)?.let {
             it.convertToMovieListType()?.let { type ->

@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onStart()
         vwPagerComponent.adapter = object : FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-
             override fun getCount(): Int {
                 return fragmentsList.size
             }

@@ -8,19 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import kotlinx.android.synthetic.main.activity_movie_detailed.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed) {
 
-    private val viewModel: MovieDetailedViewModel by viewModel()
+    private lateinit var viewModel: MovieDetailedViewModel
     private var favoriteMenu: MenuItem? = null
 
     override fun onStart() {
         super.onStart()
-
+        viewModel = ViewModelProvider(this).get(MovieDetailedViewModel::class.java)
         (viewModel.getMovie() ?: intent.getParcelableExtra(MOVIE_INTENT_KEY) as? Movie)?.let { movie ->
             viewModel.setup(movie)
             setView(movie)

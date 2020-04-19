@@ -1,7 +1,6 @@
 package com.gabrielbmoro.programmingchallenge.presentation.movieList
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
@@ -10,14 +9,14 @@ import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult.Loadin
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.PopularMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.TopRatedMoviesUseCase
+import com.gabrielbmoro.programmingchallenge.presentation.BaseViewModel
+import org.koin.core.inject
 
-class MovieListViewModel(
-        application: Application,
-        private val favoriteMoviesUseCase: FavoriteMoviesUseCase,
-        private val topRatedMoviesUseCase: TopRatedMoviesUseCase,
-        private val popularMoviesUseCase: PopularMoviesUseCase
-) : AndroidViewModel(application) {
+class MovieListViewModel(application: Application) : BaseViewModel(application) {
 
+    private val favoriteMoviesUseCase : FavoriteMoviesUseCase by inject()
+    private val topRatedMoviesUseCase: TopRatedMoviesUseCase by inject()
+    private val popularMoviesUseCase: PopularMoviesUseCase by inject()
     private lateinit var type : MovieListType
 
     fun setup(type:MovieListType): LiveData<ViewModelResult> {

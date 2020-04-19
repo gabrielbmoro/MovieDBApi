@@ -17,7 +17,7 @@ class ProgrammingChallengeApp : Application() {
             // Android context
             androidContext(this@ProgrammingChallengeApp)
             // modules
-            modules(listOf(dataReceiverModule, useCaseModule, viewModelModule))
+            modules(listOf(dataReceiverModule,useCaseModule))
         }
     }
 
