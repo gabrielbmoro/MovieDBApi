@@ -24,7 +24,7 @@ object MoviesMapper {
                                 title = it.title ?: ""
                         )
                     } ?: emptyList(),
-                    isNextPage = pageResponse.page < pageResponse.totalPages
+                    hasMorePages = pageResponse.page < pageResponse.totalPages
             )
         }
     }

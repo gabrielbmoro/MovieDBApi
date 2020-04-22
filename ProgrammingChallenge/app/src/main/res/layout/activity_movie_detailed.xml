@@ -205,7 +205,7 @@
                 android:visibility="gone"
                 tools:visibility="visible" />
 
-            <com.gabrielbmoro.programmingchallenge.presentation.FiveStarsComponent
+            <com.gabrielbmoro.programmingchallenge.presentation.components.FiveStarsComponent
                 android:id="@+id/fiveStarsComponent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -45,7 +45,7 @@
         tools:text="@string/release_date_example" />
 
 
-    <com.gabrielbmoro.programmingchallenge.presentation.FiveStarsComponent
+    <com.gabrielbmoro.programmingchallenge.presentation.components.FiveStarsComponent
         android:id="@+id/fiveStarsComponent"
         android:layout_width="match_parent"
         android:layout_height="40dp"

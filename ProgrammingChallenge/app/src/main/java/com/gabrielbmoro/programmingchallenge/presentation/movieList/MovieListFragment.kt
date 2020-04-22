@@ -9,15 +9,12 @@ import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
 import com.gabrielbmoro.programmingchallenge.domain.model.convertToMovieListType
-import com.gabrielbmoro.programmingchallenge.presentation.movieList.adapter.MoviesListAdapter
 import com.gabrielbmoro.programmingchallenge.presentation.util.show
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 
 class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
 
-    private lateinit var viewModel : MovieListViewModel
-
-    private val adapter = MoviesListAdapter()
+    private lateinit var viewModel: MovieListViewModel
 
     private val observer = Observer<ViewModelResult> { result ->
         swRefreshLayout.isRefreshing = false
@@ -33,7 +30,13 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
                 swRefreshLayout.show(false)
             }
             is ViewModelResult.Success -> {
-                adapter.setup(viewModel.movies())
+                rvList.adapterImplementation()?.setup(viewModel.movies())
+                swRefreshLayout.show(true)
+                progressBar.show(false)
+                tvError.show(false)
+            }
+            is ViewModelResult.Updated -> {
+                rvList.adapterImplementation()?.update(viewModel.newPart())
                 swRefreshLayout.show(true)
                 progressBar.show(false)
                 tvError.show(false)
@@ -44,7 +47,6 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
-        rvList.adapter = adapter
         arguments?.getInt(MOVIE_TYPE_VALUE)?.let {
             it.convertToMovieListType()?.let { type ->
                 viewModel.setup(type).observe(
@@ -57,10 +59,16 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
                     viewLifecycleOwner, observer
             )
         }
+        rvList.setup {
+            viewModel.requestMore().observe(
+                    viewLifecycleOwner,
+                    observer
+            )
+        }
     }
 
     fun scrollToTop() {
-        rvList.scrollToPosition(0)
+        rvList.scrollToTop()
     }
 
     companion object {

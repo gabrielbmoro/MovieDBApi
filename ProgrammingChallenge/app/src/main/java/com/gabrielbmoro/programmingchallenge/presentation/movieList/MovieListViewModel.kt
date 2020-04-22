@@ -34,34 +34,39 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
             emit(Loading)
             try {
                 val movies = when (type) {
-                    MovieListType.TopRated, MovieListType.Popular -> requestTopRatedMovies(type)
+                    MovieListType.TopRated, MovieListType.Popular -> requestMovies(type)
                     MovieListType.Favorite -> favoriteMoviesUseCase.execute()
                 }
                 this@MovieListViewModel.type = type
                 movies?.let {
                     moviesList.addAll(it)
-                    emit(ViewModelResult.Success)
+                    if (previousSize == 0) {
+                        emit(ViewModelResult.Success)
+                    } else {
+                        emit(ViewModelResult.Updated)
+                    }
                 }
             } catch (exception: Exception) {
                 Log.e("ERROR", exception.message ?: "--")
-                emit(ViewModelResult.Error(exception))
+                emit(ViewModelResult.Error)
             }
         }
     }
 
-    private suspend fun requestTopRatedMovies(type: MovieListType): List<Movie>? {
+    private suspend fun requestMovies(type: MovieListType): List<Movie>? {
         return when (type) {
             MovieListType.TopRated -> {
-                topRatedMoviesUseCase.execute(currentPage)?.movies
+                topRatedMoviesUseCase.execute(currentPage)
             }
             MovieListType.Popular -> {
-                popularMoviesUseCase.execute(currentPage)?.movies
+                popularMoviesUseCase.execute(currentPage)
             }
             else -> null
-        }?.let {
-            currentPage++
+        }?.let { page ->
+            if (page.hasMorePages)
+                currentPage++
             previousSize = moviesList.size
-            it
+            page.movies
         }
     }
 
@@ -74,6 +79,11 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun movies() = moviesList.toList()
+
+    fun newPart() = moviesList.subList(previousSize, moviesList.lastIndex).toList()
+
+    @Synchronized
+    fun requestMore() = setup(type)
 
     companion object {
         const val FIRST_PAGE = 1
