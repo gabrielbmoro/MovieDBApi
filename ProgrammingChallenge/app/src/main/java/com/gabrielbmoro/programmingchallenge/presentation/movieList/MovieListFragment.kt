@@ -52,7 +52,7 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
                 viewModel.setup(type).observe(
                         viewLifecycleOwner, observer
                 )
-                if(viewModel.isPaginated()){
+                if (viewModel.isPaginated()) {
                     rvList.paginationSupport {
                         viewModel.requestMore().observe(
                                 viewLifecycleOwner,
@@ -60,12 +60,12 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
                         )
                     }
                 }
+                swRefreshLayout.setOnRefreshListener {
+                    viewModel.reload()?.observe(
+                            viewLifecycleOwner, observer
+                    )
+                }
             }
-        }
-        swRefreshLayout.setOnRefreshListener {
-            viewModel.reload()?.observe(
-                    viewLifecycleOwner, observer
-            )
         }
     }
 

@@ -53,7 +53,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun isPaginated() = type == MovieListType.Popular || type == MovieListType.TopRated
+    fun isPaginated() = ::type.isInitialized && (type == MovieListType.Popular || type == MovieListType.TopRated)
 
     private suspend fun requestMovies(type: MovieListType): List<Movie>? {
         return when (type) {
