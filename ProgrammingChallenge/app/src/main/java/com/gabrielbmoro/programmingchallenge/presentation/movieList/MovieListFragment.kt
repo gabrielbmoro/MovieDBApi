@@ -52,17 +52,19 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
                 viewModel.setup(type).observe(
                         viewLifecycleOwner, observer
                 )
+                if(viewModel.isPaginated()){
+                    rvList.paginationSupport {
+                        viewModel.requestMore().observe(
+                                viewLifecycleOwner,
+                                observer
+                        )
+                    }
+                }
             }
         }
         swRefreshLayout.setOnRefreshListener {
             viewModel.reload()?.observe(
                     viewLifecycleOwner, observer
-            )
-        }
-        rvList.setup {
-            viewModel.requestMore().observe(
-                    viewLifecycleOwner,
-                    observer
             )
         }
     }

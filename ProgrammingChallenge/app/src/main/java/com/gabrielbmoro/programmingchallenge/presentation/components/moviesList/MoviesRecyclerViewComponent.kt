@@ -15,7 +15,7 @@ class MoviesRecyclerViewComponent @JvmOverloads constructor(
         adapter = MoviesListAdapter()
     }
 
-    fun setup(callback: EndOfScrollCallbackAction) {
+    fun paginationSupport(callback: EndOfScrollCallbackAction) {
         addOnScrollListener(EndOfScrollCallback(callback))
     }
 
