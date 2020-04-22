@@ -23,19 +23,25 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     private val moviesList = ArrayList<Movie>()
     private lateinit var type: MovieListType
 
+    //region pagination
+    private var currentPage = FIRST_PAGE
+    var previousSize = moviesList.size
+        private set
+    //endregion
+
     fun setup(type: MovieListType): LiveData<ViewModelResult> {
         return liveData {
             emit(Loading)
             try {
                 val movies = when (type) {
-                    MovieListType.TopRated -> topRatedMoviesUseCase.execute()
-                    MovieListType.Popular -> popularMoviesUseCase.execute()
+                    MovieListType.TopRated, MovieListType.Popular -> requestTopRatedMovies(type)
                     MovieListType.Favorite -> favoriteMoviesUseCase.execute()
                 }
                 this@MovieListViewModel.type = type
-                moviesList.clear()
-                moviesList.addAll(movies)
-                emit(ViewModelResult.Success)
+                movies?.let {
+                    moviesList.addAll(it)
+                    emit(ViewModelResult.Success)
+                }
             } catch (exception: Exception) {
                 Log.e("ERROR", exception.message ?: "--")
                 emit(ViewModelResult.Error(exception))
@@ -43,12 +49,34 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    private suspend fun requestTopRatedMovies(type: MovieListType): List<Movie>? {
+        return when (type) {
+            MovieListType.TopRated -> {
+                topRatedMoviesUseCase.execute(currentPage)?.movies
+            }
+            MovieListType.Popular -> {
+                popularMoviesUseCase.execute(currentPage)?.movies
+            }
+            else -> null
+        }?.let {
+            currentPage++
+            previousSize = moviesList.size
+            it
+        }
+    }
+
     fun reload(): LiveData<ViewModelResult>? {
         return if (::type.isInitialized) {
+            currentPage = FIRST_PAGE
+            moviesList.clear()
             setup(type)
         } else null
     }
 
     fun movies() = moviesList.toList()
+
+    companion object {
+        const val FIRST_PAGE = 1
+    }
 
 }
