@@ -25,10 +25,10 @@ class MoviesRecyclerViewComponent @JvmOverloads constructor(
 
     private fun lastAdapterIndex(): Int {
         return adapter?.itemCount?.let {
-            if (it > 0) {
+            if (it > FIRST_POSITION) {
                 (it - 1)
-            } else 0
-        } ?: 0
+            } else FIRST_POSITION
+        } ?: FIRST_POSITION
     }
 
     fun checkIfIsAtTheEndOfScroll(): Boolean {
