@@ -6,7 +6,7 @@ import org.junit.Test
 class MoviesMapperTest {
 
     @Test
-    fun mapper_nullResponse_ReturnsEmptyList() {
-        assertThat(MoviesMapper.map(null)).isEmpty()
+    fun mapper_nullResponse_ReturnsNull() {
+        assertThat(MoviesMapper.map(null)).isNull()
     }
 }
