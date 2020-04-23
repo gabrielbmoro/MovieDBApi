@@ -1,4 +1,4 @@
-package com.gabrielbmoro.programmingchallenge.presentation
+package com.gabrielbmoro.programmingchallenge.presentation.components
 
 import android.content.Context
 import android.util.AttributeSet

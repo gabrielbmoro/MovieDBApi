@@ -4,11 +4,11 @@ import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class LoggedInterceptor : Interceptor{
+class LoggedInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        Log.d("NETWORK", "Request-->${chain.request().body().toString()}")
+        Log.d("NETWORK_REQUEST", "${chain.request().method()}:${chain.request().url()}<--")
         val response = chain.proceed(chain.request())
-        Log.d("NETWORK", "Response-->$response")
+        Log.d("NETWORK_RESPONSE", "-->$response")
         return response
     }
 }

@@ -23,7 +23,7 @@ class MovieDetailedViewModel(application: Application) : AndroidViewModel(applic
                 movie.isFavorite = favoriteMovieUseCase.isFavorite(movie)
                 emit(ViewModelResult.Success)
             } catch(exception : Exception){
-                emit(ViewModelResult.Error(exception))
+                emit(ViewModelResult.Error)
             }
         }
     }
@@ -39,7 +39,7 @@ class MovieDetailedViewModel(application: Application) : AndroidViewModel(applic
                     movie?.isFavorite = isToFavorite
                     emit(ViewModelResult.Success)
                 } catch (exception: Exception) {
-                    emit(ViewModelResult.Error(exception))
+                    emit(ViewModelResult.Error)
                 }
             }
         }
