@@ -28,5 +28,6 @@ class MoviesMapperTest {
                 hasMorePages = false
         )
         assertThat(result).isEqualTo(expectedResult)
+        assertThat(expectedResult.hasMorePages).isFalse()
     }
 }
