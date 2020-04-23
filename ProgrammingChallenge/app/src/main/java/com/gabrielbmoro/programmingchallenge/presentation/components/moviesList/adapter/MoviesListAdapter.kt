@@ -1,4 +1,4 @@
-package com.gabrielbmoro.programmingchallenge.presentation.movieList.adapter
+package com.gabrielbmoro.programmingchallenge.presentation.components.moviesList.adapter
 
 import android.app.Activity
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
-import com.gabrielbmoro.programmingchallenge.presentation.FiveStarsComponent
+import com.gabrielbmoro.programmingchallenge.presentation.components.FiveStarsComponent
 import com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedActivity
 import com.gabrielbmoro.programmingchallenge.presentation.util.setImagePath
 
@@ -40,17 +40,17 @@ class MoviesListAdapter : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder
     fun setup(movieDataList: List<Movie>) {
         elements.clear()
         elements.addAll(
-                movieDataList.map { movie ->
-                    MovieData(
-                            posterPath = movie.posterPath,
-                            movieTitle = movie.title,
-                            releaseDate = movie.releaseDate,
-                            votes = movie.votesAverage,
-                            movieReference = movie
-                    )
-                }
+                movieDataList.mapToElements()
         )
         notifyDataSetChanged()
+    }
+
+    fun update(newElements: List<Movie>) {
+        val previousSize = elements.size
+        elements.addAll(
+                newElements.mapToElements()
+        )
+        notifyItemRangeInserted(previousSize, newElements.size)
     }
 
     inner class MovieViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -77,5 +77,17 @@ class MoviesListAdapter : RecyclerView.Adapter<MoviesListAdapter.MovieViewHolder
 
     companion object {
         const val VIEW_TYPE = -123
+    }
+}
+
+fun List<Movie>.mapToElements(): List<MovieData> {
+    return this.map { movie ->
+        MovieData(
+                posterPath = movie.posterPath,
+                movieTitle = movie.title,
+                releaseDate = movie.releaseDate,
+                votes = movie.votesAverage,
+                movieReference = movie
+        )
     }
 }
