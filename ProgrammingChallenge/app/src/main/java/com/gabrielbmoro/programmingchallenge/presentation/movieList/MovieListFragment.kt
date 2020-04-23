@@ -49,12 +49,12 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
         viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
         arguments?.getInt(MOVIE_TYPE_VALUE)?.let {
             it.convertToMovieListType()?.let { type ->
-                viewModel.setup(type).observe(
+                viewModel.setup(type)?.observe(
                         viewLifecycleOwner, observer
                 )
-                if (viewModel.isPaginated()) {
+                if (type == MovieListType.TopRated || type == MovieListType.Popular) {
                     rvList.paginationSupport {
-                        viewModel.requestMore().observe(
+                        viewModel.requestMore()?.observe(
                                 viewLifecycleOwner,
                                 observer
                         )

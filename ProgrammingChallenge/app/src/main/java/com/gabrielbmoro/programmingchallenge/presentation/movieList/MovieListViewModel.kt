@@ -14,6 +14,7 @@ import com.gabrielbmoro.programmingchallenge.domain.usecase.PopularMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.TopRatedMoviesUseCase
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.util.concurrent.locks.ReentrantLock
 
 class MovieListViewModel(application: Application) : AndroidViewModel(application), KoinComponent {
 
@@ -27,33 +28,37 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     private var currentPage = FIRST_PAGE
     var previousSize = moviesList.size
         private set
+    val lock = ReentrantLock()
     //endregion
 
-    fun setup(type: MovieListType): LiveData<ViewModelResult> {
-        return liveData {
-            emit(Loading)
-            try {
-                val movies = when (type) {
-                    MovieListType.TopRated, MovieListType.Popular -> requestMovies(type)
-                    MovieListType.Favorite -> favoriteMoviesUseCase.execute()
-                }
-                this@MovieListViewModel.type = type
-                movies?.let {
-                    moviesList.addAll(it)
-                    if (previousSize == 0) {
-                        emit(ViewModelResult.Success)
-                    } else {
-                        emit(ViewModelResult.Updated)
+    fun setup(type: MovieListType): LiveData<ViewModelResult>? {
+        return if (!lock.isLocked) {
+            lock.lock()
+            liveData {
+                emit(Loading)
+                try {
+                    val movies = when (type) {
+                        MovieListType.TopRated, MovieListType.Popular -> requestMovies(type)
+                        MovieListType.Favorite -> favoriteMoviesUseCase.execute()
                     }
+                    this@MovieListViewModel.type = type
+                    movies?.let {
+                        moviesList.addAll(it)
+                        if (previousSize == 0) {
+                            emit(ViewModelResult.Success)
+                        } else {
+                            emit(ViewModelResult.Updated)
+                        }
+                        lock.unlock()
+                    }
+                } catch (exception: Exception) {
+                    Log.e("ERROR", exception.message ?: "--")
+                    emit(ViewModelResult.Error)
                 }
-            } catch (exception: Exception) {
-                Log.e("ERROR", exception.message ?: "--")
-                emit(ViewModelResult.Error)
             }
-        }
+        } else
+            null
     }
-
-    fun isPaginated() = ::type.isInitialized && (type == MovieListType.Popular || type == MovieListType.TopRated)
 
     private suspend fun requestMovies(type: MovieListType): List<Movie>? {
         return when (type) {
@@ -84,7 +89,6 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun newPart() = moviesList.subList(previousSize, moviesList.lastIndex).toList()
 
-    @Synchronized
     fun requestMore() = setup(type)
 
     companion object {
