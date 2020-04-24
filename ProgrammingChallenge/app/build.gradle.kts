@@ -60,5 +60,6 @@ dependencies {
     testImplementation("com.google.truth:truth:0.42")
     testImplementation("androidx.test:core:1.2.0")
     testImplementation("org.mockito:mockito-core:2.27.0")
+    testImplementation("org.koin:koin-test:2.1.5")
 
 }
