@@ -7,6 +7,6 @@ import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 class PopularMoviesUseCase(val repository: MoviesRepository) {
 
     suspend fun execute(pageNumber: Int): Page? {
-        return MoviesMapper.map(repository.getPopularMovies(pageNumber))
+        return MoviesMapper.mapToPage(repository.getPopularMovies(pageNumber))
     }
 }

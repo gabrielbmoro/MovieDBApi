@@ -58,5 +58,7 @@ dependencies {
 
     testImplementation("junit:junit:4.12")
     testImplementation("com.google.truth:truth:0.42")
+    testImplementation("androidx.test:core:1.2.0")
+    testImplementation("org.mockito:mockito-core:2.27.0")
 
 }
