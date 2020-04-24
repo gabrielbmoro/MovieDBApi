@@ -100,4 +100,38 @@ class MoviesMapperTest {
         assertThat(result.title).isEqualTo("Choir Boyz")
         assertThat(result.votes).isEqualTo(0)
     }
+
+    @Test
+    fun whenDateIsInInvalidFormat() {
+        val given = "asodk-02-2012"
+
+        val result = MoviesMapper.formatReleaseDate(given)
+
+        val expectedResult = ""
+
+        assertThat(expectedResult).isEqualTo(result)
+    }
+
+
+    @Test
+    fun whenDateIsNull() {
+        val given = null
+
+        val result = MoviesMapper.formatReleaseDate(given)
+
+        val expectedResult = ""
+
+        assertThat(expectedResult).isEqualTo(result)
+    }
+
+    @Test
+    fun whenDateIsValid() {
+        val given = "2017-02-12"
+
+        val result = MoviesMapper.formatReleaseDate(given)
+
+        val expectedResult = "12/02/2017"
+
+        assertThat(expectedResult).isEqualTo(result)
+    }
 }

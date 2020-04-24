@@ -4,6 +4,7 @@ import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.model.Page
 import com.gabrielbmoro.programmingchallenge.repository.api.response.MovieResponse
 import com.gabrielbmoro.programmingchallenge.repository.api.response.PageResponse
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,10 +41,14 @@ object MoviesMapper {
         )
     }
 
-    private fun formatReleaseDate(dateFromResponse: String?): String {
+    fun formatReleaseDate(dateFromResponse: String?): String {
         return dateFromResponse?.let { response ->
-            dateParser.parse(response)?.let { dt ->
-                dateFormatter.format(dt)
+            try {
+                dateParser.parse(response)?.let { dt ->
+                    dateFormatter.format(dt)
+                }
+            } catch (parseException: ParseException) {
+                ""
             }
         } ?: ""
     }
