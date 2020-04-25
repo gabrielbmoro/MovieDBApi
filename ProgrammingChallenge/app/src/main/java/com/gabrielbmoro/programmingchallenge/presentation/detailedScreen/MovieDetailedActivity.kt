@@ -2,6 +2,7 @@ package com.gabrielbmoro.programmingchallenge.presentation.detailedScreen
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -24,8 +25,8 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MovieDetailedViewModel::class.java)
         (viewModel.getMovie()
                 ?: intent.getParcelableExtra(MOVIE_INTENT_KEY) as? Movie)?.let { movie ->
