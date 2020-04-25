@@ -56,6 +56,9 @@ dependencies {
     implementation("org.koin:koin-androidx-viewmodel:2.1.5")
     implementation("org.koin:koin-androidx-ext:2.1.5")
 
+    implementation("com.microsoft.appcenter:appcenter-analytics:3.2.1")
+    implementation("com.microsoft.appcenter:appcenter-crashes:3.2.1")
+
     testImplementation("junit:junit:4.12")
     testImplementation("com.google.truth:truth:0.42")
     testImplementation("androidx.test:core:1.2.0")
