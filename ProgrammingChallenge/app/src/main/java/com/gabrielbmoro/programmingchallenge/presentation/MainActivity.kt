@@ -1,5 +1,6 @@
 package com.gabrielbmoro.programmingchallenge.presentation
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.ViewModelProvider
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  * @author Gabriel Moro
  * @since 2018-08-30
  */
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val fragmentsList = listOf(
             MovieListFragment.newInstance(MovieListType.TopRated),
