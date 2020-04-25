@@ -47,25 +47,34 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(MovieListViewModel::class.java)
-        arguments?.getInt(MOVIE_TYPE_VALUE)?.let {
-            it.convertToMovieListType()?.let { type ->
-                viewModel.setup(type)?.observe(
-                        viewLifecycleOwner, observer
-                )
-                if (type == MovieListType.TopRated || type == MovieListType.Popular) {
-                    rvList.paginationSupport {
-                        viewModel.requestMore()?.observe(
-                                viewLifecycleOwner,
-                                observer
-                        )
-                    }
-                }
-                swRefreshLayout.setOnRefreshListener {
-                    viewModel.reload()?.observe(
-                            viewLifecycleOwner, observer
-                    )
-                }
+
+        if (arguments?.getInt(MOVIE_TYPE_VALUE) != null) {
+            arguments?.getInt(MOVIE_TYPE_VALUE)?.convertToMovieListType()?.let { type ->
+                setupViewModel(type)
+                setupRecyclerView(type)
             }
+        }
+    }
+
+    private fun setupViewModel(type: MovieListType) {
+        viewModel.setup(type)?.observe(
+                viewLifecycleOwner, observer
+        )
+    }
+
+    private fun setupRecyclerView(type: MovieListType) {
+        if (type == MovieListType.TopRated || type == MovieListType.Popular) {
+            rvList.paginationSupport {
+                viewModel.requestMore()?.observe(
+                        viewLifecycleOwner,
+                        observer
+                )
+            }
+        }
+        swRefreshLayout.setOnRefreshListener {
+            viewModel.reload()?.observe(
+                    viewLifecycleOwner, observer
+            )
         }
     }
 

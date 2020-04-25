@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             MovieListFragment.newInstance(MovieListType.Popular),
             MovieListFragment.newInstance(MovieListType.Favorite)
     )
-    private lateinit var viewModel : MainViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onStart() {
         super.onStart()

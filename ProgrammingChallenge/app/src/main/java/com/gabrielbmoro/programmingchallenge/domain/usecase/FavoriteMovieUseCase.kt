@@ -13,7 +13,7 @@ class FavoriteMovieUseCase(val repository: MoviesRepository) {
         return repository.unFavorite(movie)
     }
 
-    suspend fun isFavorite(movie : Movie) : Boolean {
+    suspend fun isFavorite(movie: Movie): Boolean {
         return repository.checkIsAFavoriteMovie(movie)
     }
 }

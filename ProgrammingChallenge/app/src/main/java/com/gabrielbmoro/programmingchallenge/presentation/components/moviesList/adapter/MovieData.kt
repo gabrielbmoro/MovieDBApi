@@ -6,6 +6,6 @@ data class MovieData(
         val posterPath: String,
         val movieTitle: String,
         val releaseDate: String,
-        val votes : Float,
+        val votes: Float,
         var movieReference: Movie
 )

@@ -7,6 +7,6 @@ import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 class TopRatedMoviesUseCase(val repository: MoviesRepository) {
 
     suspend fun execute(pageNumber: Int): Page? {
-        return MoviesMapper.map(repository.getTopRatedMovies(pageNumber))
+        return MoviesMapper.mapToPage(repository.getTopRatedMovies(pageNumber))
     }
 }

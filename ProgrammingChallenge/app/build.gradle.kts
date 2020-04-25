@@ -14,8 +14,8 @@ android {
         applicationId = "com.gabrielbmoro.programmingchallenge"
         minSdkVersion(22)
         targetSdkVersion(29)
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 11
+        versionName = "1.0.5"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -55,4 +55,11 @@ dependencies {
     implementation("org.koin:koin-androidx-scope:2.1.5")
     implementation("org.koin:koin-androidx-viewmodel:2.1.5")
     implementation("org.koin:koin-androidx-ext:2.1.5")
+
+    testImplementation("junit:junit:4.12")
+    testImplementation("com.google.truth:truth:0.42")
+    testImplementation("androidx.test:core:1.2.0")
+    testImplementation("org.mockito:mockito-core:2.27.0")
+    testImplementation("org.koin:koin-test:2.1.5")
+
 }

@@ -16,13 +16,13 @@ class MovieDetailedViewModel(application: Application) : AndroidViewModel(applic
 
     private var movie: Movie? = null
 
-    fun setup(movie: Movie) : LiveData<ViewModelResult>{
+    fun setup(movie: Movie): LiveData<ViewModelResult> {
         this.movie = movie
         return liveData {
             try {
                 movie.isFavorite = favoriteMovieUseCase.isFavorite(movie)
                 emit(ViewModelResult.Success)
-            } catch(exception : Exception){
+            } catch (exception: Exception) {
                 emit(ViewModelResult.Error)
             }
         }
