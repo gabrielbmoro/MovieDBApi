@@ -24,7 +24,7 @@ class FiveStarsComponent @JvmOverloads constructor(
     }
 
     @DrawableRes
-    private fun getDrawableAccordingToStarPosition(votes : Float, position : Int) : Int {
+    private fun getDrawableAccordingToStarPosition(votes: Float, position: Int): Int {
         return when {
             votes >= position -> R.drawable.ic_star
             votes < position -> {
@@ -37,7 +37,7 @@ class FiveStarsComponent @JvmOverloads constructor(
         }
     }
 
-    fun setVotesAvg(votes : Float) {
+    fun setVotesAvg(votes: Float) {
         val numberOfStarts = (votes / AVERAGE_TOTAL) * STARS_AVAILABLE
         if (votes != INVALID_NUMBER) {
             ivFirstStar.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 1))

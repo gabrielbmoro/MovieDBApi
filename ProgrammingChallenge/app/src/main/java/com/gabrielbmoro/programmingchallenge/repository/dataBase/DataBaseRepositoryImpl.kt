@@ -10,9 +10,9 @@ class DataBaseRepositoryImpl(private val favoriteDao: FavoriteMoviesDAO) : Movie
         return favoriteDao.allFavoriteMovies()
     }
 
-    override suspend fun getPopularMovies(pageNumber : Int): PageResponse? = null
+    override suspend fun getPopularMovies(pageNumber: Int): PageResponse? = null
 
-    override suspend fun getTopRatedMovies(pageNumber : Int): PageResponse? = null
+    override suspend fun getTopRatedMovies(pageNumber: Int): PageResponse? = null
 
     override suspend fun doAsFavorite(movie: Movie): Boolean {
         return try {

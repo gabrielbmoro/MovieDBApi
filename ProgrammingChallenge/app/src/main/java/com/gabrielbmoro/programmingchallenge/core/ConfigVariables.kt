@@ -1,6 +1,6 @@
 package com.gabrielbmoro.programmingchallenge.core
 
-object ConfigVariables{
+object ConfigVariables {
     const val BASE_URL = "https://api.themoviedb.org/3/"
     const val TOKEN = "755e0c67ac2fa886e775fb9057f0a32f"
     const val DATABASE_NAME = "MovieDBAppDataBase"
