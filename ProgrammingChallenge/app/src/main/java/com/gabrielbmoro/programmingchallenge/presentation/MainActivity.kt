@@ -1,5 +1,6 @@
 package com.gabrielbmoro.programmingchallenge.presentation
 
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
@@ -25,8 +26,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     )
     private lateinit var viewModel: MainViewModel
 
-    override fun onStart() {
-        super.onStart()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         vwPagerComponent.adapter = object : FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -71,5 +72,4 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
          */
         vwPagerComponent.offscreenPageLimit = 3
     }
-
 }
