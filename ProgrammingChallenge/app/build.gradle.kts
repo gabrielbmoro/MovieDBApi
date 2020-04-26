@@ -62,4 +62,8 @@ dependencies {
     testImplementation("org.mockito:mockito-core:2.27.0")
     testImplementation("org.koin:koin-test:2.1.5")
 
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.1")
+    androidTestImplementation("androidx.test:rules:1.2.0")
+    androidTestImplementation("com.google.truth:truth:0.42")
 }
