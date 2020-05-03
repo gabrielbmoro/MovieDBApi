@@ -8,17 +8,17 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import com.gabrielbmoro.programmingchallenge.presentation.util.setImagePath
 import com.gabrielbmoro.programmingchallenge.presentation.util.show
 import kotlinx.android.synthetic.main.activity_movie_detailed.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed) {
 
-    private lateinit var viewModel: MovieDetailedViewModel
+    private val viewModel : MovieDetailedViewModel by viewModel()
     private val favoriteActionObserver = Observer<ViewModelResult> {
         viewModel.getMovie()?.isFavorite?.let {
             changeFavoriteViewsState(it)
@@ -27,7 +27,6 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MovieDetailedViewModel::class.java)
         (viewModel.getMovie()
                 ?: intent.getParcelableExtra(MOVIE_INTENT_KEY) as? Movie)?.let { movie ->
             viewModel.setup(movie).observe(

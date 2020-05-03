@@ -1,9 +1,8 @@
 package com.gabrielbmoro.programmingchallenge.presentation
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel: ViewModel() {
 
     private var selectedPage = TOP_RATED_PAGE
 

@@ -17,7 +17,7 @@ class ProgrammingChallengeApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@ProgrammingChallengeApp)
-            modules(repositoryModule, usecaseModule)
+            modules(repositoryModule, usecaseModule, viewModelModules)
         }
     }
 

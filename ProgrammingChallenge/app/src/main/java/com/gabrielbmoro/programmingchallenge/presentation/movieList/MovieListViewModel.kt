@@ -1,9 +1,8 @@
 package com.gabrielbmoro.programmingchallenge.presentation.movieList
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
@@ -12,15 +11,14 @@ import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult.Loadin
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.PopularMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.TopRatedMoviesUseCase
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import java.util.concurrent.locks.ReentrantLock
 
-class MovieListViewModel(application: Application) : AndroidViewModel(application), KoinComponent {
+class MovieListViewModel(
+        private val favoriteMoviesUseCase: FavoriteMoviesUseCase,
+        private val topRatedMoviesUseCase: TopRatedMoviesUseCase,
+        private val popularMoviesUseCase: PopularMoviesUseCase
+) : ViewModel() {
 
-    private val favoriteMoviesUseCase: FavoriteMoviesUseCase by inject()
-    private val topRatedMoviesUseCase: TopRatedMoviesUseCase by inject()
-    private val popularMoviesUseCase: PopularMoviesUseCase by inject()
     private val moviesList = ArrayList<Movie>()
     private lateinit var type: MovieListType
 

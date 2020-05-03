@@ -1,18 +1,13 @@
 package com.gabrielbmoro.programmingchallenge.presentation.detailedScreen
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class MovieDetailedViewModel(application: Application) : AndroidViewModel(application), KoinComponent {
-
-    private val favoriteMovieUseCase: FavoriteMovieUseCase by inject()
+class MovieDetailedViewModel(private val favoriteMovieUseCase: FavoriteMovieUseCase) : ViewModel() {
 
     private var movie: Movie? = null
 
