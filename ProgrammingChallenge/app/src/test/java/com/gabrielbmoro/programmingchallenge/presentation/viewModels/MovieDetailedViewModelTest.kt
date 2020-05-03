@@ -5,18 +5,63 @@ import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedViewModel
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.junit.Before
 import org.junit.Test
 import org.koin.test.inject
+import org.mockito.Mockito
+import org.mockito.Mockito.times
 
 class MovieDetailedViewModelTest : KoinUnitTest() {
 
     lateinit var viewModel: MovieDetailedViewModel
+    private val favoriteMovieUseCase by inject<FavoriteMovieUseCase>()
 
     @Before
     fun init() {
-        val favoriteMovieUseCase by inject<FavoriteMovieUseCase>()
         viewModel = MovieDetailedViewModel(favoriteMovieUseCase)
+    }
+
+    @Test
+    fun whenFavoriteActionIsSelected() {
+        val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
+        val given = emptyMovieObj()
+        viewModel.setup(given)
+        viewModel.favoriteEvent(true)
+        GlobalScope.launch {
+            Mockito.verify(useCaseSpy, times(1)).favoriteMovie(given)
+        }
+    }
+
+    @Test
+    fun whenUnFavoriteActionIsSelected() {
+        val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
+        val given = emptyMovieObj()
+        viewModel.setup(given)
+        viewModel.favoriteEvent(false)
+        GlobalScope.launch {
+            Mockito.verify(useCaseSpy, times(1)).unFavoriteMovie(given)
+        }
+    }
+
+    private fun emptyMovieObj(): Movie {
+        return Movie(
+                id = null,
+                votes = 0,
+                isVideo = false,
+                votesAverage = 0f,
+                title = "",
+                popularity = 0f,
+                posterPath = "",
+                originalLanguage = "",
+                originalTitle = "",
+                backdropPath = "",
+                isAdult = false,
+                overview = "",
+                releaseDate = "",
+                isFavorite = false
+        )
     }
 
     @Test
