@@ -46,33 +46,30 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (arguments?.getInt(MOVIE_TYPE_VALUE) != null) {
-            arguments?.getInt(MOVIE_TYPE_VALUE)?.convertToMovieListType()?.let { type ->
-                setupViewModel(type)
-                setupRecyclerView(type)
-            }
+
+        getMovieTypeFromIntent()?.let { type ->
+            setupViewModel(type)
+            setupRecyclerView(type)
         }
     }
 
+    private fun getMovieTypeFromIntent(): MovieListType? {
+        return arguments?.getInt(MOVIE_TYPE_VALUE)?.convertToMovieListType()
+    }
+
     private fun setupViewModel(type: MovieListType) {
-        viewModel.setup(type)?.observe(
-                viewLifecycleOwner, observer
-        )
+        viewModel.onMoviesListReceived.observe(viewLifecycleOwner, observer)
+        viewModel.setup(type)
     }
 
     private fun setupRecyclerView(type: MovieListType) {
         if (type == MovieListType.TopRated || type == MovieListType.Popular) {
             rvList.paginationSupport {
-                viewModel.requestMore()?.observe(
-                        viewLifecycleOwner,
-                        observer
-                )
+                viewModel.requestMore()
             }
         }
         swRefreshLayout.setOnRefreshListener {
-            viewModel.reload()?.observe(
-                    viewLifecycleOwner, observer
-            )
+            viewModel.reload()
         }
     }
 

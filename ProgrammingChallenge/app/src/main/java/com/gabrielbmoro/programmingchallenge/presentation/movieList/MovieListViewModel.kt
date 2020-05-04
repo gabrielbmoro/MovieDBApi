@@ -1,9 +1,8 @@
 package com.gabrielbmoro.programmingchallenge.presentation.movieList
 
 import android.util.Log
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
@@ -11,6 +10,8 @@ import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult.Loadin
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.PopularMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.TopRatedMoviesUseCase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.concurrent.locks.ReentrantLock
 
 class MovieListViewModel(
@@ -21,6 +22,7 @@ class MovieListViewModel(
 
     private val moviesList = ArrayList<Movie>()
     private lateinit var type: MovieListType
+    val onMoviesListReceived = MutableLiveData<ViewModelResult>()
 
     //region pagination
     private var currentPage = FIRST_PAGE
@@ -29,65 +31,63 @@ class MovieListViewModel(
     val lock = ReentrantLock()
     //endregion
 
-    fun setup(type: MovieListType): LiveData<ViewModelResult>? {
-        return if (!lock.isLocked) {
+    fun setup(type: MovieListType) {
+        this@MovieListViewModel.type = type
+        onMoviesListReceived.postValue(Loading)
+        requestMore()
+    }
+
+    fun requestMore() {
+        var hasMorePages = false
+        if (!lock.isLocked) {
             lock.lock()
-            liveData {
-                emit(Loading)
+            GlobalScope.launch {
                 try {
-                    val movies = when (type) {
-                        MovieListType.TopRated, MovieListType.Popular -> requestMovies(type)
-                        MovieListType.Favorite -> favoriteMoviesUseCase.execute()
-                    }
-                    this@MovieListViewModel.type = type
-                    movies?.let {
-                        moviesList.addAll(it)
-                        if (previousSize == 0) {
-                            emit(ViewModelResult.Success)
-                        } else {
-                            emit(ViewModelResult.Updated)
+                    when (type) {
+                        MovieListType.TopRated -> {
+                            topRatedMoviesUseCase.execute(currentPage)?.also {
+                                hasMorePages = it.hasMorePages
+                            }?.movies
                         }
-                        lock.unlock()
+                        MovieListType.Popular -> {
+                            popularMoviesUseCase.execute(currentPage)?.also {
+                                hasMorePages = it.hasMorePages
+                            }?.movies
+                        }
+                        MovieListType.Favorite -> {
+                            favoriteMoviesUseCase.execute()
+                        }
+                    }?.let { movies ->
+                        if (hasMorePages)
+                            currentPage++
+                        previousSize = moviesList.size
+                        moviesList.addAll(movies)
+                        if (previousSize == 0) {
+                            onMoviesListReceived.postValue(ViewModelResult.Success)
+                        } else {
+                            onMoviesListReceived.postValue(ViewModelResult.Updated)
+                        }
                     }
                 } catch (exception: Exception) {
                     Log.e("ERROR", exception.message ?: "--")
-                    emit(ViewModelResult.Error)
+                    onMoviesListReceived.postValue(ViewModelResult.Error)
                 }
             }
-        } else
-            null
-    }
-
-    private suspend fun requestMovies(type: MovieListType): List<Movie>? {
-        return when (type) {
-            MovieListType.TopRated -> {
-                topRatedMoviesUseCase.execute(currentPage)
-            }
-            MovieListType.Popular -> {
-                popularMoviesUseCase.execute(currentPage)
-            }
-            else -> null
-        }?.let { page ->
-            if (page.hasMorePages)
-                currentPage++
-            previousSize = moviesList.size
-            page.movies
+            lock.unlock()
         }
     }
 
-    fun reload(): LiveData<ViewModelResult>? {
-        return if (::type.isInitialized) {
+    fun reload() {
+        if (::type.isInitialized) {
             currentPage = FIRST_PAGE
             moviesList.clear()
             setup(type)
-        } else null
+        }
     }
 
     fun movies() = moviesList.toList()
 
     fun newPart() = moviesList.subList(previousSize, moviesList.lastIndex).toList()
-
-    fun requestMore() = setup(type)
 
     companion object {
         const val FIRST_PAGE = 1

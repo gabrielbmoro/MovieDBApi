@@ -36,9 +36,10 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
     }
 
     private fun getMovieFromIntentOrViewModel(): Movie? {
-        return viewModel.getMovie()?.let {
+        return if (viewModel.getMovie() == null) {
             intent.getParcelableExtra(MOVIE_INTENT_KEY) as? Movie
-        }
+        } else
+            viewModel.getMovie()
     }
 
     private fun setView(movie: Movie) {
