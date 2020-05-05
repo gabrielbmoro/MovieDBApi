@@ -7,5 +7,4 @@ object ConfigVariables {
     const val BASE_IMAGE_ADDRESS = "https://image.tmdb.org/t/p/w780"
     const val PARAMETER_POPULAR_MOVIES = "popularity.desc"
     const val PARAMETER_TOP_RATED_MOVIES = "vote_average.desc"
-    const val APP_SECRET_KEY = "bad80038-9aef-47c2-a4eb-8f686dc81d16"
 }

@@ -15,7 +15,7 @@ import org.mockito.Mockito.times
 
 class MovieDetailedViewModelTest : KoinUnitTest() {
 
-    lateinit var viewModel: MovieDetailedViewModel
+    private lateinit var viewModel: MovieDetailedViewModel
     private val favoriteMovieUseCase by inject<FavoriteMovieUseCase>()
 
     @Before

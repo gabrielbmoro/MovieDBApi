@@ -26,9 +26,9 @@ class MovieListViewModel(
 
     //region pagination
     private var currentPage = FIRST_PAGE
-    var previousSize = moviesList.size
+    private var previousSize = moviesList.size
         private set
-    val lock = ReentrantLock()
+    private val lock = ReentrantLock()
     //endregion
 
     fun setup(type: MovieListType) {
