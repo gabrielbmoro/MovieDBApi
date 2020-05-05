@@ -1,45 +1,42 @@
 package com.gabrielbmoro.programmingchallenge.presentation.detailedScreen
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-class MovieDetailedViewModel(application: Application) : AndroidViewModel(application), KoinComponent {
-
-    private val favoriteMovieUseCase: FavoriteMovieUseCase by inject()
+class MovieDetailedViewModel(private val favoriteMovieUseCase: FavoriteMovieUseCase) : ViewModel() {
 
     private var movie: Movie? = null
+    val onFavoriteMovieEvent = MutableLiveData<ViewModelResult>()
 
-    fun setup(movie: Movie): LiveData<ViewModelResult> {
+    fun setup(movie: Movie) {
         this.movie = movie
-        return liveData {
+        GlobalScope.launch {
             try {
                 movie.isFavorite = favoriteMovieUseCase.isFavorite(movie)
-                emit(ViewModelResult.Success)
+                onFavoriteMovieEvent.postValue(ViewModelResult.Success)
             } catch (exception: Exception) {
-                emit(ViewModelResult.Error)
+                onFavoriteMovieEvent.postValue(ViewModelResult.Error)
             }
         }
     }
 
-    fun favoriteEvent(isToFavorite: Boolean): LiveData<ViewModelResult>? {
-        return movie?.let { m ->
-            liveData {
+    fun favoriteEvent(isToFavorite: Boolean) {
+        movie?.let { m ->
+            GlobalScope.launch {
                 try {
                     if (isToFavorite)
                         favoriteMovieUseCase.favoriteMovie(m)
                     else
                         favoriteMovieUseCase.unFavoriteMovie(m)
                     movie?.isFavorite = isToFavorite
-                    emit(ViewModelResult.Success)
+                    onFavoriteMovieEvent.postValue(ViewModelResult.Success)
                 } catch (exception: Exception) {
-                    emit(ViewModelResult.Error)
+                    onFavoriteMovieEvent.postValue(ViewModelResult.Error)
                 }
             }
         }

@@ -12,31 +12,28 @@ import org.mockito.Mockito
 class TopRatedMoviesUseCaseTest : KoinUnitTest() {
 
     @Test
-    fun checkTheRepositoryInstanceType() {
+    fun `topRatedUseCase using for the correct repository`() {
+        // given
         val topRatedUseCaseTest by inject<TopRatedMoviesUseCase>()
+
+        // when
         val given = topRatedUseCaseTest.repository
+
+        // then
         Truth.assertThat(given).isInstanceOf(ApiRepositoryImpl::class.java)
     }
 
     @Test
-    fun checkTheRepositoryInstanceIsCallingForTheCorrectMethod() {
+    fun `topRatedUseCase calling for the correct method`() {
+        // given
         val repository = Mockito.mock(MoviesRepository::class.java)
-        val topRatedUseCaseTest = TopRatedMoviesUseCase(repository)
 
         runBlocking {
-            topRatedUseCaseTest.execute(1)
+            // when
+            TopRatedMoviesUseCase(repository).execute(1)
+
+            // then
             Mockito.verify(repository, Mockito.times(1)).getTopRatedMovies(1)
-        }
-    }
-
-    @Test
-    fun checkTheRepositoryInstanceIsCallingForTheInCorrectMethod() {
-        val repository = Mockito.mock(MoviesRepository::class.java)
-        val topRatedUseCaseTest = TopRatedMoviesUseCase(repository)
-
-        runBlocking {
-            topRatedUseCaseTest.execute(1)
-            Mockito.verify(repository, Mockito.times(0)).getPopularMovies(1)
         }
     }
 }

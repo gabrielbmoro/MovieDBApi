@@ -2,6 +2,9 @@ package com.gabrielbmoro.programmingchallenge.core
 
 import androidx.room.Room
 import com.gabrielbmoro.programmingchallenge.domain.usecase.*
+import com.gabrielbmoro.programmingchallenge.presentation.MainViewModel
+import com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedViewModel
+import com.gabrielbmoro.programmingchallenge.presentation.movieList.MovieListViewModel
 import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.repository.api.ApiRepository
 import com.gabrielbmoro.programmingchallenge.repository.api.ApiRepositoryImpl
@@ -10,6 +13,7 @@ import com.gabrielbmoro.programmingchallenge.repository.dataBase.DataBaseFactory
 import com.gabrielbmoro.programmingchallenge.repository.dataBase.DataBaseRepositoryImpl
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -51,4 +55,10 @@ val usecaseModule = module {
     single { PopularMoviesUseCase(get<ApiRepositoryImpl>()) }
     single { FavoriteMovieUseCase(get<DataBaseRepositoryImpl>()) }
     single { FavoriteMoviesUseCase(get<DataBaseRepositoryImpl>()) }
+}
+
+val viewModelModules = module {
+    viewModel { MovieListViewModel(get(), get(), get()) }
+    viewModel { MovieDetailedViewModel(get()) }
+    viewModel { MainViewModel() }
 }

@@ -2,18 +2,26 @@ package com.gabrielbmoro.programmingchallenge.domain.usecase
 
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class FavoriteMovieUseCase(val repository: MoviesRepository) {
+open class FavoriteMovieUseCase(val repository: MoviesRepository) {
 
     suspend fun favoriteMovie(movie: Movie): Boolean {
-        return repository.doAsFavorite(movie)
+        return withContext(Dispatchers.IO) {
+            repository.doAsFavorite(movie)
+        }
     }
 
     suspend fun unFavoriteMovie(movie: Movie): Boolean {
-        return repository.unFavorite(movie)
+        return withContext(Dispatchers.IO) {
+            repository.unFavorite(movie)
+        }
     }
 
     suspend fun isFavorite(movie: Movie): Boolean {
-        return repository.checkIsAFavoriteMovie(movie)
+        return withContext(Dispatchers.IO) {
+            repository.checkIsAFavoriteMovie(movie)
+        }
     }
 }

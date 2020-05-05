@@ -8,34 +8,38 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
-import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import com.gabrielbmoro.programmingchallenge.presentation.util.setImagePath
 import com.gabrielbmoro.programmingchallenge.presentation.util.show
 import kotlinx.android.synthetic.main.activity_movie_detailed.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed) {
 
-    private lateinit var viewModel: MovieDetailedViewModel
-    private val favoriteActionObserver = Observer<ViewModelResult> {
-        viewModel.getMovie()?.isFavorite?.let {
-            changeFavoriteViewsState(it)
-        }
-    }
+    private val viewModel: MovieDetailedViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MovieDetailedViewModel::class.java)
-        (viewModel.getMovie()
-                ?: intent.getParcelableExtra(MOVIE_INTENT_KEY) as? Movie)?.let { movie ->
-            viewModel.setup(movie).observe(
+        getMovieFromIntentOrViewModel()?.let { movie ->
+            viewModel.setup(movie)
+            viewModel.onFavoriteMovieEvent.observe(
                     this@MovieDetailedActivity,
-                    favoriteActionObserver
+                    Observer {
+                        viewModel.getMovie()?.isFavorite?.let {
+                            changeFavoriteViewsState(it)
+                        }
+                    }
             )
             setView(movie)
         } ?: finish()
+    }
+
+    private fun getMovieFromIntentOrViewModel(): Movie? {
+        return if (viewModel.getMovie() == null) {
+            intent.getParcelableExtra(MOVIE_INTENT_KEY) as? Movie
+        } else
+            viewModel.getMovie()
     }
 
     private fun setView(movie: Movie) {
@@ -48,10 +52,7 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
         fiveStarsComponent.setVotesAvg(movie.votesAverage)
         changeFavoriteViewsState(movie.isFavorite)
         ivFavoriteOption?.setOnClickListener {
-            viewModel.favoriteEvent(!movie.isFavorite)?.observe(
-                    this@MovieDetailedActivity,
-                    favoriteActionObserver
-            )
+            viewModel.favoriteEvent(!movie.isFavorite)
         }
     }
 

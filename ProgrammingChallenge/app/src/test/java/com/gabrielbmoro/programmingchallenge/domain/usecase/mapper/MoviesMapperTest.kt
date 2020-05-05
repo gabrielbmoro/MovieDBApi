@@ -5,39 +5,47 @@ import com.gabrielbmoro.programmingchallenge.repository.api.response.MovieRespon
 import com.gabrielbmoro.programmingchallenge.repository.api.response.PageResponse
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class MoviesMapperTest {
 
     @Test
-    fun whenTheResponseIsNull() {
-        val given = null
-        val result = MoviesMapper.mapToPage(given)
+    fun `mapper cannot convert from null values`() {
+        // given
+        val nullValue = null
+
+        // when
+        val result = MoviesMapper.mapToPage(nullValue)
+
+        // then
         assertThat(result).isNull()
     }
 
     @Test
-    fun whenTheResponseIsEmpty() {
-        val given = PageResponse(
+    fun `mapper can convert from an empty page response`() {
+        // given
+        val page = PageResponse(
                 totalResults = 0,
                 totalPages = 0,
                 page = 0,
                 results = emptyList()
         )
-        val result = MoviesMapper.mapToPage(given)
-        val expectedResult = Page(
-                movies = emptyList(),
-                hasMorePages = false
+
+        // when
+        val result = MoviesMapper.mapToPage(page)
+
+        // then
+        assertThat(result).isEqualTo(
+                Page(
+                        movies = emptyList(),
+                        hasMorePages = false
+                )
         )
-        assertThat(result).isEqualTo(expectedResult)
-        assertThat(expectedResult.hasMorePages).isFalse()
     }
 
     @Test
-    fun whenMovieIsEmptyObject() {
-        val given = MovieResponse(
+    fun `mapper can convert from an empty movie response`() {
+        // given
+        val movie = MovieResponse(
                 isVideo = null,
                 releaseDate = null,
                 overview = null,
@@ -52,8 +60,10 @@ class MoviesMapperTest {
                 votes = null
         )
 
-        val result = MoviesMapper.mapToMovie(given)
+        // when
+        val result = MoviesMapper.mapToMovie(movie)
 
+        // then
         assertThat(result.isVideo).isFalse()
         assertThat(result.releaseDate).isEmpty()
         assertThat(result.overview).isEmpty()
@@ -69,8 +79,9 @@ class MoviesMapperTest {
     }
 
     @Test
-    fun whenMovieIsValidObject() {
-        val given = MovieResponse(
+    fun `mapper can convert from a movie response`() {
+        // given
+        val movieResponse = MovieResponse(
                 isVideo = false,
                 releaseDate = "2019-20-02",
                 overview = "A pair of troubled school boys navigate the chaos of love and friendship in the early 80's.",
@@ -85,8 +96,10 @@ class MoviesMapperTest {
                 votes = 0
         )
 
-        val result = MoviesMapper.mapToMovie(given)
+        // when
+        val result = MoviesMapper.mapToMovie(movieResponse)
 
+        // then
         assertThat(result.isVideo).isFalse()
         assertThat(result.releaseDate).isEqualTo("02/20/2019")
         assertThat(result.overview).isEqualTo("A pair of troubled school boys navigate the chaos of love and friendship in the early 80's.")
@@ -102,36 +115,39 @@ class MoviesMapperTest {
     }
 
     @Test
-    fun whenDateIsInInvalidFormat() {
+    fun `data cannot be converted from an invalid format`() {
+        // given
         val given = "asodk-02-2012"
 
+        // when
         val result = MoviesMapper.formatReleaseDate(given)
 
-        val expectedResult = ""
-
-        assertThat(expectedResult).isEqualTo(result)
+        // then
+        assertThat("").isEqualTo(result)
     }
 
 
     @Test
-    fun whenDateIsNull() {
+    fun `data cannot be converted from null format`() {
+        // given
         val given = null
 
+        // when
         val result = MoviesMapper.formatReleaseDate(given)
 
-        val expectedResult = ""
-
-        assertThat(expectedResult).isEqualTo(result)
+        // then
+        assertThat("").isEqualTo(result)
     }
 
     @Test
-    fun whenDateIsValid() {
+    fun `data can be converted to dd-mm-yyyy`() {
+        // given
         val given = "2017-02-12"
 
+        // when
         val result = MoviesMapper.formatReleaseDate(given)
 
-        val expectedResult = "12/02/2017"
-
-        assertThat(expectedResult).isEqualTo(result)
+        // then
+        assertThat("12/02/2017").isEqualTo(result)
     }
 }

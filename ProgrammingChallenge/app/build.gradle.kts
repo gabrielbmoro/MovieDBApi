@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 //noinspection GradleCompatible
 plugins{
     id("com.android.application")
@@ -14,8 +12,8 @@ android {
         applicationId = "com.gabrielbmoro.programmingchallenge"
         minSdkVersion(22)
         targetSdkVersion(29)
-        versionCode = 12
-        versionName = "1.0.6"
+        versionCode = 13
+        versionName = "1.0.7"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

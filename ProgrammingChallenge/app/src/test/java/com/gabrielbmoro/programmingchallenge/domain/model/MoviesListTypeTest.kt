@@ -1,38 +1,44 @@
 package com.gabrielbmoro.programmingchallenge.domain.model
 
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 import com.google.common.truth.Truth.assertThat
 
-@RunWith(MockitoJUnitRunner::class)
 class MoviesListTypeTest {
 
     @Test
-    fun whenTheMovieIsATopRatedMovie() {
-        val given = 1
+    fun `top rated movies must be a kind of movie`() {
+        // given
+        val topRatedMovieId = 1
 
-        val result = given.convertToMovieListType()
+        // when
+        val type = topRatedMovieId.convertToMovieListType()
 
-        assertThat(result).isEqualTo(MovieListType.TopRated)
+        // then
+        assertThat(type).isEqualTo(MovieListType.TopRated)
     }
 
     @Test
-    fun whenTheMovieIsAFavoriteMovie() {
-        val given = 2
+    fun `favorite movies must be a kind of movie`() {
+        // given
+        val favoriteMovieId = 2
 
-        val result = given.convertToMovieListType()
+        // when
+        val type = favoriteMovieId.convertToMovieListType()
 
-        assertThat(result).isEqualTo(MovieListType.Favorite)
+        // then
+        assertThat(type).isEqualTo(MovieListType.Favorite)
     }
 
     @Test
-    fun whenTheMovieIsAPopularMovie() {
-        val given = 3
+    fun `popular movies must be a kind of movie`() {
+        // given
+        val popularMovieId = 3
 
-        val result = given.convertToMovieListType()
+        // when
+        val type = popularMovieId.convertToMovieListType()
 
-        assertThat(result).isEqualTo(MovieListType.Popular)
+        // then
+        assertThat(type).isEqualTo(MovieListType.Popular)
     }
 
 }
