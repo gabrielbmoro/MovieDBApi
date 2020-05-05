@@ -23,28 +23,6 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
         viewModel = MovieDetailedViewModel(favoriteMovieUseCase)
     }
 
-    @Test
-    fun whenFavoriteActionIsSelected() {
-        val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
-        val given = emptyMovieObj()
-        viewModel.setup(given)
-        viewModel.favoriteEvent(true)
-        GlobalScope.launch {
-            Mockito.verify(useCaseSpy, times(1)).favoriteMovie(given)
-        }
-    }
-
-    @Test
-    fun whenUnFavoriteActionIsSelected() {
-        val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
-        val given = emptyMovieObj()
-        viewModel.setup(given)
-        viewModel.favoriteEvent(false)
-        GlobalScope.launch {
-            Mockito.verify(useCaseSpy, times(1)).unFavoriteMovie(given)
-        }
-    }
-
     private fun emptyMovieObj(): Movie {
         return Movie(
                 id = null,
@@ -65,7 +43,40 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
     }
 
     @Test
-    fun whenValidMovieIsSelected() {
+    fun `movie can be selected as favorite`() {
+        // given
+        val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
+        val movie = emptyMovieObj()
+        viewModel.setup(movie)
+
+        // when
+        viewModel.favoriteEvent(true)
+
+        // then
+        GlobalScope.launch {
+            Mockito.verify(useCaseSpy, times(1)).favoriteMovie(movie)
+        }
+    }
+
+    @Test
+    fun  `movie can be selected as unFavorite`() {
+        // given
+        val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
+        val movie = emptyMovieObj()
+        viewModel.setup(movie)
+
+        // when
+        viewModel.favoriteEvent(false)
+
+        //then
+        GlobalScope.launch {
+            Mockito.verify(useCaseSpy, times(1)).unFavoriteMovie(movie)
+        }
+    }
+
+    @Test
+    fun `movie can be selected`() {
+        // given
         val movieId = -1
         val votes = 4
         val isVideo = false
@@ -84,7 +95,7 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
                 "sunt in culpa qui officia deserunt mollit anim id est laborum."
         val releaseDate = "02-02-2012"
         val isFavorite = true
-        val given = Movie(
+        val movie = Movie(
                 id = movieId,
                 votes = votes,
                 isVideo = isVideo,
@@ -100,7 +111,11 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
                 releaseDate = releaseDate,
                 isFavorite = isFavorite
         )
-        viewModel.setup(given)
+
+        // when
+        viewModel.setup(movie)
+
+        // then
         assertThat(viewModel.getMovie()?.id).isEqualTo(movieId)
         assertThat(viewModel.getMovie()?.votes).isEqualTo(votes)
         assertThat(viewModel.getMovie()?.isVideo).isEqualTo(isVideo)

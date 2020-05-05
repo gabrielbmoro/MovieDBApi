@@ -7,31 +7,46 @@ import org.junit.Before
 
 class MainViewModelTest {
 
-    private lateinit var viewModel : MainViewModel
+    private lateinit var viewModel: MainViewModel
 
     @Before
-    fun init(){
+    fun init() {
         viewModel = MainViewModel()
     }
 
     @Test
-    fun whenThePopularPageIsSelected() {
-        val given = MainViewModel.POPULAR_PAGE
-        viewModel.setPage(given)
+    fun `select the popular movies tab`() {
+        // given
+        val tabIndex = MainViewModel.POPULAR_PAGE
+
+        // when
+        viewModel.setPage(tabIndex)
+
+        //then
         assertThat(viewModel.getPage()).isEqualTo(MainViewModel.POPULAR_PAGE)
     }
 
     @Test
-    fun whenTheTopRatedPageIsSelected() {
-        val given = MainViewModel.TOP_RATED_PAGE
-        viewModel.setPage(given)
+    fun `select the top rated movies tab`() {
+        // given
+        val tabIndex = MainViewModel.TOP_RATED_PAGE
+
+        // when
+        viewModel.setPage(tabIndex)
+
+        // then
         assertThat(viewModel.getPage()).isEqualTo(MainViewModel.TOP_RATED_PAGE)
     }
 
     @Test
-    fun whenTheFavoritePageIsSelected() {
-        val given = MainViewModel.FAVORITE_PAGE
-        viewModel.setPage(given)
+    fun `select the favorite movies tab`() {
+        // given
+        val tabIndex = MainViewModel.FAVORITE_PAGE
+
+        // when
+        viewModel.setPage(tabIndex)
+
+        // then
         assertThat(viewModel.getPage()).isEqualTo(MainViewModel.FAVORITE_PAGE)
     }
 
