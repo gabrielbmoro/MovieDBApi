@@ -8,6 +8,20 @@
 
 ![alt text](https://github.com/gabrielbmoro/MovieDBApi/blob/master/img/architecture.svg)
 
+## Coverage 
+
+> _Last update 05/11/20_
+
+| Layer                | Coverage (% classes)      |
+|----------------------|:-------------------------:|
+| core                 | _62%_                     |
+| domain               | _100%_                    |
+| presentation         | _22%_                     |
+| repository           | _90%_                     |
+
+Total: _61%_
+
+
 
 ## Stack Overview
 
