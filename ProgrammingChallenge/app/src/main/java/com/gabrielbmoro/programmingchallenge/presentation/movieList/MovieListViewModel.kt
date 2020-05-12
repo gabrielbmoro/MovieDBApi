@@ -21,12 +21,14 @@ class MovieListViewModel(
 ) : ViewModel() {
 
     private val moviesList = ArrayList<Movie>()
-    private lateinit var type: MovieListType
+    lateinit var type: MovieListType
+        private set
     val onMoviesListReceived = MutableLiveData<ViewModelResult>()
 
     //region pagination
-    private var currentPage = FIRST_PAGE
-    private var previousSize = moviesList.size
+    var currentPage = FIRST_PAGE
+        private set
+    var previousSize = moviesList.size
         private set
     private val lock = ReentrantLock()
     //endregion
