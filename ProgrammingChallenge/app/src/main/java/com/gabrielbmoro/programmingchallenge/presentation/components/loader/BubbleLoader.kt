@@ -31,13 +31,7 @@ class BubbleLoader @JvmOverloads constructor(
 
             repeat(dots) { count ->
                 val dotView = addingDots(this, dotSize, this@BubbleLoader)
-                animatorList.add(
-                        getAnimator(
-                                dotView
-                        ).also { anim ->
-                            anim.startDelay = ((count / dots.toFloat()) * DURATION).toLong()
-                        }
-                )
+                animatorList.add(getAnimator(view = dotView, dotIndex = count, amountOfDots = dots))
             }
             recycle()
         }
@@ -75,16 +69,15 @@ class BubbleLoader @JvmOverloads constructor(
         visibility = View.GONE
     }
 
-    fun isRunning() = animatorSet.isRunning
-
-
-    private fun getAnimator(view: View): Animator {
+    private fun getAnimator(view: View, dotIndex: Int, amountOfDots: Int): Animator {
         val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, DOT_EXPANDABLE_PROPORTION)
         val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, DOT_EXPANDABLE_PROPORTION)
         return ObjectAnimator.ofPropertyValuesHolder(view, scaleX, scaleY).apply {
             repeatCount = INFINITE
             repeatMode = ObjectAnimator.REVERSE
             duration = DURATION
+        }.also { anim ->
+            anim.startDelay = ((dotIndex / amountOfDots.toFloat()) * DURATION).toLong()
         }
     }
 
