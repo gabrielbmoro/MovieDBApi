@@ -5,7 +5,6 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
@@ -28,26 +27,20 @@ class BubbleLoader @JvmOverloads constructor(
         with(context.obtainStyledAttributes(attrs, R.styleable.BubbleLoader)) {
             val dots = getInt(R.styleable.BubbleLoader_amountOfDots, DEFAULT_DOTS)
             val dotSize = getDimensionPixelSize(R.styleable.BubbleLoader_dotSize, 0)
-
+            val dotColor = getColor(R.styleable.BubbleLoader_dotsColor, Color.BLACK)
             repeat(dots) { count ->
-                val dotView = addingDots(this, dotSize, this@BubbleLoader)
-                animatorList.add(getAnimator(view = dotView, dotIndex = count, amountOfDots = dots))
+                val dotView = createAndAddDot(dotColor, dotSize, this@BubbleLoader)
+                val animator = getAnimator(view = dotView, dotIndex = count, amountOfDots = dots)
+                animatorList.add(animator)
             }
             recycle()
         }
 
-        animatorSet.playTogether(
-                animatorList.toList()
-        )
+        animatorSet.playTogether(animatorList.toList())
     }
 
-    private fun addingDots(typedArray: TypedArray, dotSize: Int, bubbleLoader: BubbleLoader): View {
-        val dotView = createDot(
-                color = typedArray.getColor(
-                        R.styleable.BubbleLoader_dotsColor,
-                        Color.BLACK
-                )
-        )
+    private fun createAndAddDot(@ColorInt color: Int, dotSize: Int, bubbleLoader: BubbleLoader): View {
+        val dotView = createDot(color = color)
         val layoutSize = dotSize + (dotSize * DOT_EXPANDABLE_PROPORTION).roundToInt()
         bubbleLoader.addView(
                 dotView,
