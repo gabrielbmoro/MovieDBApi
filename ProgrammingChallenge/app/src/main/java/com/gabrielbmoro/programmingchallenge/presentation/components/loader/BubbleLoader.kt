@@ -5,6 +5,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
@@ -29,20 +30,7 @@ class BubbleLoader @JvmOverloads constructor(
             val dotSize = getDimensionPixelSize(R.styleable.BubbleLoader_dotSize, 0)
 
             repeat(dots) { count ->
-                val dotView = createDot(
-                        color = getColor(
-                                R.styleable.BubbleLoader_dotsColor,
-                                Color.BLACK
-                        )
-                )
-                val layoutSize = dotSize + (dotSize * DOT_EXPANDABLE_PROPORTION).roundToInt()
-                addView(
-                        dotView,
-                        LayoutParams(
-                                layoutSize,
-                                layoutSize
-                        )
-                )
+                val dotView = addingDots(this, dotSize, this@BubbleLoader)
                 animatorList.add(
                         getAnimator(
                                 dotView
@@ -57,6 +45,24 @@ class BubbleLoader @JvmOverloads constructor(
         animatorSet.playTogether(
                 animatorList.toList()
         )
+    }
+
+    private fun addingDots(typedArray: TypedArray, dotSize: Int, bubbleLoader: BubbleLoader): View {
+        val dotView = createDot(
+                color = typedArray.getColor(
+                        R.styleable.BubbleLoader_dotsColor,
+                        Color.BLACK
+                )
+        )
+        val layoutSize = dotSize + (dotSize * DOT_EXPANDABLE_PROPORTION).roundToInt()
+        bubbleLoader.addView(
+                dotView,
+                LayoutParams(
+                        layoutSize,
+                        layoutSize
+                )
+        )
+        return dotView
     }
 
     fun start() {
