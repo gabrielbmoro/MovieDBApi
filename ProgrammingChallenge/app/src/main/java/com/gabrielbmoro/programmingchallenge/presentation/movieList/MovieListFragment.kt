@@ -21,27 +21,29 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
         when (result) {
             is ViewModelResult.Error -> {
                 tvError.show(true)
-                progressBar.show(false)
+                progressBar.stop()
                 swRefreshLayout.show(false)
             }
             is ViewModelResult.Loading -> {
-                progressBar.show(true)
+                progressBar.start()
                 tvError.show(false)
                 swRefreshLayout.show(false)
             }
             is ViewModelResult.Success -> {
                 rvList.adapterImplementation()?.setup(viewModel.movies())
-                swRefreshLayout.show(true)
-                progressBar.show(false)
-                tvError.show(false)
+                showTheRefreshLayout()
             }
             is ViewModelResult.Updated -> {
                 rvList.adapterImplementation()?.update(viewModel.newPart())
-                swRefreshLayout.show(true)
-                progressBar.show(false)
-                tvError.show(false)
+                showTheRefreshLayout()
             }
         }
+    }
+
+    private fun showTheRefreshLayout() {
+        swRefreshLayout.show(true)
+        progressBar.stop()
+        tvError.show(false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
