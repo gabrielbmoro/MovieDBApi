@@ -31,7 +31,6 @@ Total: _61%_
 | Dependency Injection | Koin                    |
 | Load Images          | Glide                   |
 | View Binding         | Kotlin Synthatics       |
-| Build Scripts        | Kotlin Script (kts)     |
 | Handler to IO calls  | Coroutines              |
 | Screen Navigation    | Hard coded              |
 | Unit Tests           | JUnit, Truth, Mockito   |
