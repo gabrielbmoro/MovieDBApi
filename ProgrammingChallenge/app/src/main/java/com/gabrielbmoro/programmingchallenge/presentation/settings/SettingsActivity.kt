@@ -14,6 +14,8 @@ class SettingsActivity : AppCompatActivity(R.layout.activity_settings) {
                 R.id.activity_settings_preferences_layout,
                 SettingsPreferenceFragment()
         ).commit()
+
+        supportActionBar?.title = getString(R.string.settings)
     }
 
     companion object {

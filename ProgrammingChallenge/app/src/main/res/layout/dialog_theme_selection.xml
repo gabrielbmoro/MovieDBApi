@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/dialog_theme_selection_group"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
 
     <RadioButton
         android:id="@+id/dialog_theme_selection_automatic_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
         android:text="@string/dialog_theme_automatic_option" />
 
     <RadioButton
         android:id="@+id/dialog_theme_selection_night_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
         android:text="@string/dialog_theme_night_option" />
 
     <RadioButton
         android:id="@+id/dialog_theme_selection_day_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
         android:text="@string/dialog_theme_day_option" />
 
 </RadioGroup>
