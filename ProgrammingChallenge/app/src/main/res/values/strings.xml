@@ -25,4 +25,15 @@
     <string name="error_message">Alguma coisa deu errado</string>
     <string name="poster">Poster</string>
     <string name="background">Background</string>
+    <string name="home_title">Movie DB API</string>
+    <string name="settings">Settings</string>
+
+    <!-- preferences -->
+    <string name="pref_nigh_mode_key">nigh_mode</string>
+    <string name="pref_nigh_mode_summary">Set your theme.</string>
+    <string name="pref_nigh_mode_title">Nigh mode</string>
+    <string name="dialog_theme_automatic_option">Automatic</string>
+    <string name="dialog_theme_night_option">Night</string>
+    <string name="dialog_theme_day_option">Day</string>
+    <!-- endregion -->
 </resources>
