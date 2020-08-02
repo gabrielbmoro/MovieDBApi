@@ -18,20 +18,20 @@
 
         <activity
             android:name=".presentation.MainActivity"
-            android:launchMode="singleTask"
-            android:theme="@style/Base.ProgrammingChallange.FullScreen">
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedActivity">
+        <activity android:name="com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.MainActivity" />
         </activity>
+
+        <activity android:name=".presentation.settings.SettingsActivity" />
 
     </application>
 

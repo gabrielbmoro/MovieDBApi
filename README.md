@@ -42,3 +42,5 @@ Total: _61%_
 ## Teaser
 
 ![alt text](https://github.com/tido4410/moviedatabaseapi/blob/master/img/teaser.gif)
+
+- Night mode: https://github.com/tido4410/moviedatabaseapi/blob/master/img/dark-theme-support.gif
