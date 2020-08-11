@@ -1,5 +1,6 @@
 package com.gabrielbmoro.programmingchallenge.repository.dataBase
 
+import androidx.paging.DataSource
 import androidx.room.*
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 
@@ -7,7 +8,7 @@ import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 interface FavoriteMoviesDAO {
 
     @Query("SELECT * FROM  favorite_movies")
-    suspend fun allFavoriteMovies(): List<Movie>
+    fun allFavoriteMovies(): DataSource.Factory<Int, Movie>
 
     @Query("SELECT * FROM favorite_movies WHERE title = :title and originalTitle = :originalTitle")
     suspend fun isThereAMovie(title: String, originalTitle: String): List<Movie>
