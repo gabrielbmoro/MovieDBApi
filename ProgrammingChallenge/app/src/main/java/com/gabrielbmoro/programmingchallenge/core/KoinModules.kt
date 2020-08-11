@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.gabrielbmoro.programmingchallenge.domain.usecase.*
 import com.gabrielbmoro.programmingchallenge.presentation.MainViewModel
 import com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedViewModel
+import com.gabrielbmoro.programmingchallenge.presentation.favoriteMovieList.FavoriteMoviesViewModel
 import com.gabrielbmoro.programmingchallenge.presentation.movieList.MovieListViewModel
 import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.repository.api.ApiRepository
@@ -58,7 +59,8 @@ val usecaseModule = module {
 }
 
 val viewModelModules = module {
-    viewModel { MovieListViewModel(get(), get(), get()) }
+    viewModel { MovieListViewModel(get(), get()) }
+    viewModel { FavoriteMoviesViewModel(get()) }
     viewModel { MovieDetailedViewModel(get()) }
     viewModel { MainViewModel() }
 }

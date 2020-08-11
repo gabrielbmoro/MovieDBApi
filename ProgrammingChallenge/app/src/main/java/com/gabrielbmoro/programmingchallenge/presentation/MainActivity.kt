@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
+import com.gabrielbmoro.programmingchallenge.presentation.movieList.FavoriteMovieListFragment
 import com.gabrielbmoro.programmingchallenge.presentation.movieList.MovieListFragment
 import com.gabrielbmoro.programmingchallenge.presentation.settings.SettingsActivity
 import com.gabrielbmoro.programmingchallenge.presentation.util.setThemeAccordingToThePreferences
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val fragmentsList = listOf(
             MovieListFragment.newInstance(MovieListType.TopRated),
             MovieListFragment.newInstance(MovieListType.Popular),
-            MovieListFragment.newInstance(MovieListType.Favorite)
+            FavoriteMovieListFragment()
     )
     private val viewModel by viewModel<MainViewModel>()
 

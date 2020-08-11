@@ -7,7 +7,6 @@ import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult.Loading
-import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.PopularMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.TopRatedMoviesUseCase
 import kotlinx.coroutines.GlobalScope
@@ -15,7 +14,6 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.locks.ReentrantLock
 
 class MovieListViewModel(
-        private val favoriteMoviesUseCase: FavoriteMoviesUseCase,
         private val topRatedMoviesUseCase: TopRatedMoviesUseCase,
         private val popularMoviesUseCase: PopularMoviesUseCase
 ) : ViewModel() {
@@ -56,9 +54,7 @@ class MovieListViewModel(
                                 hasMorePages = it.hasMorePages
                             }?.movies
                         }
-                        MovieListType.Favorite -> {
-                            favoriteMoviesUseCase.execute()
-                        }
+                        else -> null
                     }?.let { movies ->
                         if (hasMorePages)
                             currentPage++

@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.gabrielbmoro.programmingchallenge.presentation.components.moviesList.adapter.MoviesListAdapter
+import com.gabrielbmoro.programmingchallenge.presentation.components.adapter.MoviesListAdapter
 
 class MoviesRecyclerViewComponent @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

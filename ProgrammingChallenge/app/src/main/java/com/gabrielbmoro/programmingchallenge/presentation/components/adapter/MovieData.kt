@@ -1,4 +1,4 @@
-package com.gabrielbmoro.programmingchallenge.presentation.components.moviesList.adapter
+package com.gabrielbmoro.programmingchallenge.presentation.components.adapter
 
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 
