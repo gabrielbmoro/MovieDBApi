@@ -17,33 +17,33 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
     private val viewModel: MovieListViewModel by viewModel()
 
     private val observer = Observer<ViewModelResult> { result ->
-        swRefreshLayout.isRefreshing = false
+        fragment_movies_list_sw_refresh.isRefreshing = false
         when (result) {
             is ViewModelResult.Error -> {
-                tvError.show(true)
-                progressBar.stop()
-                swRefreshLayout.show(false)
+                fragment_movies_list_tv_error.show(true)
+                fragment_movies_list_progress_bar.stop()
+                fragment_movies_list_sw_refresh.show(false)
             }
             is ViewModelResult.Loading -> {
-                progressBar.start()
-                tvError.show(false)
-                swRefreshLayout.show(false)
+                fragment_movies_list_progress_bar.start()
+                fragment_movies_list_tv_error.show(false)
+                fragment_movies_list_sw_refresh.show(false)
             }
             is ViewModelResult.Success -> {
-                rvList.adapterImplementation()?.setup(viewModel.movies())
+                fragment_movies_list_rv_list.adapterImplementation()?.setup(viewModel.movies())
                 showTheRefreshLayout()
             }
             is ViewModelResult.Updated -> {
-                rvList.adapterImplementation()?.update(viewModel.newPart())
+                fragment_movies_list_rv_list.adapterImplementation()?.update(viewModel.newPart())
                 showTheRefreshLayout()
             }
         }
     }
 
     private fun showTheRefreshLayout() {
-        swRefreshLayout.show(true)
-        progressBar.stop()
-        tvError.show(false)
+        fragment_movies_list_sw_refresh.show(true)
+        fragment_movies_list_progress_bar.stop()
+        fragment_movies_list_tv_error.show(false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,17 +66,17 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
 
     private fun setupRecyclerView(type: MovieListType) {
         if (type == MovieListType.TopRated || type == MovieListType.Popular) {
-            rvList.paginationSupport {
+            fragment_movies_list_rv_list.paginationSupport {
                 viewModel.requestMore()
             }
         }
-        swRefreshLayout.setOnRefreshListener {
+        fragment_movies_list_sw_refresh.setOnRefreshListener {
             viewModel.reload()
         }
     }
 
     fun scrollToTop() {
-        rvList.scrollToTop()
+        fragment_movies_list_rv_list.scrollToTop()
     }
 
     companion object {

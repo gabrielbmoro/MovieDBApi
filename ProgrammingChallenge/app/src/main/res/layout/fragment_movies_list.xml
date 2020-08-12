@@ -6,12 +6,12 @@
     android:layout_height="match_parent">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swRefreshLayout"
+        android:id="@+id/fragment_movies_list_sw_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.gabrielbmoro.programmingchallenge.presentation.components.moviesList.MoviesRecyclerViewComponent
-            android:id="@+id/rvList"
+            android:id="@+id/fragment_movies_list_rv_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/view_holder_movie_card" />
@@ -19,14 +19,14 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView
-        android:id="@+id/tvError"
+        android:id="@+id/fragment_movies_list_tv_error"
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/error_message" />
 
     <com.gabrielbmoro.programmingchallenge.presentation.components.loader.BubbleLoader
-        android:id="@+id/progressBar"
+        android:id="@+id/fragment_movies_list_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
