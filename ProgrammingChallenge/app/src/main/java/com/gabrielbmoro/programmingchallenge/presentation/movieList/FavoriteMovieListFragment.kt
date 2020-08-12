@@ -13,11 +13,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FavoriteMovieListFragment : Fragment(R.layout.fragment_favorite_movies_list) {
 
     private val viewModel: FavoriteMoviesViewModel by viewModel()
+    private val adapter = FavoriteMoviesListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rvList.adapter = FavoriteMoviesListAdapter()
+        fragment_favorite_movies_list_rv_list.adapter = adapter
     }
 
     override fun onResume() {
@@ -25,7 +26,7 @@ class FavoriteMovieListFragment : Fragment(R.layout.fragment_favorite_movies_lis
         viewModel.setup()?.observe(
                 viewLifecycleOwner,
                 Observer {
-                    (rvList.adapter as? FavoriteMoviesListAdapter)?.submitList(it)
+                    adapter.submitList(it)
                 }
         )
     }
