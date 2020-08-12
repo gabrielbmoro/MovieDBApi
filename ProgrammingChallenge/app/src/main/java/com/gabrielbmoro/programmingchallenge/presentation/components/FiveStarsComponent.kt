@@ -40,11 +40,11 @@ class FiveStarsComponent @JvmOverloads constructor(
     fun setVotesAvg(votes: Float) {
         val numberOfStarts = (votes / AVERAGE_TOTAL) * STARS_AVAILABLE
         if (votes != INVALID_NUMBER) {
-            ivFirstStar.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 1))
-            ivSecondStar.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 2))
-            ivThirdStar.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 3))
-            ivFourthStar.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 4))
-            ivFifthStar.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 5))
+            component_iv_first_star.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 1))
+            component_iv_second_star.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 2))
+            component_iv_third_star.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 3))
+            component_iv_fourth_star.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 4))
+            component_iv_fifth_star.background = ContextCompat.getDrawable(context, getDrawableAccordingToStarPosition(numberOfStarts, 5))
         }
     }
 

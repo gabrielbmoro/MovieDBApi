@@ -1,59 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/ivFirstStar"
+        android:id="@+id/component_iv_first_star"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/star"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/component_iv_second_star"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/star"
         tools:src="@drawable/ic_star" />
 
     <ImageView
-        android:id="@+id/ivSecondStar"
-        app:layout_constraintStart_toEndOf="@id/ivFirstStar"
+        android:id="@+id/component_iv_second_star"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/star"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/component_iv_third_star"
+        app:layout_constraintStart_toEndOf="@id/component_iv_first_star"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/star"
         tools:src="@drawable/ic_star" />
 
     <ImageView
-        android:id="@+id/ivThirdStar"
-        app:layout_constraintStart_toEndOf="@id/ivSecondStar"
+        android:id="@+id/component_iv_third_star"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/star"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/component_iv_fourth_star"
+        app:layout_constraintStart_toEndOf="@id/component_iv_second_star"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/star"
         tools:src="@drawable/ic_star" />
 
     <ImageView
-        android:id="@+id/ivFourthStar"
-        app:layout_constraintStart_toEndOf="@id/ivThirdStar"
+        android:id="@+id/component_iv_fourth_star"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/star"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/component_iv_fifth_star"
+        app:layout_constraintStart_toEndOf="@id/component_iv_third_star"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/star"
         tools:src="@drawable/ic_star" />
 
     <ImageView
-        android:id="@+id/ivFifthStar"
-        app:layout_constraintStart_toEndOf="@id/ivFourthStar"
+        android:id="@+id/component_iv_fifth_star"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/star"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/component_iv_fourth_star"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/star"
         tools:src="@drawable/ic_star_half" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
