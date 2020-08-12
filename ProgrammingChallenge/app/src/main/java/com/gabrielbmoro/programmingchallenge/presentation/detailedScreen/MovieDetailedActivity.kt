@@ -44,21 +44,21 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
 
     private fun setView(movie: Movie) {
         supportActionBar?.title = movie.title
-        backdrop.setImagePath(movie.posterPath)
-        tvOriginalTitle.text = movie.originalTitle
-        tvOverview.text = movie.overview
-        tvLanguage.text = movie.originalLanguage
-        tvPopularity.text = movie.popularity.toString()
-        fiveStarsComponent.setVotesAvg(movie.votesAverage)
+        activity_movie_detailed_backdrop.setImagePath(movie.posterPath)
+        activity_movie_detailed_tv_original_title.text = movie.originalTitle
+        activity_movie_detailed_overview.text = movie.overview
+        activity_movie_detailed_language_title.text = movie.originalLanguage
+        activity_movie_detailed_tv_popularity.text = movie.popularity.toString()
+        activity_movie_detailed_five_stars_component.setVotesAvg(movie.votesAverage)
         changeFavoriteViewsState(movie.isFavorite)
-        ivFavoriteOption?.setOnClickListener {
+        activity_movie_detailed_favorite_icon?.setOnClickListener {
             viewModel.favoriteEvent(!movie.isFavorite)
         }
     }
 
     private fun changeFavoriteViewsState(isFavorite: Boolean) {
-        ivFavoriteOption.show(true)
-        ivFavoriteOption.setImageResource(
+        activity_movie_detailed_favorite_icon.show(true)
+        activity_movie_detailed_favorite_icon.setImageResource(
                 if (isFavorite) R.drawable.ic_heart_filled
                 else R.drawable.ic_heart_border
         )

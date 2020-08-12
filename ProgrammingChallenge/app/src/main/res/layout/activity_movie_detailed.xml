@@ -2,14 +2,14 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clRootLayout"
+    android:id="@+id/activity_movie_detailed_base_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nsvBaseScroll"
+        android:id="@+id/activity_movie_detailed_base_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -22,123 +22,123 @@
             android:layout_marginEnd="@dimen/default_margin_space">
 
             <Space
-                android:id="@+id/space1"
+                android:id="@+id/activity_movie_detailed_space_1"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/space_height"
-                app:layout_constraintBottom_toTopOf="@+id/tvOriginalTitleLabel"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_tv_original_title_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvOriginalTitleLabel"
+                android:id="@+id/activity_movie_detailed_tv_original_title_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/original_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintBottom_toTopOf="@+id/tvOriginalTitle"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_tv_original_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/space1" />
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_space_1" />
 
             <TextView
-                android:id="@+id/tvOriginalTitle"
+                android:id="@+id/activity_movie_detailed_tv_original_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:layout_constraintBottom_toTopOf="@+id/space2"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_space_2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvOriginalTitleLabel"
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_tv_original_title_label"
                 tools:text="O grande dragão branco" />
 
             <Space
-                android:id="@+id/space2"
+                android:id="@+id/activity_movie_detailed_space_2"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/space_height"
-                app:layout_constraintBottom_toTopOf="@+id/tvOverviewLabel"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_overview_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvOriginalTitle" />
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_tv_original_title" />
 
             <TextView
-                android:id="@+id/tvOverviewLabel"
+                android:id="@+id/activity_movie_detailed_overview_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/overview"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintBottom_toTopOf="@+id/tvOverview"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_overview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/space2" />
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_space_2" />
 
             <TextView
-                android:id="@+id/tvOverview"
+                android:id="@+id/activity_movie_detailed_overview"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:layout_constraintBottom_toTopOf="@+id/space3"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_space_3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvOverviewLabel"
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_overview_label"
                 tools:text="@string/description_example" />
 
             <Space
-                android:id="@+id/space3"
+                android:id="@+id/activity_movie_detailed_space_3"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/space_height"
-                app:layout_constraintBottom_toTopOf="@+id/tvLanguageTitle"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_language_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvOverview" />
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_overview" />
 
             <TextView
-                android:id="@+id/tvLanguageTitle"
+                android:id="@+id/activity_movie_detailed_language_title_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/language"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintBottom_toTopOf="@+id/tvLanguage"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_language_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/space3" />
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_space_3" />
 
             <TextView
-                android:id="@+id/tvLanguage"
+                android:id="@+id/activity_movie_detailed_language_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:layout_constraintBottom_toTopOf="@+id/space4"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_space_4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLanguageTitle"
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_language_title"
                 tools:text="en-US" />
 
             <Space
-                android:id="@+id/space4"
+                android:id="@+id/activity_movie_detailed_space_4"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/space_height"
-                app:layout_constraintBottom_toTopOf="@+id/tvPopularityTitle"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_tv_popularity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLanguage" />
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_language_title" />
 
             <TextView
-                android:id="@+id/tvPopularityTitle"
+                android:id="@+id/activity_movie_detailed_tv_popularity_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/popularity"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintBottom_toTopOf="@+id/tvPopularity"
+                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_tv_popularity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/space4" />
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_space_4" />
 
             <TextView
-                android:id="@+id/tvPopularity"
+                android:id="@+id/activity_movie_detailed_tv_popularity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -147,7 +147,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvPopularityTitle"
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_tv_popularity_label"
                 tools:text="1230" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -155,12 +155,12 @@
 
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/apbBarLayout"
+        android:id="@+id/activity_movie_detailed_app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_layout_height">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+            android:id="@+id/activity_movie_detailed_collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:animateLayoutChanges="true"
@@ -173,7 +173,7 @@
             tools:title="asdiasjdijaisdj">
 
             <ImageView
-                android:id="@+id/backdrop"
+                android:id="@+id/activity_movie_detailed_backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/app_bar_layout_height"
                 android:contentDescription="@string/poster"
@@ -184,7 +184,7 @@
                 tools:src="@drawable/jean_claude_van_damme" />
 
             <ImageView
-                android:id="@+id/background"
+                android:id="@+id/activity_movie_detailed_background"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/app_bar_layout_height"
                 android:background="@drawable/card_gradient_background"
@@ -194,7 +194,7 @@
                 app:layout_collapseMode="parallax" />
 
             <ImageView
-                android:id="@+id/ivFavoriteOption"
+                android:id="@+id/activity_movie_detailed_favorite_icon"
                 android:layout_width="@dimen/button_height"
                 android:layout_height="@dimen/button_height"
                 android:layout_gravity="bottom"
@@ -206,14 +206,14 @@
                 tools:visibility="visible" />
 
             <com.gabrielbmoro.programmingchallenge.presentation.components.FiveStarsComponent
-                android:id="@+id/fiveStarsComponent"
+                android:id="@+id/activity_movie_detailed_five_stars_component"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="@dimen/top_card_margin" />
 
             <Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/activity_movie_detailed_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"

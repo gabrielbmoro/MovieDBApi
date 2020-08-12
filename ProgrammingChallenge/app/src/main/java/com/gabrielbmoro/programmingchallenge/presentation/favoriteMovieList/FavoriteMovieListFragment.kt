@@ -1,4 +1,4 @@
-package com.gabrielbmoro.programmingchallenge.presentation.movieList
+package com.gabrielbmoro.programmingchallenge.presentation.favoriteMovieList
 
 import android.os.Bundle
 import android.view.View
@@ -10,7 +10,7 @@ import com.gabrielbmoro.programmingchallenge.presentation.favoriteMovieList.Favo
 import kotlinx.android.synthetic.main.fragment_favorite_movies_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FavoriteMovieListFragment : Fragment(R.layout.fragment_favorite_movies_list) {
+class FavoriteMovieListFragment : Fragment(R.layout.fragment_favorite_movies_list), ScrollableFragment {
 
     private val viewModel: FavoriteMoviesViewModel by viewModel()
     private val adapter = FavoriteMoviesListAdapter()
@@ -29,6 +29,10 @@ class FavoriteMovieListFragment : Fragment(R.layout.fragment_favorite_movies_lis
                     adapter.submitList(it)
                 }
         )
+    }
+
+    override fun scrollToTop() {
+        fragment_favorite_movies_list_rv_list.smoothScrollToPosition(0)
     }
 
 }

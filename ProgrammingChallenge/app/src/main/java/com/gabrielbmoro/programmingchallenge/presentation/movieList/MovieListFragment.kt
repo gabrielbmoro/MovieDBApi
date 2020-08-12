@@ -8,11 +8,12 @@ import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
 import com.gabrielbmoro.programmingchallenge.domain.model.convertToMovieListType
+import com.gabrielbmoro.programmingchallenge.presentation.favoriteMovieList.ScrollableFragment
 import com.gabrielbmoro.programmingchallenge.presentation.util.show
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
+class MovieListFragment : Fragment(R.layout.fragment_movies_list), ScrollableFragment {
 
     private val viewModel: MovieListViewModel by viewModel()
 
@@ -75,7 +76,7 @@ class MovieListFragment : Fragment(R.layout.fragment_movies_list) {
         }
     }
 
-    fun scrollToTop() {
+    override fun scrollToTop() {
         fragment_movies_list_rv_list.scrollToTop()
     }
 
