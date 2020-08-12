@@ -1,12 +1,13 @@
 package com.gabrielbmoro.programmingchallenge.repository.dataBase
 
+import androidx.paging.DataSource
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.repository.api.response.PageResponse
 
 class DataBaseRepositoryImpl(private val favoriteDao: FavoriteMoviesDAO) : MoviesRepository {
 
-    override suspend fun getFavoriteMovies(): List<Movie> {
+    override fun getFavoriteMovies(): DataSource.Factory<Int, Movie> {
         return favoriteDao.allFavoriteMovies()
     }
 

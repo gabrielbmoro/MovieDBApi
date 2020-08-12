@@ -1,5 +1,6 @@
 package com.gabrielbmoro.programmingchallenge.repository.api
 
+import androidx.paging.DataSource
 import com.gabrielbmoro.programmingchallenge.core.ConfigVariables
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
@@ -7,7 +8,7 @@ import com.gabrielbmoro.programmingchallenge.repository.api.response.PageRespons
 
 class ApiRepositoryImpl(private val apiRepository: ApiRepository) : MoviesRepository {
 
-    override suspend fun getFavoriteMovies() = emptyList<Movie>()
+    override fun getFavoriteMovies(): DataSource.Factory<Int, Movie>? = null
 
     override suspend fun getPopularMovies(pageNumber: Int): PageResponse {
         return apiRepository.getMovies(

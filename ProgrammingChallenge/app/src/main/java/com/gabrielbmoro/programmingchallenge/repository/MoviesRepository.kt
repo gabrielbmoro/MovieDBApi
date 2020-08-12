@@ -1,11 +1,12 @@
 package com.gabrielbmoro.programmingchallenge.repository
 
+import androidx.paging.DataSource
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.repository.api.response.PageResponse
 
 interface MoviesRepository {
 
-    suspend fun getFavoriteMovies(): List<Movie>
+    fun getFavoriteMovies(): DataSource.Factory<Int, Movie>?
 
     suspend fun getPopularMovies(pageNumber: Int): PageResponse?
 

@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.gabrielbmoro.programmingchallenge.R
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
+import com.gabrielbmoro.programmingchallenge.presentation.favoriteMovieList.ScrollableFragment
+import com.gabrielbmoro.programmingchallenge.presentation.favoriteMovieList.FavoriteMovieListFragment
 import com.gabrielbmoro.programmingchallenge.presentation.movieList.MovieListFragment
 import com.gabrielbmoro.programmingchallenge.presentation.settings.SettingsActivity
 import com.gabrielbmoro.programmingchallenge.presentation.util.setThemeAccordingToThePreferences
@@ -23,16 +25,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private val fragmentsList = listOf(
+    private val fragmentsList = listOf<Fragment>(
             MovieListFragment.newInstance(MovieListType.TopRated),
             MovieListFragment.newInstance(MovieListType.Popular),
-            MovieListFragment.newInstance(MovieListType.Favorite)
+            FavoriteMovieListFragment()
     )
     private val viewModel by viewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vwPagerComponent.adapter = object : FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+        activity_main_pager_component.adapter = object : FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             override fun getCount(): Int {
                 return fragmentsList.size
             }
@@ -42,29 +44,29 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
         }
 
-        vwPagerComponent.currentItem = viewModel.getPage()
-        vwPagerComponent.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        activity_main_pager_component.currentItem = viewModel.getPage()
+        activity_main_pager_component.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {}
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
             override fun onPageSelected(position: Int) {
                 when (position) {
-                    MainViewModel.TOP_RATED_PAGE -> bnvBottomMenu.selectedItemId = R.id.menuTopRatedMovies
-                    MainViewModel.POPULAR_PAGE -> bnvBottomMenu.selectedItemId = R.id.menuPopularMovies
-                    MainViewModel.FAVORITE_PAGE -> bnvBottomMenu.selectedItemId = R.id.menuFavoriteMovies
+                    MainViewModel.TOP_RATED_PAGE -> activity_main_bottom_menu.selectedItemId = R.id.menuTopRatedMovies
+                    MainViewModel.POPULAR_PAGE -> activity_main_bottom_menu.selectedItemId = R.id.menuPopularMovies
+                    MainViewModel.FAVORITE_PAGE -> activity_main_bottom_menu.selectedItemId = R.id.menuFavoriteMovies
                 }
                 viewModel.setPage(pageIndex = position)
             }
         })
 
-        bnvBottomMenu.setOnNavigationItemSelectedListener {
-            if (bnvBottomMenu.selectedItemId == it.itemId) {
-                (fragmentsList[vwPagerComponent.currentItem] as? MovieListFragment)?.scrollToTop()
+        activity_main_bottom_menu.setOnNavigationItemSelectedListener {
+            if (activity_main_bottom_menu.selectedItemId == it.itemId) {
+                (fragmentsList[activity_main_pager_component.currentItem] as? ScrollableFragment)?.scrollToTop()
             }
 
             when (it.itemId) {
-                R.id.menuTopRatedMovies -> vwPagerComponent.setCurrentItem(0, false)
-                R.id.menuPopularMovies -> vwPagerComponent.setCurrentItem(1, false)
-                R.id.menuFavoriteMovies -> vwPagerComponent.setCurrentItem(2, false)
+                R.id.menuTopRatedMovies -> activity_main_pager_component.setCurrentItem(0, false)
+                R.id.menuPopularMovies -> activity_main_pager_component.setCurrentItem(1, false)
+                R.id.menuFavoriteMovies -> activity_main_pager_component.setCurrentItem(2, false)
             }
             true
         }
@@ -72,7 +74,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         /**
          * Limit pages in memory.
          */
-        vwPagerComponent.offscreenPageLimit = 3
+        activity_main_pager_component.offscreenPageLimit = 3
 
 
         supportActionBar?.title = getString(R.string.home_title)

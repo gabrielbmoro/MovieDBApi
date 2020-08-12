@@ -26,7 +26,7 @@ class MainActivityTest {
     @Test
     fun whenIsTheFirstTabTryToGoToThePreviousTab() {
         // given
-        val viewPager = withId(R.id.vwPagerComponent)
+        val viewPager = withId(R.id.activity_main_pager_component)
 
         // when
         val viewInteraction = onView(viewPager).perform(ViewActions.swipeRight())
@@ -42,7 +42,7 @@ class MainActivityTest {
     @Test
     fun whenIsTheFirstTabTryToGoToTheNextTab() {
         // given
-        val viewPager = withId(R.id.vwPagerComponent)
+        val viewPager = withId(R.id.activity_main_pager_component)
 
         // when
         val viewInteraction = onView(viewPager).perform(ViewActions.swipeLeft())
@@ -58,7 +58,7 @@ class MainActivityTest {
     @Test
     fun whenIsTheSecondTabTryToGoToThePreviousTab() {
         // given
-        val viewPager = withId(R.id.vwPagerComponent)
+        val viewPager = withId(R.id.activity_main_pager_component)
 
         // when
         val viewInteraction = onView(viewPager)
@@ -76,7 +76,7 @@ class MainActivityTest {
     @Test
     fun whenIsTheSecondTabTryToGoToTheNextTab() {
         // given
-        val viewPager = withId(R.id.vwPagerComponent)
+        val viewPager = withId(R.id.activity_main_pager_component)
 
         // when
         val viewInteraction = onView(viewPager)
@@ -95,7 +95,7 @@ class MainActivityTest {
     @Test
     fun whenIsTheThirdTabTryToGoToThePreviousTab() {
         // given
-        val viewPager = withId(R.id.vwPagerComponent)
+        val viewPager = withId(R.id.activity_main_pager_component)
 
         // when
         val viewInteraction = onView(viewPager)
@@ -114,7 +114,7 @@ class MainActivityTest {
     @Test
     fun whenIsTheThirdTabTryToGoToTheNextTab() {
         // given
-        val viewPager = withId(R.id.vwPagerComponent)
+        val viewPager = withId(R.id.activity_main_pager_component)
 
         // when
         val viewInteraction = onView(viewPager)
@@ -133,7 +133,7 @@ class MainActivityTest {
     @Test
     fun whenIsTheThirdTabTryToGoToTheFirstTab() {
         // given
-        val viewPager = withId(R.id.vwPagerComponent)
+        val viewPager = withId(R.id.activity_main_pager_component)
 
         // when
         val viewInteraction = onView(viewPager)
