@@ -10,16 +10,16 @@
 
 ## Coverage 
 
-> _Last update 05/11/20_
+> _Last update 12/08/20_
 
 | Layer                | Coverage (% classes)      |
 |----------------------|:-------------------------:|
-| core                 | _62%_                     |
-| domain               | _100%_                    |
-| presentation         | _22%_                     |
-| repository           | _90%_                     |
+| core                 | _58%_                     |
+| domain               | _93%_                     |
+| presentation         | _15%_                     |
+| repository           | _64%_                     |
 
-Total: _61%_
+Total: _44%_
 
 
 
@@ -37,7 +37,7 @@ Total: _61%_
 | UI Tests             | Expresso, Truth         |
 | Network calls        | Retrofit                |
 | Json converter       | Retrofit - Gson         |
-| Persistence          | Room                    |
+| Persistence          | Room - with paging 2    |
 
 ## Teaser
 
