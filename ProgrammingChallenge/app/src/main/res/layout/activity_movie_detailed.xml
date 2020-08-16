@@ -167,8 +167,8 @@
 
             <com.gabrielbmoro.programmingchallenge.presentation.components.FiveStarsComponent
                 android:id="@+id/activity_movie_detailed_five_stars_component"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="120dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="@dimen/top_card_margin" />
 
