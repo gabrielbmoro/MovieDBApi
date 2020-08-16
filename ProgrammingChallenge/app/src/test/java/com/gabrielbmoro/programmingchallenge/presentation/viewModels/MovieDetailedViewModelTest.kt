@@ -5,9 +5,11 @@ import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedViewModel
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.koin.test.inject
 import org.mockito.Mockito
@@ -17,6 +19,10 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
 
     private lateinit var viewModel: MovieDetailedViewModel
     private val favoriteMovieUseCase by inject<FavoriteMovieUseCase>()
+
+    @ExperimentalCoroutinesApi
+    @get:Rule
+    var coroutinesTestRule = CoroutinesTestRule()
 
     @Before
     fun init() {
@@ -59,7 +65,7 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
     }
 
     @Test
-    fun  `movie can be selected as unFavorite`() {
+    fun `movie can be selected as unFavorite`() {
         // given
         val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
         val movie = emptyMovieObj()
