@@ -32,12 +32,11 @@ Total: _44%_
 | Load Images          | Glide                   |
 | View Binding         | Kotlin Synthatics       |
 | Handler to IO calls  | Coroutines              |
-| Screen Navigation    | Hard coded              |
 | Unit Tests           | JUnit, Truth, Mockito   |
-| UI Tests             | Expresso, Truth         |
+| UI Tests             | Espresso, Truth         |
 | Network calls        | Retrofit                |
 | Json converter       | Retrofit - Gson         |
-| Persistence          | Room - with paging 2    |
+| Persistence          | Room and Paging 2       |
 
 ## Teaser
 
