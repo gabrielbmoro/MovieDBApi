@@ -3,13 +3,13 @@ package com.gabrielbmoro.programmingchallenge.presentation.movieList
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult.Loading
 import com.gabrielbmoro.programmingchallenge.domain.usecase.PopularMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.TopRatedMoviesUseCase
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.concurrent.locks.ReentrantLock
 
@@ -41,7 +41,7 @@ class MovieListViewModel(
         var hasMorePages = false
         if (!lock.isLocked) {
             lock.lock()
-            GlobalScope.launch {
+            viewModelScope.launch {
                 try {
                     when (type) {
                         MovieListType.TopRated -> {

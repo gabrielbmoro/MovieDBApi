@@ -2,10 +2,10 @@ package com.gabrielbmoro.programmingchallenge.presentation.detailedScreen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MovieDetailedViewModel(private val favoriteMovieUseCase: FavoriteMovieUseCase) : ViewModel() {
@@ -15,7 +15,7 @@ class MovieDetailedViewModel(private val favoriteMovieUseCase: FavoriteMovieUseC
 
     fun setup(movie: Movie) {
         this.movie = movie
-        GlobalScope.launch {
+        viewModelScope.launch {
             try {
                 movie.isFavorite = favoriteMovieUseCase.isFavorite(movie)
                 onFavoriteMovieEvent.postValue(ViewModelResult.Success)
@@ -27,7 +27,7 @@ class MovieDetailedViewModel(private val favoriteMovieUseCase: FavoriteMovieUseC
 
     fun favoriteEvent(isToFavorite: Boolean) {
         movie?.let { m ->
-            GlobalScope.launch {
+            viewModelScope.launch {
                 try {
                     if (isToFavorite)
                         favoriteMovieUseCase.favoriteMovie(m)
