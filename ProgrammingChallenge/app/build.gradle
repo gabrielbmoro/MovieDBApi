@@ -9,8 +9,8 @@ android {
         applicationId "com.gabrielbmoro.programmingchallenge"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 15
-        versionName "1.0.9"
+        versionCode 16
+        versionName "1.0.11"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary true
     }
