@@ -18,20 +18,6 @@ class MovieViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     private val tvReleaseDate: TextView? = view.findViewById(R.id.tvReleaseDate)
     private val fiveStarsComponent: FiveStarsComponent? = view.findViewById(R.id.fiveStarsComponent)
 
-    fun bind(data: MovieData) {
-        ivPoster?.setImagePath(data.posterPath)
-        tvTitle?.text = data.movieTitle
-        tvReleaseDate?.text = data.releaseDate
-        fiveStarsComponent?.setVotesAvg(data.votes)
-        view.setOnClickListener {
-            (view.context as? Activity)?.let { activity ->
-                ivPoster?.let {
-                    MovieDetailedActivity.startActivity(activity, data.movieReference, ivPoster)
-                }
-            }
-        }
-    }
-
     fun bind(movie: Movie) {
         ivPoster?.setImagePath(movie.posterPath)
         tvTitle?.text = movie.title

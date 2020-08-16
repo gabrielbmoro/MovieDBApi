@@ -8,7 +8,7 @@ import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 
 class MoviesListAdapter : RecyclerView.Adapter<MovieViewHolder>() {
 
-    private val elements = ArrayList<MovieData>()
+    private val elements = ArrayList<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_holder_movie_card, parent, false))
@@ -32,33 +32,19 @@ class MoviesListAdapter : RecyclerView.Adapter<MovieViewHolder>() {
 
     fun setup(movieDataList: List<Movie>) {
         elements.clear()
-        elements.addAll(
-                movieDataList.mapToElements()
-        )
+        elements.addAll(movieDataList)
         notifyDataSetChanged()
     }
 
     fun update(newElements: List<Movie>) {
         val previousSize = elements.size
         elements.addAll(
-                newElements.mapToElements()
+                newElements
         )
         notifyItemRangeInserted(previousSize, newElements.size)
     }
 
     companion object {
         const val VIEW_TYPE = -123
-    }
-}
-
-fun List<Movie>.mapToElements(): List<MovieData> {
-    return this.map { movie ->
-        MovieData(
-                posterPath = movie.posterPath,
-                movieTitle = movie.title,
-                releaseDate = movie.releaseDate,
-                votes = movie.votesAverage,
-                movieReference = movie
-        )
     }
 }
