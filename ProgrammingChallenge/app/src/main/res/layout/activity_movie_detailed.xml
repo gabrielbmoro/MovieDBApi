@@ -21,15 +21,6 @@
             android:layout_marginTop="@dimen/default_margin_space"
             android:layout_marginEnd="@dimen/default_margin_space">
 
-            <Space
-                android:id="@+id/activity_movie_detailed_space_1"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_height"
-                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_tv_original_title_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/activity_movie_detailed_tv_original_title_label"
                 android:layout_width="0dp"
@@ -39,7 +30,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_tv_original_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_space_1" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/activity_movie_detailed_tv_original_title"
@@ -47,31 +38,21 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_space_2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_tv_original_title_label"
                 tools:text="O grande dragão branco" />
-
-            <Space
-                android:id="@+id/activity_movie_detailed_space_2"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_height"
-                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_overview_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_tv_original_title" />
 
             <TextView
                 android:id="@+id/activity_movie_detailed_overview_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/overview"
+                android:layout_marginTop="@dimen/default_margin_space"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_overview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_space_2" />
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_tv_original_title" />
 
             <TextView
                 android:id="@+id/activity_movie_detailed_overview"
@@ -79,31 +60,21 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_space_3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_overview_label"
                 tools:text="@string/description_example" />
-
-            <Space
-                android:id="@+id/activity_movie_detailed_space_3"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_height"
-                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_language_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_overview" />
 
             <TextView
                 android:id="@+id/activity_movie_detailed_language_title_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/language"
+                android:layout_marginTop="@dimen/default_margin_space"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_language_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_space_3" />
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_overview" />
 
             <TextView
                 android:id="@+id/activity_movie_detailed_language_title"
@@ -111,31 +82,21 @@
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_space_4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_language_title"
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_language_title_label"
                 tools:text="en-US" />
-
-            <Space
-                android:id="@+id/activity_movie_detailed_space_4"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/space_height"
-                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_tv_popularity"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_language_title" />
 
             <TextView
                 android:id="@+id/activity_movie_detailed_tv_popularity_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/popularity"
+                android:layout_marginTop="@dimen/default_margin_space"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_constraintBottom_toTopOf="@+id/activity_movie_detailed_tv_popularity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_space_4" />
+                app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_language_title" />
 
             <TextView
                 android:id="@+id/activity_movie_detailed_tv_popularity"
@@ -144,7 +105,6 @@
                 android:layout_marginBottom="8dp"
                 android:lineSpacingExtra="4dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activity_movie_detailed_tv_popularity_label"
