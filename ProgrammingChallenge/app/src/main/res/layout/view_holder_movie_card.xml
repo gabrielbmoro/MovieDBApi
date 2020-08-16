@@ -13,7 +13,7 @@
     app:cardCornerRadius="10dp">
 
     <ImageView
-        android:id="@+id/ivPoster"
+        android:id="@+id/view_holder_movie_card_poster"
         android:layout_width="@dimen/poster_card_width"
         android:layout_height="280dp"
         android:layout_gravity="top|start"
@@ -23,7 +23,7 @@
         tools:src="@drawable/jean_claude_van_damme" />
 
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@+id/view_holder_movie_card_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top|start"
@@ -34,7 +34,7 @@
         tools:text="@string/grande_dragao_branco" />
 
     <TextView
-        android:id="@+id/tvReleaseDate"
+        android:id="@+id/view_holder_movie_card_release_date"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_gravity="top|start"
@@ -46,7 +46,7 @@
 
 
     <com.gabrielbmoro.programmingchallenge.presentation.components.FiveStarsComponent
-        android:id="@+id/fiveStarsComponent"
+        android:id="@+id/view_holder_movie_card_five_stars_component"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="top|start"
