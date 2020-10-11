@@ -1,6 +1,7 @@
 package com.gabrielbmoro.programmingchallenge.core
 
 import androidx.room.Room
+import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.usecase.*
 import com.gabrielbmoro.programmingchallenge.presentation.MainViewModel
 import com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedViewModel
@@ -61,6 +62,8 @@ val usecaseModule = module {
 val viewModelModules = module {
     viewModel { MovieListViewModel(get(), get()) }
     viewModel { FavoriteMoviesViewModel(get()) }
-    viewModel { MovieDetailedViewModel(get()) }
+    viewModel {
+        (movie: Movie) -> MovieDetailedViewModel(movie, get())
+    }
     viewModel { MainViewModel() }
 }

@@ -8,13 +8,14 @@ import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import kotlinx.coroutines.launch
 
-class MovieDetailedViewModel(private val favoriteMovieUseCase: FavoriteMovieUseCase) : ViewModel() {
+class MovieDetailedViewModel(
+        val movie: Movie,
+        private val favoriteMovieUseCase: FavoriteMovieUseCase
+) : ViewModel() {
 
-    private var movie: Movie? = null
     val onFavoriteMovieEvent = MutableLiveData<ViewModelResult>()
 
-    fun setup(movie: Movie) {
-        this.movie = movie
+    init {
         viewModelScope.launch {
             try {
                 movie.isFavorite = favoriteMovieUseCase.isFavorite(movie)
@@ -26,21 +27,17 @@ class MovieDetailedViewModel(private val favoriteMovieUseCase: FavoriteMovieUseC
     }
 
     fun favoriteEvent(isToFavorite: Boolean) {
-        movie?.let { m ->
-            viewModelScope.launch {
-                try {
-                    if (isToFavorite)
-                        favoriteMovieUseCase.favoriteMovie(m)
-                    else
-                        favoriteMovieUseCase.unFavoriteMovie(m)
-                    movie?.isFavorite = isToFavorite
-                    onFavoriteMovieEvent.postValue(ViewModelResult.Success)
-                } catch (exception: Exception) {
-                    onFavoriteMovieEvent.postValue(ViewModelResult.Error)
-                }
+        viewModelScope.launch {
+            try {
+                if (isToFavorite)
+                    favoriteMovieUseCase.favoriteMovie(movie)
+                else
+                    favoriteMovieUseCase.unFavoriteMovie(movie)
+                movie.isFavorite = isToFavorite
+                onFavoriteMovieEvent.postValue(ViewModelResult.Success)
+            } catch (exception: Exception) {
+                onFavoriteMovieEvent.postValue(ViewModelResult.Error)
             }
         }
     }
-
-    fun getMovie() = movie
 }

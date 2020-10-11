@@ -8,4 +8,5 @@
     <dimen name="space_height">24dp</dimen>
     <dimen name="button_height">56dp</dimen>
     <dimen name="top_card_margin">12dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
 </resources>
