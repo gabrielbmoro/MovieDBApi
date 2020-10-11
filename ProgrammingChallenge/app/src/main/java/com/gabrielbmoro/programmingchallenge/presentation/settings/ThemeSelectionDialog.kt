@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager
 import com.gabrielbmoro.programmingchallenge.R
 import kotlinx.android.synthetic.main.dialog_theme_selection.*
 
-class ThemeSelectionDialog(val currentTheme : Int) : DialogFragment() {
+class ThemeSelectionDialog(val currentTheme: Int) : DialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.dialog_theme_selection, container)
@@ -20,25 +20,29 @@ class ThemeSelectionDialog(val currentTheme : Int) : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // select the current theme
-        when(currentTheme){
-            AppCompatDelegate.MODE_NIGHT_NO -> dialog_theme_selection_day_option.isChecked = true
-            AppCompatDelegate.MODE_NIGHT_YES -> dialog_theme_selection_night_option.isChecked = true
-            AppCompatDelegate.MODE_NIGHT_AUTO -> dialog_theme_selection_automatic_option.isChecked = true
-        }
+        val preferencesOptions = resources.getTextArray(R.array.pref_themes)
+        if (preferencesOptions.size >= 3) {
+            val optionValue = when (currentTheme) {
+                AppCompatDelegate.MODE_NIGHT_AUTO -> preferencesOptions[0]
+                AppCompatDelegate.MODE_NIGHT_YES -> preferencesOptions[1]
+                AppCompatDelegate.MODE_NIGHT_NO -> preferencesOptions[2]
+                else -> ""
+            }
+            dialog_theme_selection_group.setCheckTo(optionValue)
 
-        dialog_theme_selection_group.setOnCheckedChangeListener { _, checkedId ->
-            targetFragment?.onActivityResult(
-                    REQUEST_CODE,
-                    when (checkedId) {
-                        R.id.dialog_theme_selection_day_option -> AppCompatDelegate.MODE_NIGHT_NO
-                        R.id.dialog_theme_selection_night_option -> AppCompatDelegate.MODE_NIGHT_YES
-                        R.id.dialog_theme_selection_automatic_option -> AppCompatDelegate.MODE_NIGHT_AUTO
-                        else -> AppCompatDelegate.MODE_NIGHT_NO
-                    },
-                    null
-            )
-            dismiss()
+            dialog_theme_selection_group.setupCallback { selectedItem ->
+                targetFragment?.onActivityResult(
+                        REQUEST_CODE,
+                        when (selectedItem) {
+                            preferencesOptions[0] -> AppCompatDelegate.MODE_NIGHT_AUTO
+                            preferencesOptions[1] -> AppCompatDelegate.MODE_NIGHT_YES
+                            preferencesOptions[2] -> AppCompatDelegate.MODE_NIGHT_NO
+                            else -> AppCompatDelegate.MODE_NIGHT_NO
+                        },
+                        null
+                )
+                dismiss()
+            }
         }
     }
 
