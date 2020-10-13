@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'file:///C:/Users/gabri/Documents/svn/personal/MovieDBApi/flutter-version/ProgrammingChallenge/movie_db_app/lib/presentation/screens/home_page.dart';
 import 'package:movie_db_app/presentation/colors.dart';
 
-void main() => runApp(MyApp());
+const String BASE_URL = 'https://api.themoviedb.org/3/';
+const String TOKEN = '755e0c67ac2fa886e775fb9057f0a32f';
+const String DATA_BASE_NAME = 'MovieDBAppDataBase';
+const String BASE_IMAGE_ADDRESS = 'https://image.tmdb.org/t/p/w780';
+const String PARAMETER_POPULAR_MOVIES = 'popularity.desc';
+const String PARAMETER_TOP_RATED_MOVIES = 'vote_average.desc';
 
-class MyApp extends StatelessWidget {
+void main() => runApp(MovieDBApi());
+
+class MovieDBApi extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
