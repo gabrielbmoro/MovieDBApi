@@ -8,12 +8,15 @@ class MovieDBRepository {
     _api = api;
   }
 
-  Future<Page> getMovies({String apiKey, String sortBy, int pageNumber}) {
-    final page = _api.getMovies(
-      apiKey: apiKey,
-      sortBy: sortBy,
+  Future<Page> getPopularMovies({int pageNumber}) {
+    return _api.getPopularMovies(
       pageNumber: pageNumber,
     );
-    return page;
+  }
+
+  Future<Page> getTopRatedMovies({int pageNumber}) {
+    return _api.getTopRatedMovies(
+      pageNumber: pageNumber,
+    );
   }
 }

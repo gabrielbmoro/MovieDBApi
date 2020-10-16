@@ -1,4 +1,4 @@
-import 'package:movie_db_app/main.dart';
+import 'package:movie_db_app/domain/model/page.dart';
 import 'package:movie_db_app/repository/movie_db_api_repository.dart';
 
 class PopularMoviesUseCase {
@@ -8,10 +8,9 @@ class PopularMoviesUseCase {
     _repository = repository;
   }
 
-  execute(int pageNumber) {
-    return _repository.getMovies(
-        apiKey: TOKEN,
-        pageNumber: pageNumber,
-        sortBy: PARAMETER_POPULAR_MOVIES);
+  Future<Page> execute(int pageNumber) {
+    return _repository.getPopularMovies(
+      pageNumber: pageNumber
+    );
   }
 }
