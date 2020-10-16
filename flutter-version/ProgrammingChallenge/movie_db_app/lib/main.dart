@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Users/gabri/Documents/svn/personal/MovieDBApi/flutter-version/ProgrammingChallenge/movie_db_app/lib/presentation/screens/home_page.dart';
 import 'package:movie_db_app/presentation/colors.dart';
+import 'presentation/screens/home_page.dart';
 
-void main() => runApp(MyApp());
+const String DATA_BASE_NAME = 'MovieDBAppDataBase';
 
-class MyApp extends StatelessWidget {
+void main() => runApp(MovieDBApi());
+
+class MovieDBApi extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
