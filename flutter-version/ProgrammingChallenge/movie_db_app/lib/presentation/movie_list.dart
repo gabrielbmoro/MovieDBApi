@@ -1,18 +1,22 @@
 import 'package:flutter/cupertino.dart';
-import 'package:movie_db_app/domain/model/movie_type.dart';
+import 'package:flutter/material.dart';
+import 'package:movie_db_app/domain/model/movie.dart';
 
 // ignore: must_be_immutable
 class MovieList extends StatelessWidget {
-  MovieType _type;
+  List<Movie> _movies;
 
-  MovieList(MovieType type) {
-    _type = type;
+  MovieList(List<Movie> movies) {
+    _movies = movies;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(_type.name()),
+    return ListView.builder(
+      itemCount: _movies.length,
+      itemBuilder: (context, position) => Text(
+        _movies[position].title,
+      ),
     );
   }
 }

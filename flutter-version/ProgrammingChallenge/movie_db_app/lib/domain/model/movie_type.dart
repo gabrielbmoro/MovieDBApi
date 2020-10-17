@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_db_app/presentation/common/strings.dart';
 
-const TOP_RATED_MOVIES_TAB_INDEX = 0;
-const POPULAR_MOVIES_TAB_INDEX = 1;
-const FAVORITE_MOVIES_TAB_INDEX = 2;
 const INVALID_INDEX = -1;
 
 enum MovieType { TOP_RATED_MOVIES, FAVORITE_MOVIES, POPULAR_MOVIES }
