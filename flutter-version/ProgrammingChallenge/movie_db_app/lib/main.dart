@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_db_app/presentation/colors.dart';
-import 'presentation/screens/home_page.dart';
+import 'presentation/common/colors.dart';
+import 'presentation/home_page.dart';
 
 const String DATA_BASE_NAME = 'MovieDBAppDataBase';
 
