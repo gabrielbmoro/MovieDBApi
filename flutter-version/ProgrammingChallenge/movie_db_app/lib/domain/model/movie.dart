@@ -44,36 +44,6 @@ class Movie {
     this.releaseDate = releaseDate;
   }
 
-  factory Movie.fromJson(Map<String, dynamic> json) {
-    final int votes = json['vote_count'];
-    final bool isVideo = json['video'];
-    final int votesAverage = 0; //json['vote_average'];
-    final String title = json['title'];
-    final int popularity = 0; //json['popularity'];
-    final String posterPath = json['poster_path'];
-    final String originalLanguage = json['original_language'];
-    final String originalTitle = json['original_title'];
-    final String backdropPath = json['backdrop_path'];
-    final bool isAdult = json['adult'];
-    final String overview = json['overview'];
-    final String releaseDate = json['release_date'];
-
-    return Movie(
-      votes: votes,
-      isVideo: isVideo,
-      votesAverage: votesAverage,
-      title: title,
-      popularity: popularity,
-      postPath: posterPath,
-      originalLanguage: originalLanguage,
-      originalTitle: originalTitle,
-      backdropPath: backdropPath,
-      isAdult: isAdult,
-      overview: overview,
-      releaseDate: releaseDate,
-    );
-  }
-
   @override
   String toString() {
     return "$title -> popularity $popularity, votes $votesAverage";
