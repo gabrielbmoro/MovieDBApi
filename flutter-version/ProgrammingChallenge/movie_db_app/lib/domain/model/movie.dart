@@ -16,19 +16,18 @@ class Movie {
   String releaseDate;
   bool isFavorite = false;
 
-  Movie(
-      {@required int votesAverage,
-      @required String title,
-      @required bool isVideo,
-      @required int votes,
-      @required int popularity,
-      @required String postPath,
-      @required String originalLanguage,
-      @required String originalTitle,
-      @required String backdropPath,
-      @required bool isAdult,
-      @required String overview,
-      @required String releaseDate}) {
+  Movie({@required int votesAverage,
+    @required String title,
+    @required bool isVideo,
+    @required int votes,
+    @required int popularity,
+    @required String postPath,
+    @required String originalLanguage,
+    @required String originalTitle,
+    @required String backdropPath,
+    @required bool isAdult,
+    @required String overview,
+    @required String releaseDate}) {
     this.id = id;
     this.votesAverage = votesAverage;
     this.title = title;
@@ -42,6 +41,10 @@ class Movie {
     this.isAdult = isAdult;
     this.overview = overview;
     this.releaseDate = releaseDate;
+  }
+
+  String imageAddress() {
+    return "https://image.tmdb.org/t/p/w500$postPath";
   }
 
   @override

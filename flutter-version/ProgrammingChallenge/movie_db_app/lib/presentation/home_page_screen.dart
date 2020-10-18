@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:movie_db_app/core/use_case_factory.dart';
 import 'package:movie_db_app/domain/model/movie.dart';
 import 'package:movie_db_app/domain/model/movie_type.dart';
-import 'package:movie_db_app/presentation/movie_list.dart';
+import 'file:///C:/Users/gabri/Documents/svn/personal/MovieDBApi/flutter-version/ProgrammingChallenge/movie_db_app/lib/presentation/components/movieList/movie_list.dart';
 
-class HomePage extends StatefulWidget {
+class HomePageScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _HomePageState();
+  State<StatefulWidget> createState() => _HomePageScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageScreenState extends State<HomePageScreen> {
   List<Movie> _topRatedMovies = [];
   List<Movie> _favoriteMovies = [];
   List<Movie> _popularMovies = [];
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   int _currentTabIndex;
 
-  _HomePageState() {
+  _HomePageScreenState() {
     _currentTabIndex = 0;
     UseCaseFactory.getTopRatedUseCase().execute(_topRatedMoviesPageIndex).then(
           (value) => this.updateTheState(
@@ -80,8 +80,8 @@ class _HomePageState extends State<HomePage> {
   List<BottomNavigationBarItem> _getMenuItems() {
     final movieTypes = [
       MovieType.TOP_RATED_MOVIES,
+      MovieType.POPULAR_MOVIES,
       MovieType.FAVORITE_MOVIES,
-      MovieType.POPULAR_MOVIES
     ];
 
     return movieTypes
