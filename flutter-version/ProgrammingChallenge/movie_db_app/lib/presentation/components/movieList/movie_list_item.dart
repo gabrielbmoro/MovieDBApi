@@ -23,7 +23,16 @@ class MovieListCell extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                Text(_movie.title),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    _movie.title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 Text(_movie.releaseDate),
                 Text(_movie.votesAverage.toString()),
               ],

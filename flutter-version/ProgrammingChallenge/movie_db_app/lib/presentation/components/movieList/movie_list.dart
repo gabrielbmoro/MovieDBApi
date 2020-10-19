@@ -8,15 +8,15 @@ import 'movie_list_item.dart';
 
 // ignore: must_be_immutable
 class MovieList extends StatefulWidget {
-  _MovieListState _state;
+  MovieType _movieType;
 
   MovieList(MovieType movieType) {
-    _state = _MovieListState(movieType);
+    _movieType = movieType;
   }
 
   @override
   State<StatefulWidget> createState() {
-    return _state;
+    return _MovieListState(_movieType);
   }
 }
 
