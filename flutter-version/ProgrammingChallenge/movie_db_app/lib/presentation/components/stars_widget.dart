@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_db_app/presentation/common/colors.dart';
 
 // ignore: must_be_immutable
-class StarWidget extends StatelessWidget {
+class StarsWidget extends StatelessWidget {
   Icon _firstStar;
   Icon _secondStar;
   Icon _thirdStar;
@@ -13,7 +13,7 @@ class StarWidget extends StatelessWidget {
   static const AVERAGE_TOTAL = 10.0;
   static const STARS_AVAILABLE = 5.0;
 
-  StarWidget(num votes) {
+  StarsWidget(num votes) {
     final numberOfStars = (votes / AVERAGE_TOTAL) * STARS_AVAILABLE;
     _firstStar = Icon(
       _getAccordingToStarPosition(votes: numberOfStars, position: 1),
