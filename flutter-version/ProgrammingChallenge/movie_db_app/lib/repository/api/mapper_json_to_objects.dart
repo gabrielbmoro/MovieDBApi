@@ -2,7 +2,6 @@ import 'package:movie_db_app/domain/model/movie.dart';
 import 'package:movie_db_app/domain/model/page.dart';
 
 class PageMapper {
-
   MovieMapper _movieMapper = MovieMapper();
 
   fromJson(Map<String, dynamic> json) {
@@ -17,7 +16,7 @@ class PageMapper {
         movies.add(movie);
       }
     });
-    return Page(movies: movies, hasMorePages: (page < totalPages));
+    return Page(movieList: movies, hasMorePages: (page < totalPages));
   }
 }
 
