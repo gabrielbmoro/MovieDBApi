@@ -62,17 +62,13 @@ class _MovieListState extends State<MovieList> {
     }
   }
 
-  _callMovieDetailsScreen(BuildContext context, Movie movie) {
-    MovieDetailsScreen.launch(context, movie);
-  }
-
   _gestureDetector({BuildContext context, Movie movie}) {
     return GestureDetector(
       child: Container(
         padding: EdgeInsets.all(8),
         child: MovieListCell(movie),
       ),
-      onTap: _callMovieDetailsScreen(context, movie),
+      onTap: () => MovieDetailsScreen.launch(context, movie),
     );
   }
 
