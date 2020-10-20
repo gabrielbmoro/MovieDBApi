@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_db_app/domain/model/movie.dart';
+import 'package:movie_db_app/presentation/components/stars_widget.dart';
 
 // ignore: must_be_immutable
 class MovieListCell extends StatelessWidget {
@@ -23,9 +24,18 @@ class MovieListCell extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                Text(_movie.title),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    _movie.title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 Text(_movie.releaseDate),
-                Text(_movie.votesAverage.toString()),
+                StarsWidget(_movie.votesAverage),
               ],
             ),
           )

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class Movie {
   int id;
-  int votesAverage;
+  num votesAverage;
   String title;
   bool isVideo;
   int votes;
-  int popularity;
+  num popularity;
   String postPath;
   String originalLanguage;
   String originalTitle;
@@ -16,32 +16,20 @@ class Movie {
   String releaseDate;
   bool isFavorite = false;
 
-  Movie({@required int votesAverage,
-    @required String title,
-    @required bool isVideo,
-    @required int votes,
-    @required int popularity,
-    @required String postPath,
-    @required String originalLanguage,
-    @required String originalTitle,
-    @required String backdropPath,
-    @required bool isAdult,
-    @required String overview,
-    @required String releaseDate}) {
-    this.id = id;
-    this.votesAverage = votesAverage;
-    this.title = title;
-    this.isVideo = isVideo;
-    this.votes = votes;
-    this.popularity = popularity;
-    this.postPath = postPath;
-    this.originalLanguage = originalLanguage;
-    this.originalTitle = originalTitle;
-    this.backdropPath = backdropPath;
-    this.isAdult = isAdult;
-    this.overview = overview;
-    this.releaseDate = releaseDate;
-  }
+  Movie({
+    @required this.votesAverage,
+    @required this.title,
+    @required this.isVideo,
+    @required this.votes,
+    @required this.popularity,
+    @required this.postPath,
+    @required this.originalLanguage,
+    @required this.originalTitle,
+    @required this.backdropPath,
+    @required this.isAdult,
+    @required this.overview,
+    @required this.releaseDate,
+  });
 
   String imageAddress() {
     return "https://image.tmdb.org/t/p/w500$postPath";
