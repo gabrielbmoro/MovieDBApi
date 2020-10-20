@@ -25,9 +25,9 @@ class MovieMapper {
   fromJson(Map<String, dynamic> json) {
     final int votes = json['vote_count'];
     final bool isVideo = json['video'];
-    final int votesAverage = 0; //json['vote_average'];
+    final num votesAverage = json['vote_average'];
     final String title = json['title'];
-    final int popularity = 0; //json['popularity'];
+    final num popularity = json['popularity'];
     final String posterPath = json['poster_path'];
     final String originalLanguage = json['original_language'];
     final String originalTitle = json['original_title'];

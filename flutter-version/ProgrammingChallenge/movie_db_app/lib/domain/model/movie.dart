@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class Movie {
   int id;
-  int votesAverage;
+  num votesAverage;
   String title;
   bool isVideo;
   int votes;
-  int popularity;
+  num popularity;
   String postPath;
   String originalLanguage;
   String originalTitle;
@@ -16,11 +16,11 @@ class Movie {
   String releaseDate;
   bool isFavorite = false;
 
-  Movie({@required int votesAverage,
+  Movie({@required num votesAverage,
     @required String title,
     @required bool isVideo,
     @required int votes,
-    @required int popularity,
+    @required num popularity,
     @required String postPath,
     @required String originalLanguage,
     @required String originalTitle,
