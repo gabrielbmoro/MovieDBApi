@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_db_app/presentation/common/colors.dart';
 
 // ignore: must_be_immutable
 class StarWidget extends StatelessWidget {
@@ -16,18 +17,23 @@ class StarWidget extends StatelessWidget {
     final numberOfStars = (votes / AVERAGE_TOTAL) * STARS_AVAILABLE;
     _firstStar = Icon(
       _getAccordingToStarPosition(votes: numberOfStars, position: 1),
+      color: starColor,
     );
     _secondStar = Icon(
       _getAccordingToStarPosition(votes: numberOfStars, position: 2),
+      color: starColor,
     );
     _thirdStar = Icon(
       _getAccordingToStarPosition(votes: numberOfStars, position: 3),
+      color: starColor,
     );
     _fourthStar = Icon(
       _getAccordingToStarPosition(votes: numberOfStars, position: 4),
+      color: starColor,
     );
     _fifthStar = Icon(
       _getAccordingToStarPosition(votes: numberOfStars, position: 5),
+      color: starColor,
     );
   }
 
@@ -47,13 +53,13 @@ class StarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FittedBox(
       child: Row(
-          children: [
-            _firstStar,
-            _secondStar,
-            _thirdStar,
-            _fourthStar,
-            _fifthStar,
-          ],
+        children: [
+          _firstStar,
+          _secondStar,
+          _thirdStar,
+          _fourthStar,
+          _fifthStar,
+        ],
       ),
     );
   }
