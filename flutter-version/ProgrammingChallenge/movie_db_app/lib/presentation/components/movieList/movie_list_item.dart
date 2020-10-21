@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_db_app/domain/model/movie.dart';
-import 'package:movie_db_app/presentation/common/strings.dart';
 import 'package:movie_db_app/presentation/components/stars_widget.dart';
-
+import '../image_loader_widget.dart';
 import '../text_section_title_widget.dart';
 
 // ignore: must_be_immutable
@@ -20,9 +19,7 @@ class MovieListCell extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
-            child: Image(
-              image: NetworkImage(_movie.imageAddress()),
-            ),
+            child: ImageLoader(_movie.imageAddress()),
           ),
           Expanded(
             child: Column(

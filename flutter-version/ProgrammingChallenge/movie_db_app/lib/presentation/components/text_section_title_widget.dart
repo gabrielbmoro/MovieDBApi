@@ -13,7 +13,6 @@ class TextSectionTitle extends StatelessWidget {
       textAlign:TextAlign.start,
       style: TextStyle(
         fontSize: 18,
-        fontWeight: FontWeight.bold,
       ),
     );
   }

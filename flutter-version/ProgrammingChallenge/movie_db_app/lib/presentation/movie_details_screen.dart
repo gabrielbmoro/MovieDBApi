@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_db_app/domain/model/movie.dart';
 import 'package:movie_db_app/presentation/common/strings.dart';
+import 'package:movie_db_app/presentation/components/image_loader_widget.dart';
 import 'package:movie_db_app/presentation/components/text_section_title_widget.dart';
 import 'components/text_section_label_widget.dart';
 
@@ -41,9 +42,7 @@ class _MovieDetailsScreen extends State<MovieDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FittedBox(
-                child: Image.network(
-                  _movie.imageAddress(),
-                ),
+                child: ImageLoader(_movie.imageAddress()),
               ),
               _wrappingSectionLabel(TextSectionLabel(ORIGINAL_TITLE)),
               _wrappingSectionContent(TextSectionTitle(_movie.title)),
