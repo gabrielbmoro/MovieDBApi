@@ -19,7 +19,10 @@ class MovieListCell extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
-            child: ImageLoader(_movie.imageAddress()),
+            child: ImageLoader(
+              _movie.imageAddress(),
+              400,
+            ),
           ),
           Expanded(
             child: Column(

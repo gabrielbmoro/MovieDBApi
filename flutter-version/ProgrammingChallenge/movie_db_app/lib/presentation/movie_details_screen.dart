@@ -4,6 +4,8 @@ import 'package:movie_db_app/domain/model/movie.dart';
 import 'package:movie_db_app/presentation/common/strings.dart';
 import 'package:movie_db_app/presentation/components/image_loader_widget.dart';
 import 'package:movie_db_app/presentation/components/text_section_title_widget.dart';
+import 'common/colors.dart';
+import 'components/stars_widget.dart';
 import 'components/text_section_label_widget.dart';
 
 // ignore: must_be_immutable
@@ -41,8 +43,9 @@ class _MovieDetailsScreen extends State<MovieDetailsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageLoader(
-                _movie.imageAddress(),
+              _buildHeader(
+                imageAddress: _movie.imageAddress(),
+                numOfVotes: _movie.votes,
               ),
               _wrappingSectionLabel(TextSectionLabel(ORIGINAL_TITLE)),
               _wrappingSectionContent(TextSectionTitle(_movie.title)),
@@ -56,6 +59,25 @@ class _MovieDetailsScreen extends State<MovieDetailsScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildHeader({String imageAddress, int numOfVotes}) {
+    return Stack(
+      children: [
+        ImageLoader(imageAddress, 400),
+        Container(
+          color: cardTransparentMask,
+          width: double.infinity,
+          height: 400,
+        ),
+        Positioned(
+          bottom: 40,
+          right: 16,
+          height: 32,
+          child: StarsWidget(numOfVotes),
+        )
+      ],
     );
   }
 
