@@ -41,8 +41,8 @@ class _MovieDetailsScreen extends State<MovieDetailsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FittedBox(
-                child: ImageLoader(_movie.imageAddress()),
+              ImageLoader(
+                _movie.imageAddress(),
               ),
               _wrappingSectionLabel(TextSectionLabel(ORIGINAL_TITLE)),
               _wrappingSectionContent(TextSectionTitle(_movie.title)),
