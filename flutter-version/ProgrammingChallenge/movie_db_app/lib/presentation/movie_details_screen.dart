@@ -5,6 +5,7 @@ import 'package:movie_db_app/presentation/common/strings.dart';
 import 'package:movie_db_app/presentation/components/image_loader_widget.dart';
 import 'package:movie_db_app/presentation/components/text_section_title_widget.dart';
 import 'common/colors.dart';
+import 'components/favorite_button.dart';
 import 'components/stars_widget.dart';
 import 'components/text_section_label_widget.dart';
 
@@ -76,6 +77,13 @@ class _MovieDetailsScreen extends State<MovieDetailsScreen> {
           right: 16,
           height: 32,
           child: StarsWidget(numOfVotes),
+        ),
+        Positioned(
+          bottom: 40,
+          left: 16,
+          child: FavoriteButton(
+            false,
+          ),
         )
       ],
     );
