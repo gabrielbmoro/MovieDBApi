@@ -61,11 +61,14 @@ class _MovieListState extends State<MovieList> {
       Future<page.Page> futurePage;
       switch (_type) {
         case MovieType.TOP_RATED_MOVIES:
-          futurePage = UseCaseFactory.getTopRatedUseCase().execute(pageNumber);
+          futurePage = UseCaseFactory.getTopRatedUseCase().execute(
+            pageNumber,
+          );
           break;
         case MovieType.POPULAR_MOVIES:
-          futurePage =
-              UseCaseFactory.getPopularMoviesUseCase().execute(pageNumber);
+          futurePage = UseCaseFactory.getPopularMoviesUseCase().execute(
+            pageNumber,
+          );
           break;
         default:
           futurePage = null;

@@ -10,7 +10,7 @@ class PopularMoviesUseCase {
 
   Future<Page> execute(int pageNumber) {
     return _repository.getPopularMovies(
-      pageNumber: pageNumber
+      pageNumber: pageNumber,
     );
   }
 }
