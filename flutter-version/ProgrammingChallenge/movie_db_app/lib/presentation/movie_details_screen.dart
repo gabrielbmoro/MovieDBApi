@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_db_app/core/use_case_factory.dart';
 import 'package:movie_db_app/domain/model/movie.dart';
 import 'package:movie_db_app/presentation/common/strings.dart';
 import 'package:movie_db_app/presentation/components/image_loader_widget.dart';
@@ -29,8 +30,21 @@ class MovieDetailsScreen extends StatefulWidget {
 
 class _MovieDetailsScreen extends State<MovieDetailsScreen> {
   Movie _movie;
+  bool _isFavoriteMovie = false;
 
   _MovieDetailsScreen(this._movie);
+
+  @override
+  void initState() {
+    super.initState();
+
+    UseCaseFactory.getFavoriteMoviesUseCase()
+        .execute()
+        .then((value) => _updateFavoriteButton(
+              value.movieList.any((element) =>
+                  element.originalTitle == this._movie.originalTitle),
+            ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,11 +96,31 @@ class _MovieDetailsScreen extends State<MovieDetailsScreen> {
           bottom: 40,
           left: 16,
           child: FavoriteButton(
-            false,
-          ),
+              _isFavoriteMovie,
+              () => {
+                    UseCaseFactory.favoriteMoviesUseCase()
+                        .execute(
+                          movie: _movie,
+                          isToFavoriteOrNot: !_isFavoriteMovie,
+                        )
+                        .then((result) =>
+                            _changeFavoriteValueJustIsSuccess(result))
+                  }),
         )
       ],
     );
+  }
+
+  _changeFavoriteValueJustIsSuccess(bool wasSuccess) {
+    if (wasSuccess) {
+      _updateFavoriteButton(!_isFavoriteMovie);
+    }
+  }
+
+  _updateFavoriteButton(bool newValue) {
+    setState(() {
+      _isFavoriteMovie = newValue;
+    });
   }
 
   Widget _wrappingSectionLabel(Widget widget) {

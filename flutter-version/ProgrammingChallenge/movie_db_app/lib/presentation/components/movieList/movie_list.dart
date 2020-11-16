@@ -70,6 +70,9 @@ class _MovieListState extends State<MovieList> {
             pageNumber,
           );
           break;
+        case MovieType.FAVORITE_MOVIES:
+          futurePage = UseCaseFactory.getFavoriteMoviesUseCase().execute();
+          break;
         default:
           futurePage = null;
           break;
