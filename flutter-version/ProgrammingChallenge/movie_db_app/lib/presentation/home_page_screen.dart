@@ -64,7 +64,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
       children: [
         MovieList(MovieType.TOP_RATED_MOVIES),
         MovieList(MovieType.POPULAR_MOVIES),
-        Text('Building')
+        MovieList(MovieType.FAVORITE_MOVIES),
       ],
     );
   }

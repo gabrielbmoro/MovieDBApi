@@ -11,6 +11,7 @@ class ImageLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("${this._imageAddress} - ${this._height}");
     return FadeInImage.assetNetwork(
       width: double.infinity,
       height: _height,

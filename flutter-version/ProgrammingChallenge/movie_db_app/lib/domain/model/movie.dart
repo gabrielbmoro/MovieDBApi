@@ -17,6 +17,7 @@ class Movie {
   bool isFavorite = false;
 
   Movie({
+    this.id,
     @required this.votesAverage,
     @required this.title,
     @required this.isVideo,
