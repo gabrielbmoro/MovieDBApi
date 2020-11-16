@@ -38,7 +38,7 @@ class DatabaseHelper {
       onCreate: (db, version) {
         // Run the CREATE TABLE statement on the database.
         return db.execute("CREATE TABLE ${FavoriteMoviesDAO.TABLE_NAME}("
-            "${FavoriteMoviesDAO.FIELD_ID} INTEGER PRIMARY KEY, "
+            "${FavoriteMoviesDAO.FIELD_ID} INTEGER PRIMARY KEY AUTOINCREMENT, "
             "${FavoriteMoviesDAO.FIELD_VOTES_AVERAGE} REAL, "
             "${FavoriteMoviesDAO.FIELD_TITLE} TEXT, "
             "${FavoriteMoviesDAO.FIELD_IS_VIDEO} INTEGER, "

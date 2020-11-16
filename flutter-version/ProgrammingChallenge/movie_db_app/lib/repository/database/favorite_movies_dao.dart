@@ -87,7 +87,7 @@ class FavoriteMoviesDAO {
               (txn) async {
                 int affectedRows = await txn.delete(
                   TABLE_NAME,
-                  where: "$FIELD_ID==?s",
+                  where: "$FIELD_ID=?",
                   whereArgs: [movieId],
                 );
 
