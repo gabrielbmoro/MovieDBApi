@@ -5,11 +5,8 @@ import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedViewModel
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.koin.test.inject
 import org.mockito.Mockito
@@ -17,17 +14,7 @@ import org.mockito.Mockito.times
 
 class MovieDetailedViewModelTest : KoinUnitTest() {
 
-    private lateinit var viewModel: MovieDetailedViewModel
     private val favoriteMovieUseCase by inject<FavoriteMovieUseCase>()
-
-    @ExperimentalCoroutinesApi
-    @get:Rule
-    var coroutinesTestRule = CoroutinesTestRule()
-
-    @Before
-    fun init() {
-        viewModel = MovieDetailedViewModel(favoriteMovieUseCase)
-    }
 
     private fun emptyMovieObj(): Movie {
         return Movie(
@@ -53,7 +40,7 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
         // given
         val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
         val movie = emptyMovieObj()
-        viewModel.setup(movie)
+        val viewModel = MovieDetailedViewModel(movie, favoriteMovieUseCase)
 
         // when
         viewModel.favoriteEvent(true)
@@ -69,7 +56,7 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
         // given
         val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
         val movie = emptyMovieObj()
-        viewModel.setup(movie)
+        val viewModel = MovieDetailedViewModel(movie, favoriteMovieUseCase)
 
         // when
         viewModel.favoriteEvent(false)
@@ -119,23 +106,23 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
         )
 
         // when
-        viewModel.setup(movie)
+        val viewModel = MovieDetailedViewModel(movie, favoriteMovieUseCase)
 
         // then
-        assertThat(viewModel.getMovie()?.id).isEqualTo(movieId)
-        assertThat(viewModel.getMovie()?.votes).isEqualTo(votes)
-        assertThat(viewModel.getMovie()?.isVideo).isEqualTo(isVideo)
-        assertThat(viewModel.getMovie()?.votesAverage).isEqualTo(votesAverage)
-        assertThat(viewModel.getMovie()?.title).isEqualTo(title)
-        assertThat(viewModel.getMovie()?.originalLanguage).isEqualTo(originalLanguage)
-        assertThat(viewModel.getMovie()?.originalTitle).isEqualTo(title)
-        assertThat(viewModel.getMovie()?.popularity).isEqualTo(popularity)
-        assertThat(viewModel.getMovie()?.posterPath).isEqualTo(posterPath)
-        assertThat(viewModel.getMovie()?.backdropPath).isEqualTo(backdropPath)
-        assertThat(viewModel.getMovie()?.isAdult).isEqualTo(isAdult)
-        assertThat(viewModel.getMovie()?.overview).isEqualTo(overview)
-        assertThat(viewModel.getMovie()?.releaseDate).isEqualTo(releaseDate)
-        assertThat(viewModel.getMovie()?.isFavorite).isEqualTo(isFavorite)
+        assertThat(viewModel.movie.id).isEqualTo(movieId)
+        assertThat(viewModel.movie.votes).isEqualTo(votes)
+        assertThat(viewModel.movie.isVideo).isEqualTo(isVideo)
+        assertThat(viewModel.movie.votesAverage).isEqualTo(votesAverage)
+        assertThat(viewModel.movie.title).isEqualTo(title)
+        assertThat(viewModel.movie.originalLanguage).isEqualTo(originalLanguage)
+        assertThat(viewModel.movie.originalTitle).isEqualTo(title)
+        assertThat(viewModel.movie.popularity).isEqualTo(popularity)
+        assertThat(viewModel.movie.posterPath).isEqualTo(posterPath)
+        assertThat(viewModel.movie.backdropPath).isEqualTo(backdropPath)
+        assertThat(viewModel.movie.isAdult).isEqualTo(isAdult)
+        assertThat(viewModel.movie.overview).isEqualTo(overview)
+        assertThat(viewModel.movie.releaseDate).isEqualTo(releaseDate)
+        assertThat(viewModel.movie.isFavorite).isEqualTo(isFavorite)
     }
 
 }
