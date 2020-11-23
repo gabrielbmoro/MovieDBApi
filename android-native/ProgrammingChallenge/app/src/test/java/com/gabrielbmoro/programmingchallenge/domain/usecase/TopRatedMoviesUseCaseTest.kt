@@ -4,7 +4,8 @@ import com.gabrielbmoro.programmingchallenge.KoinUnitTest
 import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.repository.api.ApiRepositoryImpl
 import com.google.common.truth.Truth
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.junit.Test
 import org.koin.test.inject
 import org.mockito.Mockito
@@ -28,7 +29,7 @@ class TopRatedMoviesUseCaseTest : KoinUnitTest() {
         // given
         val repository = Mockito.mock(MoviesRepository::class.java)
 
-        runBlocking {
+        GlobalScope.launch {
             // when
             TopRatedMoviesUseCase(repository).execute(1)
 

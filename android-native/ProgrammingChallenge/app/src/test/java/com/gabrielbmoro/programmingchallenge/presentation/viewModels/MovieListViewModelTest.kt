@@ -5,27 +5,21 @@ import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
 import com.gabrielbmoro.programmingchallenge.domain.usecase.PopularMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.TopRatedMoviesUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.movieList.MovieListViewModel
-import org.junit.Before
 import org.junit.Test
 import com.google.common.truth.Truth.assertThat
 import org.koin.test.inject
 
 class MovieListViewModelTest : KoinUnitTest() {
 
-    private lateinit var viewModel: MovieListViewModel
     private val topRatedUseCase by inject<TopRatedMoviesUseCase>()
     private val popularMoviesUseCase by inject<PopularMoviesUseCase>()
 
-    @Before
-    fun init() {
-        viewModel = MovieListViewModel(
+    @Test
+    fun `the list of movies can be reloaded`() {
+        val viewModel = MovieListViewModel(
                 topRatedMoviesUseCase = topRatedUseCase,
                 popularMoviesUseCase = popularMoviesUseCase
         )
-    }
-
-    @Test
-    fun `the list of movies can be reloaded`() {
         viewModel.setup(MovieListType.TopRated)
 
         viewModel.reload()
