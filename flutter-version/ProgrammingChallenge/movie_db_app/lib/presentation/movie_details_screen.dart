@@ -21,8 +21,8 @@ class MovieDetailsScreen extends StatefulWidget {
     return _MovieDetailsScreen(_movie);
   }
 
-  static launch(BuildContext context, Movie movie) {
-    Navigator.of(context).push(
+  static Future<dynamic> launch(BuildContext context, Movie movie) {
+    return Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => MovieDetailsScreen(movie)),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_db_app/domain/model/movie_type.dart';
-
 import 'components/movieList/movie_list.dart';
 
 class HomePageScreen extends StatefulWidget {
