@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:movie_db_app/core/use_case_factory.dart';
@@ -93,13 +92,21 @@ class _MovieListState extends State<MovieList> {
     }
   }
 
+  _resetData() {
+    _movies.clear();
+    _currentPageSelected = 1;
+    getMovies(_currentPageSelected);
+  }
+
   _gestureDetector({BuildContext context, Movie movie}) {
     return GestureDetector(
       child: Container(
         padding: EdgeInsets.all(8),
         child: MovieListCell(movie),
       ),
-      onTap: () => MovieDetailsScreen.launch(context, movie),
+      onTap: () => {
+        MovieDetailsScreen.launch(context, movie).then((value) => _resetData())
+      },
     );
   }
 
