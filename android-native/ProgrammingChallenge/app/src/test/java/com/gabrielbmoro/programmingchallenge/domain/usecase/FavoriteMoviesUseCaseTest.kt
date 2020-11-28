@@ -5,11 +5,10 @@ import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.repository.dataBase.DataBaseRepositoryImpl
 import org.junit.Test
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.runBlocking
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
 import org.koin.test.inject
-import org.mockito.Mockito
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.times
 
 class FavoriteMoviesUseCaseTest : KoinUnitTest() {
 
@@ -28,15 +27,16 @@ class FavoriteMoviesUseCaseTest : KoinUnitTest() {
     @Test
     fun `favoriteMoviesUseCase calling for the correct method`() {
         // given
-        val moviesRepository = mock(MoviesRepository::class.java)
+        val moviesRepository = mockk<MoviesRepository>()
+        every { moviesRepository.getFavoriteMovies() }.returns(null)
 
-        runBlocking {
+        // when
+        FavoriteMoviesUseCase(moviesRepository).execute()
 
-            // when
-            FavoriteMoviesUseCase(moviesRepository).execute()
-
-            // then
-            Mockito.verify(moviesRepository, times(1)).getFavoriteMovies()
+        // then
+        verify(atLeast = 1) {
+            moviesRepository.getFavoriteMovies()
         }
     }
+
 }

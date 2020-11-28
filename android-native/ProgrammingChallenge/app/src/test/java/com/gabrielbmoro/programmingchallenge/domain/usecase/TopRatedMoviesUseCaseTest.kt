@@ -4,11 +4,13 @@ import com.gabrielbmoro.programmingchallenge.KoinUnitTest
 import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 import com.gabrielbmoro.programmingchallenge.repository.api.ApiRepositoryImpl
 import com.google.common.truth.Truth
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.mockk
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.junit.Test
 import org.koin.test.inject
-import org.mockito.Mockito
 
 class TopRatedMoviesUseCaseTest : KoinUnitTest() {
 
@@ -27,14 +29,17 @@ class TopRatedMoviesUseCaseTest : KoinUnitTest() {
     @Test
     fun `topRatedUseCase calling for the correct method`() {
         // given
-        val repository = Mockito.mock(MoviesRepository::class.java)
+        val repository = mockk<MoviesRepository>()
+        coEvery { repository.getTopRatedMovies(any()) }.returns(null)
 
         GlobalScope.launch {
             // when
             TopRatedMoviesUseCase(repository).execute(1)
 
             // then
-            Mockito.verify(repository, Mockito.times(1)).getTopRatedMovies(1)
+            coVerify {
+                repository.getTopRatedMovies(1)
+            }
         }
     }
 }

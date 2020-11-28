@@ -5,12 +5,12 @@ import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedViewModel
 import com.google.common.truth.Truth.assertThat
+import io.mockk.coVerify
+import io.mockk.spyk
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.junit.Test
 import org.koin.test.inject
-import org.mockito.Mockito
-import org.mockito.Mockito.times
 
 class MovieDetailedViewModelTest : KoinUnitTest() {
 
@@ -38,32 +38,36 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
     @Test
     fun `movie can be selected as favorite`() {
         // given
-        val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
+        val useCaseSpy = spyk(favoriteMovieUseCase)
         val movie = emptyMovieObj()
         val viewModel = MovieDetailedViewModel(movie, favoriteMovieUseCase)
 
-        // when
-        viewModel.favoriteEvent(true)
-
-        // then
         GlobalScope.launch {
-            Mockito.verify(useCaseSpy, times(1)).favoriteMovie(movie)
+            // when
+            viewModel.favoriteEvent(true)
+
+            // then
+            coVerify {
+                useCaseSpy.favoriteMovie(movie)
+            }
         }
     }
 
     @Test
     fun `movie can be selected as unFavorite`() {
         // given
-        val useCaseSpy = Mockito.spy(favoriteMovieUseCase)
+        val useCaseSpy = spyk(favoriteMovieUseCase)
         val movie = emptyMovieObj()
         val viewModel = MovieDetailedViewModel(movie, favoriteMovieUseCase)
 
-        // when
-        viewModel.favoriteEvent(false)
-
-        //then
         GlobalScope.launch {
-            Mockito.verify(useCaseSpy, times(1)).unFavoriteMovie(movie)
+            // when
+            viewModel.favoriteEvent(false)
+
+            //then
+            coVerify {
+                useCaseSpy.unFavoriteMovie(movie)
+            }
         }
     }
 
