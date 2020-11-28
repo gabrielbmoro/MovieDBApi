@@ -32,7 +32,7 @@ Total: _44%_
 | Load Images          | Glide                   |
 | View Binding         | Kotlin Synthatics       |
 | Handler to IO calls  | Coroutines              |
-| Unit Tests           | JUnit, Truth, Mockito   |
+| Unit Tests           | JUnit, Truth, mockK     |
 | UI Tests             | Espresso, Truth         |
 | Network calls        | Retrofit                |
 | Json converter       | Retrofit - Gson         |
