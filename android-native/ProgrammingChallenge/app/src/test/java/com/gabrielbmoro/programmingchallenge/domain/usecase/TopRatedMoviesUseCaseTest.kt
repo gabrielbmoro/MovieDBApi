@@ -6,7 +6,6 @@ import com.gabrielbmoro.programmingchallenge.repository.api.ApiRepositoryImpl
 import com.google.common.truth.Truth
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
