@@ -1,38 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_db_app/core/use_case_factory.dart';
 import 'package:movie_db_app/domain/model/movie.dart';
 import 'package:movie_db_app/presentation/common/strings.dart';
 import 'package:movie_db_app/presentation/components/image_loader_widget.dart';
 import 'package:movie_db_app/presentation/components/text_section_title_widget.dart';
-import 'common/colors.dart';
-import 'components/favorite_button.dart';
-import 'components/stars_widget.dart';
-import 'components/text_section_label_widget.dart';
+import '../../common/colors.dart';
+import '../../components/favorite_button_widget.dart';
+import '../../components/stars_widget.dart';
+import '../../components/text_section_label_widget.dart';
+import 'movie_details_screen_widget.dart';
 
-// ignore: must_be_immutable
-class MovieDetailsScreen extends StatefulWidget {
-  Movie _movie;
-
-  MovieDetailsScreen(this._movie);
-
-  @override
-  State<StatefulWidget> createState() {
-    return _MovieDetailsScreen(_movie);
-  }
-
-  static Future<dynamic> launch(BuildContext context, Movie movie) {
-    return Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => MovieDetailsScreen(movie)),
-    );
-  }
-}
-
-class _MovieDetailsScreen extends State<MovieDetailsScreen> {
+class MovieDetailsState extends State<MovieDetailsScreenWidget> {
   Movie _movie;
   bool _isFavoriteMovie = false;
 
-  _MovieDetailsScreen(this._movie);
+  MovieDetailsState(this._movie);
 
   @override
   void initState() {
@@ -41,9 +23,9 @@ class _MovieDetailsScreen extends State<MovieDetailsScreen> {
     UseCaseFactory.getFavoriteMoviesUseCase()
         .execute()
         .then((value) => _updateFavoriteButton(
-              value.movieList.any((element) =>
-                  element.originalTitle == this._movie.originalTitle),
-            ));
+      value.movieList.any((element) =>
+      element.originalTitle == this._movie.originalTitle),
+    ));
   }
 
   @override
@@ -62,13 +44,13 @@ class _MovieDetailsScreen extends State<MovieDetailsScreen> {
                 imageAddress: _movie.imageAddress(),
                 numOfVotes: _movie.votes,
               ),
-              _wrappingSectionLabel(TextSectionLabel(ORIGINAL_TITLE)),
-              _wrappingSectionContent(TextSectionTitle(_movie.title)),
-              _wrappingSectionLabel(TextSectionLabel(OVERVIEW_TITLE)),
+              _wrappingSectionLabel(TextSectionLabelWidget(ORIGINAL_TITLE)),
+              _wrappingSectionContent(TextSectionTitleWidget(_movie.title)),
+              _wrappingSectionLabel(TextSectionLabelWidget(OVERVIEW_TITLE)),
               _wrappingSectionContent(Text(_movie.overview)),
-              _wrappingSectionLabel(TextSectionLabel(LANGUAGE_TITLE)),
+              _wrappingSectionLabel(TextSectionLabelWidget(LANGUAGE_TITLE)),
               _wrappingSectionContent(Text(_movie.originalLanguage)),
-              _wrappingSectionLabel(TextSectionLabel(POPULARITY_TITLE)),
+              _wrappingSectionLabel(TextSectionLabelWidget(POPULARITY_TITLE)),
               _wrappingSectionContent(Text(_movie.popularity.toString()))
             ],
           ),
@@ -80,7 +62,7 @@ class _MovieDetailsScreen extends State<MovieDetailsScreen> {
   Widget _buildHeader({String imageAddress, int numOfVotes}) {
     return Stack(
       children: [
-        ImageLoader(imageAddress, 400),
+        ImageLoaderWidget(imageAddress, 400),
         Container(
           color: cardTransparentMask,
           width: double.infinity,
@@ -95,17 +77,17 @@ class _MovieDetailsScreen extends State<MovieDetailsScreen> {
         Positioned(
           bottom: 40,
           left: 16,
-          child: FavoriteButton(
+          child: FavoriteButtonWidget(
               _isFavoriteMovie,
-              () => {
-                    UseCaseFactory.favoriteMoviesUseCase()
-                        .execute(
-                          movie: _movie,
-                          isToFavoriteOrNot: !_isFavoriteMovie,
-                        )
-                        .then((result) =>
-                            _changeFavoriteValueJustIsSuccess(result))
-                  }),
+                  () => {
+                UseCaseFactory.favoriteMoviesUseCase()
+                    .execute(
+                  movie: _movie,
+                  isToFavoriteOrNot: !_isFavoriteMovie,
+                )
+                    .then((result) =>
+                    _changeFavoriteValueJustIsSuccess(result))
+              }),
         )
       ],
     );

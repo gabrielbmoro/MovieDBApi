@@ -1,28 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:movie_db_app/core/use_case_factory.dart';
-import 'package:movie_db_app/domain/model/page.dart' as page;
 import 'package:movie_db_app/domain/model/movie.dart';
 import 'package:movie_db_app/domain/model/movie_type.dart';
-import 'package:movie_db_app/presentation/movie_details_screen.dart';
-import 'movie_list_item.dart';
+import 'package:movie_db_app/presentation/screens/movieDetailsScreen/movie_details_screen_widget.dart';
+import 'movie_list_widget.dart';
+import 'package:movie_db_app/domain/model/page.dart' as page;
+import 'movie_list_item_widget.dart';
 
-// ignore: must_be_immutable
-class MovieList extends StatefulWidget {
-  MovieType _movieType;
-
-  MovieList(MovieType movieType) {
-    _movieType = movieType;
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    return _MovieListState(_movieType);
-  }
-}
-
-class _MovieListState extends State<MovieList> {
+class MovieListState extends State<MovieListWidget> {
   List<Movie> _movies = [];
   MovieType _type;
   int _currentPageSelected = 1;
@@ -30,7 +16,7 @@ class _MovieListState extends State<MovieList> {
   ScrollController _controller;
   Future<Null> _requestLocker;
 
-  _MovieListState(MovieType movieType) {
+  MovieListState(MovieType movieType) {
     _type = movieType;
   }
 
@@ -102,10 +88,10 @@ class _MovieListState extends State<MovieList> {
     return GestureDetector(
       child: Container(
         padding: EdgeInsets.all(8),
-        child: MovieListCell(movie),
+        child: MovieListCellWidget(movie),
       ),
       onTap: () => {
-        MovieDetailsScreen.launch(context, movie).then((value) => _resetData())
+        MovieDetailsScreenWidget.launch(context, movie).then((value) => _resetData())
       },
     );
   }

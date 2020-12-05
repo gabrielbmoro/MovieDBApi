@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class FavoriteButton extends StatelessWidget {
+class FavoriteButtonWidget extends StatelessWidget {
   bool isFilled;
   VoidCallback onPressed;
 
-  FavoriteButton(this.isFilled, this.onPressed);
+  FavoriteButtonWidget(this.isFilled, this.onPressed);
 
   @override
   Widget build(BuildContext context) {
