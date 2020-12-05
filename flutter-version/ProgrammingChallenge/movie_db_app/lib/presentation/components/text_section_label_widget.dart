@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 // ignore: must_be_immutable
-class TextSectionLabel extends StatelessWidget {
+class TextSectionLabelWidget extends StatelessWidget {
   String _title;
 
-  TextSectionLabel(this._title);
+  TextSectionLabelWidget(this._title);
 
   @override
   Widget build(BuildContext context) {

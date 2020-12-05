@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'presentation/common/colors.dart';
-import 'presentation/home_page_screen.dart';
+import 'presentation/screens/homeScreen/home_page_screen.dart';
 
 const String DATA_BASE_NAME = 'MovieDBAppDataBase';
 
@@ -30,7 +30,7 @@ class MovieDBApi extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePageScreen(),
+      home: HomePageScreenWidget(),
     );
   }
 }

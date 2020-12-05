@@ -5,10 +5,10 @@ import '../image_loader_widget.dart';
 import '../text_section_title_widget.dart';
 
 // ignore: must_be_immutable
-class MovieListCell extends StatelessWidget {
+class MovieListCellWidget extends StatelessWidget {
   Movie _movie;
 
-  MovieListCell(Movie movie) {
+  MovieListCellWidget(Movie movie) {
     _movie = movie;
   }
 
@@ -19,7 +19,7 @@ class MovieListCell extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
-            child: ImageLoader(
+            child: ImageLoaderWidget(
               _movie.imageAddress(),
               400,
             ),
@@ -29,7 +29,7 @@ class MovieListCell extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextSectionTitle(
+                  child: TextSectionTitleWidget(
                     _movie.title,
                   ),
                 ),

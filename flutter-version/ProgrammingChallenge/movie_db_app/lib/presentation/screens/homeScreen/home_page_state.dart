@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_db_app/domain/model/movie_type.dart';
-import 'components/movieList/movie_list.dart';
+import '../../components/movieList/movie_list_widget.dart';
+import 'home_page_screen.dart';
 
-class HomePageScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => _HomePageScreenState();
-}
-
-class _HomePageScreenState extends State<HomePageScreen> {
+class HomePageScreenState extends State<HomePageScreenWidget> {
   int _currentTabIndex = 0;
   PageController _pageController;
 
@@ -61,9 +57,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
         });
       },
       children: [
-        MovieList(MovieType.TOP_RATED_MOVIES),
-        MovieList(MovieType.POPULAR_MOVIES),
-        MovieList(MovieType.FAVORITE_MOVIES),
+        MovieListWidget(MovieType.TOP_RATED_MOVIES),
+        MovieListWidget(MovieType.POPULAR_MOVIES),
+        MovieListWidget(MovieType.FAVORITE_MOVIES),
       ],
     );
   }
