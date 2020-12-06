@@ -12,22 +12,13 @@ class FavoriteMovieUseCase {
 
   Future<bool> execute({
     @required Movie movie,
-    @required bool isToFavoriteOrNot,
   }) {
     final completer = new Completer<bool>();
-    if (isToFavoriteOrNot) {
-      _repository.saveFavoriteMovie(
-        movie: movie,
-        onSuccess: () => {completer.complete(true)},
-        onFail: () => {completer.complete(false)},
-      );
-    } else {
-      _repository.removeFavoriteMovie(
-        movie: movie,
-        onSuccess: () => {completer.complete(true)},
-        onFail: () => {completer.complete(false)},
-      );
-    }
+    _repository.saveFavoriteMovie(
+      movie: movie,
+      onSuccess: () => {completer.complete(true)},
+      onFail: () => {completer.complete(false)},
+    );
     return completer.future;
   }
 }
