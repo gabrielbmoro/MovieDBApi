@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_db_app/core/use_case_factory.dart';
 import 'package:movie_db_app/domain/model/movie.dart';
+import 'package:movie_db_app/domain/usecase/favorite_movies_use_case.dart';
+import 'package:movie_db_app/domain/usecase/get_favorite_movies_use_case.dart';
 import 'package:movie_db_app/presentation/common/strings.dart';
 import 'package:movie_db_app/presentation/components/image_loader_widget.dart';
 import 'package:movie_db_app/presentation/components/text_section_title_widget.dart';
@@ -13,16 +15,18 @@ import 'movie_details_screen_widget.dart';
 class MovieDetailsState extends State<MovieDetailsScreenWidget> {
   Movie _movie;
   bool _isFavoriteMovie = false;
+  GetFavoriteMoviesUseCase _getFavoriteMoviesUseCase = UseCaseFactory.getFavoriteMoviesUseCase();
 
   MovieDetailsState(this._movie);
 
   @override
   void initState() {
     super.initState();
+    _checkIfIsFavorite();
+  }
 
-    UseCaseFactory.getFavoriteMoviesUseCase()
-        .execute()
-        .then((value) => _updateFavoriteButton(
+  void _checkIfIsFavorite() {
+    _getFavoriteMoviesUseCase.execute().then((value) => _updateFavoriteButton(
       value.movieList.any((element) =>
       element.originalTitle == this._movie.originalTitle),
     ));

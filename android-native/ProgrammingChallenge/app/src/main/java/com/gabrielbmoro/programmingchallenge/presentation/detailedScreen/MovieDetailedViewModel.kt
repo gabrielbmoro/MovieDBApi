@@ -20,6 +20,10 @@ class MovieDetailedViewModel(
     val onFavoriteMovieEvent = MutableLiveData<ViewModelResult>()
 
     init {
+        checkIfIsFavorite()
+    }
+
+    private fun checkIfIsFavorite() {
         viewModelScope.launch {
             try {
                 movie.isFavorite = checkMovieIsFavoriteUseCase.execute(movie)
