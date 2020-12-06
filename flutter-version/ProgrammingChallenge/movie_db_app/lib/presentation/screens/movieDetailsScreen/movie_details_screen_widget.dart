@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_db_app/core/use_case_factory.dart';
 import 'package:movie_db_app/domain/model/movie.dart';
 import 'movie_details_state.dart';
 
@@ -11,7 +12,12 @@ class MovieDetailsScreenWidget extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return MovieDetailsState(_movie);
+    return MovieDetailsState(
+      _movie,
+      UseCaseFactory.favoriteMoviesUseCase(),
+      UseCaseFactory.unFavoriteMovieUseCase(),
+      UseCaseFactory.checkMovieIsFavoriteUseCase(),
+    );
   }
 
   static Future<dynamic> launch(BuildContext context, Movie movie) {

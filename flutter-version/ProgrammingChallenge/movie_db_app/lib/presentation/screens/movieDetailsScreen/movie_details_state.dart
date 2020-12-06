@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_db_app/core/use_case_factory.dart';
 import 'package:movie_db_app/domain/model/movie.dart';
-import 'package:movie_db_app/domain/usecase/favorite_movies_use_case.dart';
-import 'package:movie_db_app/domain/usecase/get_favorite_movies_use_case.dart';
+import 'package:movie_db_app/domain/usecase/check_movie_is_favorite_use_case.dart';
+import 'package:movie_db_app/domain/usecase/favorite_movie_use_case.dart';
+import 'package:movie_db_app/domain/usecase/unfavorite_movie_use_case.dart';
 import 'package:movie_db_app/presentation/common/strings.dart';
 import 'package:movie_db_app/presentation/components/image_loader_widget.dart';
 import 'package:movie_db_app/presentation/components/text_section_title_widget.dart';
@@ -15,9 +15,17 @@ import 'movie_details_screen_widget.dart';
 class MovieDetailsState extends State<MovieDetailsScreenWidget> {
   Movie _movie;
   bool _isFavoriteMovie = false;
-  GetFavoriteMoviesUseCase _getFavoriteMoviesUseCase = UseCaseFactory.getFavoriteMoviesUseCase();
 
-  MovieDetailsState(this._movie);
+  FavoriteMovieUseCase _favoriteMovieUseCase;
+  UnFavoriteMovieUseCase _unFavoriteMovieUseCase;
+  CheckMovieIsFavoriteUseCase _checkMovieIsFavoriteUseCase;
+
+  MovieDetailsState(
+    this._movie,
+    this._favoriteMovieUseCase,
+    this._unFavoriteMovieUseCase,
+    this._checkMovieIsFavoriteUseCase,
+  );
 
   @override
   void initState() {
@@ -26,10 +34,9 @@ class MovieDetailsState extends State<MovieDetailsScreenWidget> {
   }
 
   void _checkIfIsFavorite() {
-    _getFavoriteMoviesUseCase.execute().then((value) => _updateFavoriteButton(
-      value.movieList.any((element) =>
-      element.originalTitle == this._movie.originalTitle),
-    ));
+    _checkMovieIsFavoriteUseCase.execute(movie: this._movie).then(
+          (value) => _updateFavoriteButton(value),
+        );
   }
 
   @override
@@ -82,16 +89,9 @@ class MovieDetailsState extends State<MovieDetailsScreenWidget> {
           bottom: 40,
           left: 16,
           child: FavoriteButtonWidget(
-              _isFavoriteMovie,
-                  () => {
-                UseCaseFactory.favoriteMoviesUseCase()
-                    .execute(
-                  movie: _movie,
-                  isToFavoriteOrNot: !_isFavoriteMovie,
-                )
-                    .then((result) =>
-                    _changeFavoriteValueJustIsSuccess(result))
-              }),
+            _isFavoriteMovie,
+            _handleOnFavoriteButtonEvent,
+          ),
         )
       ],
     );
@@ -128,5 +128,17 @@ class MovieDetailsState extends State<MovieDetailsScreenWidget> {
       ),
       child: widget,
     );
+  }
+
+  _handleOnFavoriteButtonEvent() async {
+    bool result;
+    if (_isFavoriteMovie) {
+      result = await _unFavoriteMovieUseCase.execute(movie: _movie);
+    } else {
+      result = await _favoriteMovieUseCase.execute(movie: _movie);
+    }
+    if (result != null) {
+      _changeFavoriteValueJustIsSuccess(result);
+    }
   }
 }
