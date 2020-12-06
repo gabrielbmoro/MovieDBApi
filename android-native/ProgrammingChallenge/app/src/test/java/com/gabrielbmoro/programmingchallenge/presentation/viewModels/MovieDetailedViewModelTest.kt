@@ -53,7 +53,7 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
 
         GlobalScope.launch {
             // when
-            viewModel.isToFavoriteOrUnfavorite(true)
+            viewModel.isToFavoriteOrUnFavorite(true)
 
             // then
             coVerify {
@@ -76,7 +76,7 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
 
         GlobalScope.launch {
             // when
-            viewModel.isToFavoriteOrUnfavorite(false)
+            viewModel.isToFavoriteOrUnFavorite(false)
 
             //then
             coVerify {

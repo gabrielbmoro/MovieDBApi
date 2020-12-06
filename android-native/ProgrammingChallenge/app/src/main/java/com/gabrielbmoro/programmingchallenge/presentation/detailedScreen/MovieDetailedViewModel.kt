@@ -30,7 +30,7 @@ class MovieDetailedViewModel(
         }
     }
 
-    fun isToFavoriteOrUnfavorite(isToFavorite: Boolean) {
+    fun isToFavoriteOrUnFavorite(isToFavorite: Boolean) {
         viewModelScope.launch {
             try {
                 if (isToFavorite)
