@@ -7,4 +7,10 @@ The first project is an android native project using kotlin, the other one is us
 
 ## Teaser
 
-![alt text](https://github.com/tido4410/moviedatabaseapi/blob/master/img/teaser.gif)
+- Android Native:
+
+![Android Native Version](https://github.com/tido4410/moviedatabaseapi/blob/master/img/teaser.gif)
+
+- Flutter:
+
+![Flutter Version](https://github.com/tido4410/moviedatabaseapi/blob/master/img/teaser_flutter_version.gif)

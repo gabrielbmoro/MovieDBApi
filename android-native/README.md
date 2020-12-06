@@ -6,7 +6,7 @@
 
 ## Architecture
 
-![alt text](https://github.com/gabrielbmoro/MovieDBApi/blob/master/img/architecture.svg)
+![Architecture](https://github.com/gabrielbmoro/MovieDBApi/blob/master/img/architecture.svg)
 
 ## Coverage 
 
@@ -40,6 +40,6 @@ Total: _44%_
 
 ## Teaser
 
-![alt text](https://github.com/tido4410/moviedatabaseapi/blob/master/img/teaser.gif)
+![Android Native Version](https://github.com/tido4410/moviedatabaseapi/blob/master/img/teaser.gif)
 
 - Night mode: https://github.com/tido4410/moviedatabaseapi/blob/master/img/dark-theme-support.gif
