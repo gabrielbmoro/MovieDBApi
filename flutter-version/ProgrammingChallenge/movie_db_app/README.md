@@ -1,16 +1,12 @@
-# movie_db_app
+# Welcome!
 
-A new Flutter project.
+- This repository provides a Flutter project that uses the library  [Movie DB API](https://www.themoviedb.org)
 
-## Getting Started
+## Architecture
 
-This project is a starting point for a Flutter application.
+![alt text](https://github.com/gabrielbmoro/MovieDBApi/blob/master/img/architecture.svg)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Teaser
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![alt text](https://github.com/tido4410/moviedatabaseapi/blob/master/img/teaser_flutter_version.gif)
