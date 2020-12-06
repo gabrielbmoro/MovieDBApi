@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
-import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMoviesUseCase
+import com.gabrielbmoro.programmingchallenge.domain.usecase.GetFavoriteMoviesUseCase
 
 class FavoriteMoviesViewModel(
-        private val favoriteMoviesUseCase: FavoriteMoviesUseCase
+        private val getFavoriteMoviesUseCase: GetFavoriteMoviesUseCase
 ) : ViewModel() {
 
     fun setup(): LiveData<PagedList<Movie>>? {
-        return favoriteMoviesUseCase.execute()
+        return getFavoriteMoviesUseCase.execute()
     }
 
 }

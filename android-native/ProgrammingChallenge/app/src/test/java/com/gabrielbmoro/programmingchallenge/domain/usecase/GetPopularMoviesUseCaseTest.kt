@@ -6,19 +6,18 @@ import com.gabrielbmoro.programmingchallenge.repository.api.ApiRepositoryImpl
 import com.google.common.truth.Truth
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.junit.Test
 import org.koin.test.inject
 
-class PopularMoviesUseCaseTest : KoinUnitTest() {
+class GetPopularMoviesUseCaseTest : KoinUnitTest() {
 
     @Test
     fun `popularMoviesUseCase using the correct repository`() {
         // given
-        val popularUseCaseTest by inject<PopularMoviesUseCase>()
+        val popularUseCaseTest by inject<GetPopularMoviesUseCase>()
 
         // when
         val repository = popularUseCaseTest.repository
@@ -35,7 +34,7 @@ class PopularMoviesUseCaseTest : KoinUnitTest() {
 
         GlobalScope.launch {
             // when
-            PopularMoviesUseCase(repository).execute(1)
+            GetPopularMoviesUseCase(repository).execute(1)
 
             // then
             coVerify {

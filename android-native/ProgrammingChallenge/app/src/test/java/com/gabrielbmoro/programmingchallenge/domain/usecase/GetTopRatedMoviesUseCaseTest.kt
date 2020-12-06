@@ -12,12 +12,12 @@ import kotlinx.coroutines.launch
 import org.junit.Test
 import org.koin.test.inject
 
-class TopRatedMoviesUseCaseTest : KoinUnitTest() {
+class GetTopRatedMoviesUseCaseTest : KoinUnitTest() {
 
     @Test
     fun `topRatedUseCase using for the correct repository`() {
         // given
-        val topRatedUseCaseTest by inject<TopRatedMoviesUseCase>()
+        val topRatedUseCaseTest by inject<GetTopRatedMoviesUseCase>()
 
         // when
         val given = topRatedUseCaseTest.repository
@@ -34,7 +34,7 @@ class TopRatedMoviesUseCaseTest : KoinUnitTest() {
 
         GlobalScope.launch {
             // when
-            TopRatedMoviesUseCase(repository).execute(1)
+            GetTopRatedMoviesUseCase(repository).execute(1)
 
             // then
             coVerify {

@@ -2,7 +2,9 @@ package com.gabrielbmoro.programmingchallenge.presentation.viewModels
 
 import com.gabrielbmoro.programmingchallenge.KoinUnitTest
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
+import com.gabrielbmoro.programmingchallenge.domain.usecase.CheckMovieIsFavoriteUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
+import com.gabrielbmoro.programmingchallenge.domain.usecase.UnFavoriteMovieUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.detailedScreen.MovieDetailedViewModel
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coVerify
@@ -15,6 +17,8 @@ import org.koin.test.inject
 class MovieDetailedViewModelTest : KoinUnitTest() {
 
     private val favoriteMovieUseCase by inject<FavoriteMovieUseCase>()
+    private val unFavoriteMovieUseCase by inject<UnFavoriteMovieUseCase>()
+    private val checkMovieIsFavoriteUseCase by inject<CheckMovieIsFavoriteUseCase>()
 
     private fun emptyMovieObj(): Movie {
         return Movie(
@@ -40,15 +44,20 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
         // given
         val useCaseSpy = spyk(favoriteMovieUseCase)
         val movie = emptyMovieObj()
-        val viewModel = MovieDetailedViewModel(movie, favoriteMovieUseCase)
+        val viewModel = MovieDetailedViewModel(
+                movie,
+                useCaseSpy,
+                unFavoriteMovieUseCase,
+                checkMovieIsFavoriteUseCase
+        )
 
         GlobalScope.launch {
             // when
-            viewModel.favoriteEvent(true)
+            viewModel.isToFavoriteOrUnfavorite(true)
 
             // then
             coVerify {
-                useCaseSpy.favoriteMovie(movie)
+                useCaseSpy.execute(movie)
             }
         }
     }
@@ -56,17 +65,22 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
     @Test
     fun `movie can be selected as unFavorite`() {
         // given
-        val useCaseSpy = spyk(favoriteMovieUseCase)
+        val useCaseSpy = spyk(unFavoriteMovieUseCase)
         val movie = emptyMovieObj()
-        val viewModel = MovieDetailedViewModel(movie, favoriteMovieUseCase)
+        val viewModel = MovieDetailedViewModel(
+                movie,
+                favoriteMovieUseCase,
+                useCaseSpy,
+                checkMovieIsFavoriteUseCase
+        )
 
         GlobalScope.launch {
             // when
-            viewModel.favoriteEvent(false)
+            viewModel.isToFavoriteOrUnfavorite(false)
 
             //then
             coVerify {
-                useCaseSpy.unFavoriteMovie(movie)
+                useCaseSpy.execute(movie)
             }
         }
     }
@@ -110,7 +124,12 @@ class MovieDetailedViewModelTest : KoinUnitTest() {
         )
 
         // when
-        val viewModel = MovieDetailedViewModel(movie, favoriteMovieUseCase)
+        val viewModel = MovieDetailedViewModel(
+                movie,
+                favoriteMovieUseCase,
+                unFavoriteMovieUseCase,
+                checkMovieIsFavoriteUseCase
+        )
 
         // then
         assertThat(viewModel.movie.id).isEqualTo(movieId)

@@ -53,17 +53,19 @@ val repositoryModule = module {
 }
 
 val usecaseModule = module {
-    single { TopRatedMoviesUseCase(get<ApiRepositoryImpl>()) }
-    single { PopularMoviesUseCase(get<ApiRepositoryImpl>()) }
-    single { FavoriteMovieUseCase(get<DataBaseRepositoryImpl>()) }
-    single { FavoriteMoviesUseCase(get<DataBaseRepositoryImpl>()) }
+    single { GetTopRatedMoviesUseCase(get<ApiRepositoryImpl>()) }
+    single { GetPopularMoviesUseCase(get<ApiRepositoryImpl>()) }
+    single { GetFavoriteMoviesUseCase(get<DataBaseRepositoryImpl>()) }
+    single { FavoriteMovieUseCase(get<DataBaseRepositoryImpl>())}
+    single { UnFavoriteMovieUseCase(get<DataBaseRepositoryImpl>())}
+    single { CheckMovieIsFavoriteUseCase(get<DataBaseRepositoryImpl>())}
 }
 
 val viewModelModules = module {
     viewModel { MovieListViewModel(get(), get()) }
     viewModel { FavoriteMoviesViewModel(get()) }
     viewModel {
-        (movie: Movie) -> MovieDetailedViewModel(movie, get())
+        (movie: Movie) -> MovieDetailedViewModel(movie, get(), get(), get())
     }
     viewModel { MainViewModel() }
 }

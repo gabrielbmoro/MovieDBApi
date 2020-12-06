@@ -51,7 +51,7 @@ class MovieDetailedActivity : AppCompatActivity(R.layout.activity_movie_detailed
         activity_movie_detailed_five_stars_component.setVotesAvg(movie.votesAverage)
         changeFavoriteViewsState(movie.isFavorite)
         activity_movie_detailed_favorite_icon?.setOnClickListener {
-            viewModel.favoriteEvent(!movie.isFavorite)
+            viewModel.isToFavoriteOrUnfavorite(!movie.isFavorite)
         }
     }
 

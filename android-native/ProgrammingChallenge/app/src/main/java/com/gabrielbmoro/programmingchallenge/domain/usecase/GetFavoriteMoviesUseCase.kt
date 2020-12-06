@@ -6,7 +6,7 @@ import androidx.paging.toLiveData
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.repository.MoviesRepository
 
-class FavoriteMoviesUseCase(val repository: MoviesRepository) {
+class GetFavoriteMoviesUseCase(val repository: MoviesRepository) {
 
     fun execute(): LiveData<PagedList<Movie>>? {
         return repository.getFavoriteMovies()?.toLiveData(PAGE_SIZE)

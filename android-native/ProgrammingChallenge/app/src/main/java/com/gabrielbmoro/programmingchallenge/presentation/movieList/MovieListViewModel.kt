@@ -8,14 +8,14 @@ import com.gabrielbmoro.programmingchallenge.domain.model.Movie
 import com.gabrielbmoro.programmingchallenge.domain.model.MovieListType
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult.Loading
-import com.gabrielbmoro.programmingchallenge.domain.usecase.PopularMoviesUseCase
-import com.gabrielbmoro.programmingchallenge.domain.usecase.TopRatedMoviesUseCase
+import com.gabrielbmoro.programmingchallenge.domain.usecase.GetPopularMoviesUseCase
+import com.gabrielbmoro.programmingchallenge.domain.usecase.GetTopRatedMoviesUseCase
 import kotlinx.coroutines.launch
 import java.util.concurrent.locks.ReentrantLock
 
 class MovieListViewModel(
-        private val topRatedMoviesUseCase: TopRatedMoviesUseCase,
-        private val popularMoviesUseCase: PopularMoviesUseCase
+        private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
+        private val getPopularMoviesUseCase: GetPopularMoviesUseCase
 ) : ViewModel() {
 
     private val moviesList = ArrayList<Movie>()
@@ -45,12 +45,12 @@ class MovieListViewModel(
                 try {
                     when (type) {
                         MovieListType.TopRated -> {
-                            topRatedMoviesUseCase.execute(currentPage)?.also {
+                            getTopRatedMoviesUseCase.execute(currentPage)?.also {
                                 hasMorePages = it.hasMorePages
                             }?.movies
                         }
                         MovieListType.Popular -> {
-                            popularMoviesUseCase.execute(currentPage)?.also {
+                            getPopularMoviesUseCase.execute(currentPage)?.also {
                                 hasMorePages = it.hasMorePages
                             }?.movies
                         }

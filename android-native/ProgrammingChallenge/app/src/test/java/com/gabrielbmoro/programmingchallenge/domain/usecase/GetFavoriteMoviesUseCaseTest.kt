@@ -10,12 +10,12 @@ import io.mockk.mockk
 import io.mockk.verify
 import org.koin.test.inject
 
-class FavoriteMoviesUseCaseTest : KoinUnitTest() {
+class GetFavoriteMoviesUseCaseTest : KoinUnitTest() {
 
     @Test
     fun `favoriteMoviesUseCase using the correct repository`() {
         // given
-        val favoriteUseCaseTest by inject<FavoriteMoviesUseCase>()
+        val favoriteUseCaseTest by inject<GetFavoriteMoviesUseCase>()
 
         // when
         val repository = favoriteUseCaseTest.repository
@@ -31,7 +31,7 @@ class FavoriteMoviesUseCaseTest : KoinUnitTest() {
         every { moviesRepository.getFavoriteMovies() }.returns(null)
 
         // when
-        FavoriteMoviesUseCase(moviesRepository).execute()
+        GetFavoriteMoviesUseCase(moviesRepository).execute()
 
         // then
         verify(atLeast = 1) {

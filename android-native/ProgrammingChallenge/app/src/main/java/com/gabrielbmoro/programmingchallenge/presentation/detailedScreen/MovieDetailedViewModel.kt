@@ -4,13 +4,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gabrielbmoro.programmingchallenge.domain.model.Movie
+import com.gabrielbmoro.programmingchallenge.domain.usecase.CheckMovieIsFavoriteUseCase
 import com.gabrielbmoro.programmingchallenge.domain.usecase.FavoriteMovieUseCase
+import com.gabrielbmoro.programmingchallenge.domain.usecase.UnFavoriteMovieUseCase
 import com.gabrielbmoro.programmingchallenge.presentation.ViewModelResult
 import kotlinx.coroutines.launch
 
 class MovieDetailedViewModel(
         val movie: Movie,
-        private val favoriteMovieUseCase: FavoriteMovieUseCase
+        private val favoriteMovieUseCase: FavoriteMovieUseCase,
+        private val unFavoriteMovieUseCase: UnFavoriteMovieUseCase,
+        private val checkMovieIsFavoriteUseCase: CheckMovieIsFavoriteUseCase
 ) : ViewModel() {
 
     val onFavoriteMovieEvent = MutableLiveData<ViewModelResult>()
@@ -18,7 +22,7 @@ class MovieDetailedViewModel(
     init {
         viewModelScope.launch {
             try {
-                movie.isFavorite = favoriteMovieUseCase.isFavorite(movie)
+                movie.isFavorite = checkMovieIsFavoriteUseCase.execute(movie)
                 onFavoriteMovieEvent.postValue(ViewModelResult.Success)
             } catch (exception: Exception) {
                 onFavoriteMovieEvent.postValue(ViewModelResult.Error)
@@ -26,13 +30,13 @@ class MovieDetailedViewModel(
         }
     }
 
-    fun favoriteEvent(isToFavorite: Boolean) {
+    fun isToFavoriteOrUnfavorite(isToFavorite: Boolean) {
         viewModelScope.launch {
             try {
                 if (isToFavorite)
-                    favoriteMovieUseCase.favoriteMovie(movie)
+                    favoriteMovieUseCase.execute(movie)
                 else
-                    favoriteMovieUseCase.unFavoriteMovie(movie)
+                    unFavoriteMovieUseCase.execute(movie)
                 movie.isFavorite = isToFavorite
                 onFavoriteMovieEvent.postValue(ViewModelResult.Success)
             } catch (exception: Exception) {
