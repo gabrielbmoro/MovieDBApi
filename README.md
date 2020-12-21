@@ -1,5 +1,5 @@
 # Migration to Gitlab
-- https://gitlab.com/gabrielbmoro/CrazyMath
+- https://gitlab.com/gabrielbmoro/MovieDBApi
 
 -----------------------------------------------
 
